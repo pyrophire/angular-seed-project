@@ -14,70 +14,24 @@ export class NavigationComponent implements OnInit {
   navItems: NavItem[] = [
     {
       name: 'Home',
-      type: 'route',
-      route: '/home',
+      type: 'route', // route or link
+      route: '/home', // required when type is 'route'
+      // queryParams: { }, // optional when type is 'route'
+      // url: '' // required when type is 'link'
+      // target: '' // optional when type is 'link', defaults to '_blank'
       children: null
     },
-
     {
-      name: 'Layer 1',
-      route: '/home',
-      children: [
-        {
-          name: 'Layer 2',
-          route: '/home',
-          children: [
-            {
-              name: 'Layer 3',
-              route: '/home',
-              children: [
-                {
-                  name: 'Layer 4',
-                  route: '/home'
-                },
-                {
-                  name: 'Layer 4 No Child',
-                  type: 'route',
-                  route: '/home',
-                  children: null
-                },
-                {
-                  name: 'Google Out',
-                  type: 'link',
-                  url: 'https://google.com',
-                  target: '_blank'
-                },
-
-                {
-                  name: 'css-tricks alpha window',
-                  type: 'link',
-                  url: 'https://css-tricks.com',
-                  target: 'alpha'
-                },
-
-                {
-                  name: 'github alpha',
-                  type: 'link',
-                  url: 'https://github.com',
-                  target: 'alpha'
-                }
-              ]
-            },
-            {
-              name: 'Layer 3 No Child',
-              type: 'route',
-              route: '/home',
-              children: null
-            }
-          ]
-        },
-        {
-          name: 'Layer 2 No Child',
-          type: 'route',
-          route: '/home',
-          children: null
-        }
-      ]
+      name: 'Angular',
+      type: 'link',
+      url: 'https://angular.io/docs',
+      children: null
+    },
+    {
+      name: 'Angular Material',
+      type: 'link',
+      url: 'https://material.angular.io/components/categories',
+      children: null
     }
   ];
 

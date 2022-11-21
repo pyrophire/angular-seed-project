@@ -6,7 +6,7 @@
     <ng-container *ngIf="item.type === 'link'">
         <a mat-menu-item
            [href]="item.url"
-           [target]="item.target">{{item.name}}</a>
+           [target]="item.target? item.target : '_blank'">{{item.name}}</a>
     </ng-container>
 </ng-container>
 <ng-container *ngIf="type==='button'">
@@ -17,6 +17,6 @@
     <ng-container *ngIf="item.type === 'link'">
         <a mat-button
            [href]="item.url"
-           [target]="item.target">{{item.name}}</a>
+           [target]="item.target? item.target : '_blank'">{{item.name}}</a>
     </ng-container>
 </ng-container>
