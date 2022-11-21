@@ -1,0 +1,60 @@
+.dark .ngx-json-viewer {
+  .segment .segment-main {
+    .toggler {
+      color: #eee !important;
+    }
+
+    .segment-key {
+      color: #fd4 !important;
+    }
+
+    .segment-separator {
+      color: #eee !important;
+    }
+
+    .segment-value {
+      color: #fff !important;
+    }
+  }
+
+  .segment-type-string > .segment-main > .segment-value {
+    color: #fff !important;
+  }
+
+  .segment-type-number > .segment-main > .segment-value {
+    color: rgb(108, 255, 85) !important;
+  }
+
+  .segment-type-boolean > .segment-main > .segment-value {
+    color: #f9e !important;
+  }
+
+  .segment-type-date > .segment-main > .segment-value {
+    color: #5fe !important;
+  }
+
+  .segment-type-array > .segment-main > .segment-value,
+  .segment-type-function > .segment-main > .segment-value,
+  .segment-type-object > .segment-main > .segment-value {
+    color: #eee !important;
+  }
+
+  .segment-type-null > .segment-main > .segment-value,
+  .segment-type-undefined > .segment-main > .segment-value {
+    color: #fff !important;
+  }
+
+  .segment-type-null > .segment-main > .segment-value {
+    background-color: red !important;
+  }
+
+  .segment-type-undefined > .segment-main > {
+    .segment-key {
+      color: #eee !important;
+    }
+
+    .segment-value {
+      background-color: #eee !important;
+    }
+  }
+}

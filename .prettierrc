@@ -1,0 +1,22 @@
+{
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "parser": "typescript",
+    "printWidth": 140,
+    "requirePragma": false,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "overrides": [
+        {
+            "files": [
+                "*.scss"
+            ],
+            "options": {
+                "parser": "scss"
+            }
+        }
+    ]
+}

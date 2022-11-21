@@ -1,0 +1,72 @@
+// Extendables
+//
+// Reusable code that can be extended to be used between
+// Use a % prefix to prevent compilation
+//
+// Styleguide Extendables
+
+//
+
+@import '_partials/extras.partial';
+
+// Label/Value
+//
+// Markup: Will create label/value relationships for containers to mimic Angular Materials display of input data
+// .class {
+// @extend %label-value
+// .label {
+// }
+// .value {
+// }
+// };
+//
+// Styleguide Extendables.label-value
+
+%label-value {
+  // width: 100%;
+  label,
+  .label,
+  .manual-label {
+    opacity: 1;
+    font-weight: 500;
+    display: block;
+  }
+  .value,
+  .track-value {
+    margin: 0 16px 8px 16px;
+  }
+}
+
+// Small Icon Button
+//
+// Markup: Will add styling to make mat-icon-button smaller. To be used in areas where a larger button does not fit.
+// .class {
+// @extend %small-icon-button
+// };
+//
+// Styleguide Extendables.small-icon-button
+
+%small-icon-button {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  .mat-icon {
+    font-size: 1.5em;
+  }
+}
+
+%title-decorator {
+  font-family: 'Patua One', cursive;
+  padding: 8px;
+  font-weight: 500;
+  font-size: 1.125rem;
+
+  border-radius: 4px 4px 0 0;
+  background-color: $primary;
+  color: set-inverse-text-color($primary);
+}
+%title {
+  @extend %title-decorator;
+  background-color: unset;
+  color: unset;
+}

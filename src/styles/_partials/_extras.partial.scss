@@ -1,0 +1,57 @@
+@use '@angular/material' as mat;
+// Dark wrapper
+//
+// Markup: Will wrap anything inside of the curly brackets with a .dark class to use with a dark theme.
+// @include dark() { .internal { color: blue } }
+//
+// Styleguide Extras.dark
+
+@mixin dark() {
+  .dark {
+    @content;
+  }
+}
+
+// Rotate
+//
+// Markup: Used to rotate buttons when they're in a toggle state. Good for expandable triggers.
+// .open {
+// @include rotate(180)
+// }
+// .closed {
+// @include rotate(0)
+// }
+//
+// Styleguide Extras.rotate
+
+@mixin rotate($degree) {
+  transform: rotate(#{$degree}deg);
+  transition: transform cubic-bezier(0.4, 0, 0.2, 1) 225ms;
+}
+
+// Transition
+//
+// Markup: Used to write animation transitions. Props passed in are $properties: css property; $delay: time in s or ms; $duration: time in s or ms; $function: timing function, could be manual or one of the built in options
+// .class {
+// @include transition(width, 0, 2s, ease-in-out);
+// }
+//
+// Styleguide Extras.transition
+
+@mixin transition($duration: 125ms, $function: ease-in-out, $delay: 0, $properties...) {
+  transition-property: $properties;
+  transition-delay: $delay;
+  transition-duration: $duration;
+  transition-timing-function: $function;
+}
+
+@mixin panel-box($padding: 8px) {
+  padding: $padding;
+  margin-bottom: 16px;
+  background-color: white;
+  @include mat.elevation(2);
+}
+
+@mixin basic-transition {
+  transition: all 0.25s cubic-bezier(0.77, 0, 0.175, 1);
+}

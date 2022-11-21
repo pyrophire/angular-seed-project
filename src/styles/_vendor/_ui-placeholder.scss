@@ -1,0 +1,282 @@
+// UI Placeholder
+//
+// Markup: Will use ghost-loaders in place of progress spinners/bars
+// .light {
+//   $fg: #000;
+//   $bar: lighten($fg, 5);
+//   $bg: #fff;
+//   .ui-placeholder-container {
+//     width: 100%;
+//     @include ui-placeholder($fg, $bar, $bg);
+//     .ui.placeholder {
+//       max-width: 100% !important;
+//     }
+//   }
+// }
+// .dark {
+//   $fg: #fff;
+//   $bar: darken($fg, 25);
+//   $bg: #333;
+//   .ui-placeholder-container {
+//     width: 100%;
+//     @include ui-placeholder($fg, $bar, $bg);
+//     .ui.placeholder {
+//       max-width: 100% !important;
+//     }
+//   }
+// }
+//
+// Styleguide Vendor.ui-placeholder
+
+/*-------------------
+      Content
+--------------------*/
+
+@mixin ui-placeholder($fg, $bar, $bg) {
+  .ui {
+    &.placeholder {
+      &.margin {
+        margin: 8px;
+      }
+      position: static;
+      overflow: hidden;
+      -webkit-animation: placeholderShimmer 2s linear;
+      animation: placeholderShimmer 2s linear;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      background-color: transparent;
+      background-image: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(rgba($fg, 0.08)),
+        color-stop(15%, rgba($fg, 0.15)),
+        color-stop(30%, rgba($fg, 0.08))
+      );
+      background-image: -webkit-linear-gradient(
+        left,
+        rgba($fg, 0.08) 0%,
+        rgba($fg, 0.25) 15%,
+        rgba($fg, 0.08) 30%
+      );
+      background-image: linear-gradient(
+        to right,
+        rgba($fg, 0.08) 0%,
+        rgba($fg, 0.25) 15%,
+        rgba($fg, 0.08) 30%
+      );
+      background-size: 1200px 100%;
+      max-width: 30rem;
+      + .ui.placeholder {
+        margin-top: 2rem;
+        -webkit-animation-delay: 0.15s;
+        animation-delay: 0.15s;
+        + .ui.placeholder {
+          -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+          + .ui.placeholder {
+            -webkit-animation-delay: 0.45s;
+            animation-delay: 0.45s;
+            + .ui.placeholder {
+              -webkit-animation-delay: 0.6s;
+              animation-delay: 0.6s;
+            }
+          }
+        }
+      }
+      background-color: $bg;
+      > :before,
+      .image.header:after {
+        background-color: $bg;
+      }
+      .line {
+        background-color: $bg;
+        &:after {
+          background-color: $bg;
+        }
+      }
+      .image:not(.header):not(.ui) {
+        height: 100px;
+      }
+      .square.image:not(.header) {
+        height: 0px;
+        overflow: hidden;
+        /* 1/1 aspect ratio */
+        padding-top: 100%;
+      }
+      .rectangular.image:not(.header) {
+        height: 0px;
+        overflow: hidden;
+        /* 4/3 aspect ratio */
+        padding-top: 75%;
+      }
+      .line {
+        position: relative;
+        height: 0.85714286em;
+        &:before,
+        &:after {
+          top: 100%;
+          position: absolute;
+          content: "";
+          background-color: inherit;
+        }
+        &:before {
+          left: 0px;
+        }
+        &:after {
+          right: 0px;
+        }
+        margin-bottom: 0.5em;
+        &:before,
+        &:after {
+          height: 0.5em;
+        }
+        &:not(:first-child) {
+          margin-top: 0.5em;
+        }
+      }
+      .header {
+        position: relative;
+        overflow: hidden;
+      }
+      .line {
+        &:nth-child(1):after {
+          width: 8%;
+        }
+        &:nth-child(2):after {
+          width: 52%;
+        }
+        &:nth-child(3):after {
+          width: 20%;
+        }
+        &:nth-child(4):after {
+          width: 35%;
+        }
+        &:nth-child(5):after {
+          width: 65%;
+        }
+      }
+      .header .line {
+        margin-bottom: 0.64285714em;
+        &:before,
+        &:after {
+          height: 0.64285714em;
+        }
+        &:not(:first-child) {
+          margin-top: 0.64285714em;
+        }
+        &:after {
+          width: 20%;
+        }
+        &:nth-child(2):after {
+          width: 60%;
+        }
+      }
+      .image {
+        &.header {
+          .line {
+            margin-left: 3em;
+            &:before {
+              width: 0.71428571rem;
+            }
+          }
+          &:after {
+            display: block;
+            height: 0.85714286em;
+            content: "";
+            margin-left: 3em;
+          }
+        }
+        .line:first-child {
+          height: 0.01px;
+        }
+      }
+      .paragraph .line:first-child,
+      .header .line:first-child {
+        height: 0.01px;
+      }
+      .image:not(:first-child):before,
+      .paragraph:not(:first-child):before,
+      .header:not(:first-child):before {
+        height: 1.42857143em;
+        content: "";
+        display: block;
+      }
+    }
+    &.inverted.placeholder {
+      background-image: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(rgba($bg, 0.08)),
+        color-stop(15%, rgba($bg, 0.14)),
+        color-stop(30%, rgba($bg, 0.08))
+      );
+      background-image: -webkit-linear-gradient(
+        left,
+        rgba($bg, 0.08) 0%,
+        rgba($bg, 0.14) 15%,
+        rgba($bg, 0.08) 30%
+      );
+      background-image: linear-gradient(
+        to right,
+        rgba($bg, 0.08) 0%,
+        rgba($bg, 0.14) 15%,
+        rgba($bg, 0.08) 30%
+      );
+      background-color: $bar;
+      > :before,
+      .image.header:after {
+        background-color: $bar;
+      }
+      .line {
+        background-color: $bar;
+        &:after {
+          background-color: $bar;
+        }
+      }
+    }
+    &.placeholder {
+      .full.line.line.line:after {
+        width: 0%;
+      }
+      .very.long.line.line.line:after {
+        width: 10%;
+      }
+      .long.line.line.line:after {
+        width: 35%;
+      }
+      .medium.line.line.line:after {
+        width: 50%;
+      }
+      .short.line.line.line:after {
+        width: 65%;
+      }
+      .very.short.line.line.line:after {
+        width: 80%;
+      }
+    }
+    &.fluid.placeholder {
+      max-width: none;
+    }
+  }
+}
+@-webkit-keyframes placeholderShimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}

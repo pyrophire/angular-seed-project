@@ -2,8 +2,45 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./out-tsc/app",
-    "types": []
+    "experimentalDecorators": true,
+    "types": [],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@services/*": [
+        "src/app/shared/services/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@pipes/*": [
+        "src/app/shared/pipes/*"
+      ],
+      "@enums/*": [
+        "src/app/shared/enums/*"
+      ],
+      "@models/*": [
+        "src/app/shared/models/*"
+      ],
+      "@resolvers/*": [
+        "src/app/shared/resolvers/*"
+      ],
+      "@mocks/*": [
+        "src/app/shared/mocks/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+    },
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
   },
   "files": [
     "src/main.ts"

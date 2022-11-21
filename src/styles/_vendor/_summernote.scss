@@ -1,0 +1,130 @@
+// NGX Summernote
+//
+// Custom defined theme to add theme and dark support.
+// https://github.com/lula/ngx-summernote
+//
+// Styleguide Vendor.summernote
+
+@import 'src/styles/mixins';
+
+.note-modal-content {
+  padding-bottom: 16px;
+
+  input {
+    background-color: darken(white, 5);
+    color: set-inverse-text-color(darken(white, 5));
+    border: none;
+  }
+
+  input[type='button'] {
+    background-color: $primary;
+    color: set-inverse-text-color($primary) !important;
+    opacity: 1;
+  }
+}
+
+.dark {
+
+  .note-editor .note-toolbar .note-btn-group .note-table .note-dimension-picker .note-dimension-picker-highlighted,
+  .note-popover .popover-content .note-btn-group .note-table .note-dimension-picker .note-dimension-picker-highlighted {
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAABKgAwAEAAAAAQAAABIAAAAAaZPfVgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDYuMC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KGV7hBwAAAEVJREFUOBFjYKASYASZk1054T+55k1tLwCbwQIzQIDrH4xJNP3hGxNcLYIFFyKPMWoQ4XAbDaMRHUbwTIucAQmHyFBQAQAN0wkKBWpjTQAAAABJRU5ErkJggg==') repeat;
+  }
+
+  .note-editor.note-frame {
+    color: set-inverse-text-color($backgroundDark);
+
+    .note-toolbar {
+      background-color: $backgroundDark2;
+      border-bottom-color: black;
+
+      button[disabled] {
+        opacity: 0.25;
+      }
+
+      button {
+        background-color: $backgroundDark;
+        border-color: $backgroundDark2;
+        color: set-inverse-text-color($backgroundDark);
+
+        &.active {
+          background-color: lighten($backgroundDark, 25);
+          border-color: set-inverse-text-color(lighten($backgroundDark, 25));
+        }
+      }
+
+      .note-dropdown-menu {
+        background-color: $backgroundDark2;
+
+        .note-dimension-display {
+          color: white;
+        }
+
+        a {
+          text-decoration: none !important;
+        }
+      }
+    }
+
+    .note-editing-area {
+      background-color: $backgroundDark1;
+      color: set-inverse-text-color($backgroundDark1);
+    }
+
+    .note-statusbar {
+      background-color: $backgroundDark2;
+
+      .note-resizebar .note-icon-bar {
+        border-top-color: rgba(white, 0.5);
+      }
+    }
+  }
+
+  .note-modal-content {
+    background-color: $backgroundDark;
+    color: set-inverse-text-color($backgroundDark1);
+
+    .note-modal-title,
+    label {
+      color: set-inverse-text-color($backgroundDark1);
+    }
+
+    .note-modal-header {
+      border: none;
+
+      button {
+        opacity: 0.5;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        .note-icon-close {
+          color: set-inverse-text-color($backgroundDark);
+        }
+      }
+    }
+
+    button {
+      background-color: $backgroundDark;
+      border-color: $backgroundDark2;
+      color: set-inverse-text-color($backgroundDark);
+
+      &.active {
+        background-color: lighten($backgroundDark, 25);
+        border-color: set-inverse-text-color(lighten($backgroundDark, 25));
+      }
+    }
+
+    input {
+      background-color: $backgroundDark1;
+      color: set-inverse-text-color($backgroundDark1);
+      border: none;
+    }
+
+    input[type='button'] {
+      background-color: $primaryDark;
+      color: set-inverse-text-color($primaryDark) !important;
+      opacity: 1;
+    }
+  }
+}

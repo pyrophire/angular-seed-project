@@ -1,13 +1,177 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>CHANGEME</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <CHANGEME-root></CHANGEME-root>
-</body>
+
+    <head>
+        <meta charset="utf-8">
+        <title>CHANGEME</title>
+        <base href="/">
+
+        <link rel="preconnect"
+              href="https://cdn.tlc.texas.gov">
+
+        <meta name="apple-mobile-web-app-status-bar-style"
+              content="#303030">
+
+        <meta name="color-scheme"
+              content="dark light">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1">
+        <meta name="theme-color"
+              content="#303030">
+        <meta name="apple-mobile-web-app-status-bar-style"
+              content="#303030">
+        <link rel="icon"
+              type="image/x-icon"
+              href="favicon.ico">
+        <link rel="apple-touch-icon-precomposed"
+              sizes="57x57"
+              href="/assets/img/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed"
+              sizes="114x114"
+              href="/assets/img/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon-precomposed"
+              sizes="72x72"
+              href="/assets/img/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon-precomposed"
+              sizes="144x144"
+              href="/assets/img/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon-precomposed"
+              sizes="60x60"
+              href="/assets/img/apple-touch-icon-60x60.png" />
+        <link rel="apple-touch-icon-precomposed"
+              sizes="120x120"
+              href="/assets/img/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon-precomposed"
+              sizes="76x76"
+              href="/assets/img/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon-precomposed"
+              sizes="152x152"
+              href="/assets/img/apple-touch-icon-152x152.png" />
+        <link rel="icon"
+              type="image/png"
+              href="/assets/img/favicon-196x196.png"
+              sizes="196x196" />
+        <link rel="icon"
+              type="image/png"
+              href="/assets/img/favicon-96x96.png"
+              sizes="96x96" />
+        <link rel="icon"
+              type="image/png"
+              href="/assets/img/favicon-32x32.png"
+              sizes="32x32" />
+        <link rel="icon"
+              type="image/png"
+              href="/assets/img/favicon-16x16.png"
+              sizes="16x16" />
+        <link rel="icon"
+              type="image/png"
+              href="/assets/img/favicon-128.png"
+              sizes="128x128" />
+        <meta name="application-name"
+              content="&nbsp;" />
+        <meta name="msapplication-TileColor"
+              content="/assets/img/#FFFFFF" />
+        <meta name="msapplication-TileImage"
+              content="/assets/img/mstile-144x144.png" />
+        <meta name="msapplication-square70x70logo"
+              content="/assets/img/mstile-70x70.png" />
+        <meta name="msapplication-square150x150logo"
+              content="/assets/img/mstile-150x150.png" />
+        <meta name="msapplication-wide310x150logo"
+              content="/assets/img/mstile-310x150.png" />
+        <meta name="msapplication-square310x310logo"
+              content="/assets/img/mstile-310x310.png" />
+
+        <link rel="stylesheet"
+              href="third-party.css"
+              onload="this.media='all'; this.onload=null;">
+
+        <style>
+:root {
+    --loader-ring-color: #1976d2;
+    --loader-pulse-color: #1976d2bf;
+}
+
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.default-loader {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 6rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.default-loader:before,
+.default-loader:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    animation: pulsOut 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 1rem var(--loader-pulse-color));
+}
+
+.default-loader:before {
+    width: 100%;
+    padding-bottom: 100%;
+    box-shadow: inset 0 0 0 1rem var(--loader-ring-color);
+    animation-name: pulsIn;
+}
+
+.default-loader:after {
+    width: calc(100% - 2rem);
+    padding-bottom: calc(100% - 2rem);
+    box-shadow: 0 0 0 0 var(--loader-ring-color);
+}
+
+@keyframes pulsIn {
+    0% {
+        box-shadow: inset 0 0 0 1rem var(--loader-ring-color);
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        box-shadow: inset 0 0 0 0 var(--loader-ring-color);
+        opacity: 0;
+    }
+}
+
+@keyframes pulsOut {
+
+    0%,
+    50% {
+        box-shadow: 0 0 0 0 var(--loader-ring-color);
+        opacity: 0;
+    }
+
+    100% {
+        box-shadow: 0 0 0 1rem var(--loader-ring-color);
+        opacity: 1;
+    }
+}
+
+        </style>
+    </head>
+
+    <body class="mat-typography dark"
+          id="scrollable">
+        <CHANGEME-root>
+            <div class="loader-container">
+                <div class="default-loader">
+
+                </div>
+            </div>
+        </CHANGEME-root>
+    </body>
+
 </html>

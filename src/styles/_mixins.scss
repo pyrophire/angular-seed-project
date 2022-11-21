@@ -1,0 +1,22 @@
+// Mixins
+//
+// Collection of all mixins to be used by
+// Markup: @import 'style/mixins';
+//
+// Styleguide Mixins
+
+// required
+@import "vars";
+// required partials
+@import "_partials/mat-elevation.partial";
+@import "_partials/media-queries.partial";
+@import "_partials/coloring.partial";
+@import "_partials/text.partial";
+@import "_partials/layout.partial";
+@import "_partials/extras.partial";
+
+// vendor
+// @import "_vendor/ui-placeholder";
+
+// optional
+@import "extendables";

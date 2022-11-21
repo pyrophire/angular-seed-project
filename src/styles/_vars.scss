@@ -1,0 +1,102 @@
+@use '@angular/material' as mat;
+@import '_colors/material-color-palette';
+@import '_colors/custom-palette';
+@import '_partials/coloring.partial';
+
+// Theme Color Variables
+//
+// Copies of the _themes file to be used within the app.
+// Angular Material's theming prevents pulling the colors directly from the theme file without bloating complied css.
+// View source for better definition of settings
+//
+// Styleguide Vars.colors.theme
+
+// EDIT THESE
+$primary-palette: mat.$light-blue-palette;
+$primary-shade: 500;
+$accent-palette: mat.$amber-palette;
+$accent-shade: 400;
+$primary-shade-dark: 800;
+$accent-shade-dark: 500;
+
+$headerHeight: 100px;
+$headerPaddingTopBottom: 16px;
+$headerPaddingSides: 32px;
+$mainNavHeight: 52px;
+$footerHeight: 0px; // 52px if environment footer is enabled
+$footerBg: $grey300;
+$footerBgDark: $grey700;
+
+$appContainerWidth: 1400px;
+// DO NOT EDIT THESE
+$primary: map-get($primary-palette, $primary-shade);
+$accent: map-get($accent-palette, $accent-shade);
+$primaryDark: map-get($primary-palette, $primary-shade-dark);
+$accentDark: map-get($accent-palette, $accent-shade-dark);
+$warn: $red500;
+$success: $green500;
+
+// Background Color Variables
+//
+// Used for app backgrounds in both light and dark themes
+// View source for better definition of settings
+//
+// Styleguide Vars.colors.backgrounds
+
+$appBackgroundColor: $grey200;
+
+$background: $appBackgroundColor;
+
+$background1: darken($appBackgroundColor, 10);
+$background2: darken($appBackgroundColor, 15);
+$background3: darken($appBackgroundColor, 20);
+$backgroundA1: lighten($appBackgroundColor, 10);
+$backgroundA2: lighten($appBackgroundColor, 15);
+$backgroundA3: lighten($appBackgroundColor, 20);
+
+$backgroundDark: $grey800;
+
+$backgroundDark1: darken($backgroundDark, 10);
+$backgroundDark2: darken($backgroundDark, 15);
+$backgroundDark3: darken($backgroundDark, 20);
+$backgroundDarkA1: lighten($backgroundDark, 10);
+$backgroundDarkA2: lighten($backgroundDark, 15);
+$backgroundDarkA3: lighten($backgroundDark, 20);
+
+$linkColor: $blue500;
+$linkColorDark: $light-blue200;
+
+// Media Breakpoint Variables
+//
+// Defined breakpoints for media queries. These should match Angular Material's breakpoints.
+// View source for better definition of settings.
+//
+// Styleguide Vars.media
+
+// screen size vars
+
+$xs: 'screen and (max-width: 599.99px)';
+$sm: 'screen and (min-width: 600px) and (max-width: 959.99px)';
+$md: 'screen and (min-width: 960px) and (max-width: 1279.99px)';
+$lg: 'screen and (min-width: 1280px) and (max-width: 1919.99px)';
+$xl: 'screen and (min-width: 1920px)';
+
+// less than sizes
+
+$lt-sm: 'screen and (max-width: 959.99px)';
+$lt-md: 'screen and (max-width: 1279.99px)';
+$lt-lg: 'screen and (max-width: 1919.99px)';
+$lt-xl: 'screen and (max-width: 1920px)';
+
+// greater than sizes
+
+$gt-xs: 'screen and (min-width: 600px)';
+$gt-sm: 'screen and (min-width: 960px)';
+$gt-md: 'screen and (min-width: 1280px)';
+$gt-lg: 'screen and (min-width: 1920px)';
+
+$ipad-portrait: 'only screen and (min-device-width : 737px) and (max-device-width : 1023px) and (orientation : portrait)';
+$ipad-landscape: 'only screen and (min-device-width : 737px) and (max-device-width : 1024px) and (orientation : landscape)';
+
+$iphone-portrait: 'only screen and (min-device-width : 320px) and (max-device-width : 736px) and (orientation : portrait)';
+$iphone-landscape: 'only screen and (min-device-width : 320px) and (max-device-width : 896px) and (orientation : landscape) ';

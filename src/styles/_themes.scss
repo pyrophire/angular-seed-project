@@ -1,0 +1,38 @@
+@use 'node_modules/@angular/material' as mat;
+@import 'src/styles/vars';
+
+@include mat.core();
+@include mat.all-legacy-component-typographies();
+
+// Light theme
+//
+// Defined primary, accent and warn colors to be used in the .light theme.
+// Requires a primary, accent and warn declarations to be set inside the mat.define-light-theme() function to generate Angular Material's light theme.
+// Setting it inside of the .light class will take advantage of the light/dark. If no dark theme will be provided. Unwrap the @include from the .light class
+//
+// Styleguide Themes.light
+
+$light-primary: mat.define-palette($primary-palette, $primary-shade);
+$light-accent: mat.define-palette($accent-palette, $accent-shade);
+$light-warn: mat.define-palette(mat.$red-palette, 500);
+$light-theme: mat.define-light-theme($light-primary, $light-accent, $light-warn);
+
+.light {
+  @include mat.all-component-themes($light-theme);
+}
+
+// Dark theme
+//
+// Defined primary, accent and warn colors to be used in the .dark theme.
+// Requires a primary, accent and warn declarations to be set inside the mat.define-dark-theme() function to generate Angular Material's dark theme.
+//
+// Styleguide Themes.dark
+
+$dark-primary: mat.define-palette($primary-palette, $primary-shade-dark);
+$dark-accent: mat.define-palette($accent-palette, $accent-shade-dark);
+$dark-warn: mat.define-palette(mat.$red-palette, 500);
+$dark-theme: mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.dark {
+  @include mat.all-component-themes($dark-theme);
+}

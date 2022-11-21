@@ -1,0 +1,9 @@
+<mat-icon class="tf-check"
+          [ngClass]="{'checked': data, 'unchecked': !data}">
+    <ng-container *ngIf="data">
+        check_circle
+    </ng-container>
+    <ng-container *ngIf="!data">
+        highlight_off
+    </ng-container>
+</mat-icon>

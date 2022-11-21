@@ -1,0 +1,95 @@
+// Clickable Text
+//
+// Markup: Inerts css for clickable text elements, such as anchor tags or hyperlinked text using the $decoration input
+// .class {
+// @include clickable-text(blue, underline);
+// }
+//
+// Styleguide Text.clickable-text
+@mixin clickable-text($color, $decoration) {
+  color: $color;
+  text-decoration: $decoration;
+  cursor: pointer;
+
+  md-icon {
+    color: currentColor;
+    text-decoration: none;
+  }
+}
+
+// Clickable Link
+//
+// Markup: Inerts css for links to passed in color.
+// .class {
+// @include clickable-link(blue);
+// }
+//
+// Styleguide Text.clickable-link
+@mixin clickable-link($color) {
+
+  a,
+  [click],
+  [href],
+  [routerLink],
+  .click,
+  .clickable {
+    &:not(.mat-mdc-button):not(.mat-mdc-menu-item):not(.mdc-button) {
+      color: $color;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.mat-icon,
+      & .mat-icon {
+        text-decoration: none !important;
+
+        &:hover {
+          text-decoration-line: none !important;
+        }
+      }
+    }
+  }
+}
+
+// Manual label
+//
+// Markup: Used to generate manual labels to match Angular Material's input labels. Child element must be a <label class="manual></label>
+// .class {
+// @include manual-label();
+// }
+//
+// Styleguide Text.manual-label
+@mixin manual-label() {
+  label.manual {
+    color: rgba(set-inverse-text-color($backgroundA1), 0.5);
+    display: block;
+    font-size: 0.75em;
+    line-height: 1em;
+    margin-top: 16px;
+    margin-right: 8px;
+    margin-bottom: 4px;
+  }
+
+  .dark {
+    label.manual {
+      color: rgba(set-inverse-text-color($backgroundDark2), 0.5);
+    }
+  }
+}
+
+// Truncate
+//
+// Markup: Will truncate text in a single element. Element requires a width restrictor.
+// .class {
+// @include truncate();
+// }
+//
+// Styleguide Text.truncate
+@mixin truncate() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

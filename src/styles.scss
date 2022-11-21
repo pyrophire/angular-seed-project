@@ -1,1 +1,149 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'src/styles/mixins';
+
+// used for loading page only
+
+.loading {
+  background-color: rgb(50, 50, 50);
+  height: 100vh;
+  width: 100vw;
+  @include flex(row, center, center, nowrap);
+
+  .logo {
+    height: 50vh;
+    width: 50vw;
+    @include flex(row, center, center, nowrap);
+
+    svg {
+      .st0 {
+        fill: $primary;
+      }
+
+      .st1 {
+        fill: #ffffff;
+      }
+
+      height: 100%;
+    }
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Hide focus styles if they're not needed, for example, 
+when an element receives focus via the mouse. */
+:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+/* Show focus styles on keyboard focus. */
+:focus-visible {
+  outline: 3px solid blue;
+}
+
+html {
+  top: 0 !important;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  overflow-x: hidden;
+
+  @media only print {
+    overflow-x: unset;
+    height: unset;
+  }
+}
+
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-size: 400% 400%;
+  animation: AnimationName 15s ease infinite;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  @include flex(row, flex-start, center, nowrap);
+}
+
+body.light {
+  background-color: $background;
+  color: set-inverse-text-color($background);
+}
+
+body.dark {
+  background-color: $backgroundDark1;
+  color: set-inverse-text-color($backgroundDark1);
+}
+
+@include flex-directive;
+@include clickable-link($blue700);
+
+
+.desktop {
+  @include media-lt-sm {
+    display: none !important;
+  }
+}
+
+.mobile {
+  @include media-gt-sm {
+    display: none !important;
+  }
+}
+
+ix-scroll-button {
+  z-index: 9999;
+
+  @media only print {
+    display: none;
+  }
+}
+
+.no-print {
+  @media only print {
+    display: none !important;
+  }
+}
+
+// fixes forms with auto complete to remove chrome's blue background
+form {
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: set-inverse-text-color(white);
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+.dark {
+  form {
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      -webkit-text-fill-color: set-inverse-text-color(black);
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+}

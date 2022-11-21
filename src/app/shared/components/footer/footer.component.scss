@@ -1,0 +1,93 @@
+@import 'src/styles/mixins';
+
+footer {
+  position: sticky;
+  top: 100vh;
+
+  @media only print {
+    display: none;
+  }
+
+  @include desktop {
+    height: $footerHeight;
+  }
+
+  @media only screen {
+    @include mat-elevation(24, darken($background, 10));
+  }
+
+  background-color: $footerBg;
+  color: set-inverse-text-color($footerBg);
+  max-width: 1400px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: ' left center right ';
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 'left''center''right ';
+  }
+
+  .left {
+    grid-area: left;
+  }
+
+  .center {
+    grid-area: center;
+  }
+
+  .right {
+    grid-area: right;
+  }
+
+  aside {
+    @if ($footerHeight  !=0px) {
+      padding: 16px;
+    }
+
+    border-color: rgba(set-inverse-text-color($footerBg), 0.25);
+    border-style: solid;
+    border-width: 0;
+
+    @include desktop {
+      &.center {
+        border-width: 0px 1px;
+      }
+    }
+
+    @include mobile {
+      &.center {
+        border-width: 1px 0px;
+      }
+    }
+
+    .title {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    button.mat-icon-button {
+      font-size: 1.625em;
+      margin: 4px;
+    }
+  }
+}
+
+.dark {
+  footer {
+    background-color: $footerBgDark;
+
+    color: set-inverse-text-color($footerBgDark);
+
+    @media only screen {
+      @include mat-elevation(24, darken($footerBgDark, 30));
+    }
+  }
+}
+
+.copyright {
+  font-size: 0.8em;
+}

@@ -1,0 +1,136 @@
+@import 'src/styles/vars';
+
+// Media queries for viewports and devices
+
+// Extra Small devices
+@mixin media-xs {
+  @media #{$xs} {
+    @content;
+  }
+}
+
+// Small devices
+@mixin media-sm {
+  @media #{$sm} {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin media-md {
+  @media #{$md} {
+    @content;
+  }
+}
+
+// Large devices
+@mixin media-lg {
+  @media #{$lg} {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin media-xl {
+  @media #{$xl} {
+    @content;
+  }
+}
+
+// Less than Small devices
+@mixin media-lt-sm {
+  @media #{$lt-sm} {
+    @content;
+  }
+}
+
+// Less than Medium devices
+@mixin media-lt-md {
+  @media #{$lt-md} {
+    @content;
+  }
+}
+
+// Less than Large devices
+@mixin media-lt-lg {
+  @media #{$lt-lg} {
+    @content;
+  }
+}
+
+// Less than Extra large devices
+@mixin media-lt-xl {
+  @media #{$lt-xl} {
+    @content;
+  }
+}
+
+// Greater than Extra Small devices
+@mixin media-gt-xs {
+  @media #{$gt-xs} {
+    @content;
+  }
+}
+
+// Greater than Small devices
+@mixin media-gt-sm {
+  @media #{$gt-sm} {
+    @content;
+  }
+}
+
+// Greater than Medium devices
+@mixin media-gt-md {
+  @media #{$gt-md} {
+    @content;
+  }
+}
+
+// Greater than Large devices
+@mixin media-gt-lg {
+  @media #{$gt-lg} {
+    @content;
+  }
+}
+
+// Mobile specific media queries
+
+// ipad-portrait
+@mixin media-ipad-portrait {
+  @media #{$ipad-portrait} {
+    @content;
+  }
+}
+
+// ipad-landscape
+@mixin media-ipad-landscape {
+  @media #{$ipad-landscape} {
+    @content;
+  }
+}
+
+// iphone-portrait
+@mixin media-iphone-portrait {
+  @media #{$iphone-portrait} {
+    @content;
+  }
+}
+
+// iphone-landscape
+@mixin media-iphone-landscape {
+  @media #{$iphone-landscape} {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @include media-lt-sm {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include media-gt-sm {
+    @content;
+  }
+}

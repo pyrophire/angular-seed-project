@@ -1,0 +1,269 @@
+@import 'coloring.partial';
+
+// Flex
+//
+// Markup: Will wrap anything inside of the curly brackets with a .dark class to use with a dark theme.
+// .class {
+// @include flex($direction: row, $align: center, $justify: center, $wrap: wrap, $align-content: stretch)
+// }
+//   - Inserts flex-box css rules
+//     - $direction: row | row-reverse | column | column-reverse
+//     - $align: stretch | flex-start | flex-end | center | baseline
+//     - $justify: flex-start | flex-end | center | space-between | space-around | space-evenly
+//     - $wrap: nowrap | wrap | wrap-reverse
+//     - $align-content: flex-start | flex-end | center | space-between | space-around | stretch
+//
+// Styleguide Layout.flex
+
+@mixin flex($direction: row, $align: center, $justify: center, $wrap: wrap, $align-content: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: safe #{$align};
+  justify-content: #{$justify};
+  flex-wrap: $wrap;
+  align-content: #{$align-content};
+
+}
+
+// Flex Form
+//
+// Markup: Works with flex() and flex-form() to create column stacked elements with a .form-row class with horizontal flexed insides
+// .class {
+// @include flex-form($direction: row, $align: center, $justify: center, $wrap: wrap, $align-content: stretch)
+// }
+//
+//
+// Styleguide Layout.flex-form
+@mixin flex-form() {
+  @include flex(column, stretch, center, nowrap);
+
+  .form-row {
+    @include flex-form-row();
+  }
+}
+
+// Flex Form Row
+//
+// Markup: Works with flex() to layout mat-form-fields in a horizontal row
+// .class {
+// @include flex-form-row()
+// }
+//
+//
+// Styleguide Layout.flex-form-row
+@mixin flex-form-row() {
+  @include flex(row, center, stretch, nowrap);
+
+  .mat-form-field {
+    flex: 1 0 auto;
+  }
+}
+
+// Flex directive
+//
+// Markup: Allows the use ".flex" or "flex" attribute to stretch elements. This is to match AngularJS's version of flexbox
+// .class {
+// @include flex;
+// }
+//
+// Styleguide Layout.flex-form
+@mixin flex-directive() {
+
+  .flex,
+  [flex],
+  flex {
+    flex: 1 0 auto;
+  }
+}
+
+// Root Container Height
+//
+// Markup: Inserts height, overflow, margin and padding of container with the basis off 100 view height
+// .class {
+// @include setRootContainerHeight(0,0);
+// }
+//
+// Styleguide Layout.root-container
+@mixin setRootContainerHeight($margin: 0, $padding: 0) {
+  $totalMargin: $margin * 2;
+  $totalPadding: $padding * 2;
+
+  @media screen and (max-width: 600px) {
+    height: calc(100vh - #{$totalMargin}px);
+    overflow-y: auto;
+    margin: #{$margin}px;
+    padding: #{$padding}px;
+  }
+
+  @media screen and (min-width: 601px) {
+    height: calc(100vh - #{$totalMargin}px);
+    overflow-y: auto;
+    margin: #{$margin}px;
+    padding: #{$padding}px;
+  }
+}
+
+// Container Height
+//
+// Markup: Inserts height, overflow, margin and padding of container with the basis off 100 view height minus a mat-toolbar height in both mobile and desktop resolutions.
+// .class {
+// @include setHeightContainer(0,0);
+// }
+//
+// Styleguide Layout.container-height
+@mixin setContainerHeight($margin: 0, $padding: 0) {
+  $totalMargin: $margin * 2;
+  $totalPadding: $padding * 2;
+
+  @media screen and (max-width: 600px) {
+    height: calc(100vh - 56px - #{$totalMargin}px);
+    overflow-y: auto;
+    margin: #{$margin}px;
+    padding: #{$padding}px;
+  }
+
+  @media screen and (min-width: 601px) {
+    height: calc(100vh - 64px - #{$totalMargin}px);
+    overflow-y: auto;
+    margin: #{$margin}px;
+    padding: #{$padding}px;
+  }
+
+  @include media-iphone-portrait {
+    height: calc(100vh - 64px - #{$totalMargin}px - 66px);
+    overflow-y: auto;
+    margin: #{$margin}px;
+    padding: #{$padding}px;
+  }
+}
+
+// Container Height with Toolbars
+//
+// Markup: Same as setContainerHeight but takes in a required toolbar param to offset for any sub toolbars.
+// .class {
+// @include setContainerHeightWithToolbars(0,0,1);
+// }
+//
+// Styleguide Layout.container-height
+@mixin setContainerHeightWithToolbars($margin: 0, $padding: 0, $toolbars: 0) {
+  $totalMargin: $margin * 2;
+  $totalPadding: $padding * 2;
+
+  @media screen and (max-width: 600px) {
+    height: calc(100vh - (#{$toolbars} * 56px) - #{$totalMargin}px);
+    overflow-y: auto;
+    margin: #{$margin}px;
+    padding: #{$padding}px;
+  }
+
+  @media screen and (min-width: 601px) {
+    height: calc(100vh - (#{$toolbars} * 64px) - #{$totalMargin}px);
+    overflow-y: auto;
+    margin: #{$margin}px;
+    padding: #{$padding}px;
+  }
+}
+
+@mixin page-padding($desktopPadding, $mobilePadding) {
+  @include desktop {
+    padding: #{$desktopPadding}px #{$desktopPadding * 2}px;
+  }
+
+  @include mobile {
+    padding: #{$mobilePadding}px #{$mobilePadding * 2}px;
+  }
+}
+
+// Set osx style scroll bars
+//  Like, basically PERFECT scrollbars
+//    It's pure CSS.
+//    Since a quick google search will confirm people going crazy about Mac OS Lion scrollbars...
+//    these scrollbars have no fade-out effect.
+//    In Mac OS Lion, the lowest common denominator is always showing scrollbars by a setting.
+//    So, this fits that lowest common denominator.
+//    Facebook, lifehacker, and Google have all basically taken this approach. Of course Google uses incredibly ugly square scrollbars, but so be it.
+//    Also, in regards to the fade in/out effect, this may just be one reason why soo many people outraged (and still hide) the ticker.
+//    Ending note: I recommend this for non-lion users. As a lion user, I prefer my fading out scrollbars. If you sniff a UA of mac os lion, don't add this css.
+//    After doing my first post here on Dabblet, I dug into their custom
+//   scrollbar css.
+//   here that is, I starred the box-shadow css for the nice pop.
+// section.page:not(.focus):not(:hover)::-webkit-scrollbar {
+//   display: none;
+// }
+// ::-webkit-scrollbar-track,::-webkit-scrollbar-thumb {
+//   border: 5px solid transparent;
+//   border-radius: 999px;
+// }
+// ::-webkit-scrollbar-track {
+//   ** box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset; **
+// }
+// ::-webkit-scrollbar-thumb {
+//   background: url(/img/noise.png);
+//   background-clip: content-box;
+//   ** box-shadow: 0 0 0 5px hsla(24, 20%, 50%,.4) inset; **
+//   min-height: 20px;
+// }
+// ::-webkit-scrollbar-corner {
+//   background: transparent;
+// }
+//
+// Markup:
+// .class {
+// @include perfect-scroll-bars($color);
+// }
+//
+// Styleguide Layout.perfect-scroll-bars
+@mixin perfect-scroll-bars($color: $black) {
+
+  /* Turn on custom 8px wide scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    /* 1px wider than Lion. */
+    /* This is more usable for users trying to click it. */
+    background-color: rgba($color, 0);
+    -webkit-border-radius: 100px;
+  }
+
+  /* hover effect for both scrollbar area, and scrollbar 'thumb' */
+  ::-webkit-scrollbar:hover {
+    background-color: rgba($color, 0.09);
+  }
+
+  /* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+  ::-webkit-scrollbar-thumb:vertical {
+    /* This is the EXACT color of Mac OS scrollbars. 
+     Yes, I pulled out digital color meter */
+    background: rgba($color, 0.5);
+    -webkit-border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-thumb:vertical:active {
+    background: rgba($color, 0.61);
+    /* Some darker color when you click it */
+    -webkit-border-radius: 100px;
+  }
+
+  .dark {
+    $color: get-inverse-color($color);
+
+    ::-webkit-scrollbar,
+    &::-webkit-scrollbar {
+      background-color: rgba($color, 0);
+    }
+
+    ::-webkit-scrollbar:hover,
+    &::-webkit-scrollbar:hover {
+      background-color: rgba($color, 0.09);
+    }
+
+    ::-webkit-scrollbar-thumb:vertical,
+    &::-webkit-scrollbar-thumb:vertical {
+      background: rgba($color, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb:vertical:active,
+    &::-webkit-scrollbar-thumb:vertical:active {
+      background: rgba($color, 0.61);
+    }
+  }
+}

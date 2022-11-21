@@ -1,0 +1,53 @@
+// Inverse text color
+//
+// Markup: Will return the inverse color, usually the background with an alpha of .875 to match Material Design spec.
+// .class {
+// background: $background
+// color: set-inverse-text-color($background)
+// }
+//
+// Styleguide Coloring.set-inverse-text-color
+
+@function set-inverse-text-color($inputColor) {
+  @if (lightness($inputColor) > 57) {
+    @return rgba(black, 0.875);
+  }
+
+  @else {
+    @return rgba(white, 0.875);
+  }
+}
+
+// Inverse color
+//
+// Markup: Similar to set-inverse-text-color, but just returns a full opacity color.
+// .class {
+// background: $background
+// color: get-inverse-color($background)
+// }
+//
+// Styleguide Coloring.get-inverse-color
+
+@function get-inverse-color($color) {
+  @if (lightness($color) > 50) {
+    @return darken($color, 50%);
+  }
+
+  @else {
+    @return lighten($color, 50%);
+  }
+}
+
+// Background color and text
+//
+// Markup: Uses set-inverse-text-color to set both background and text.
+// .class {
+// @include background-color-with-text()
+// }
+//
+// Styleguide Coloring.background-color-with-text
+
+@mixin background-color-with-text($color) {
+  background-color: $color;
+  color: set-inverse-text-color($color);
+}

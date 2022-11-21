@@ -1,0 +1,33 @@
+@import 'src/styles/mixins';
+
+div.app {
+    min-height: calc(100vh - #{$headerHeight} - (#{$headerPaddingTopBottom} * 0) - #{$mainNavHeight} - #{$footerHeight} - 0px);
+    @include flex(column, stretch, stretch, nowrap);
+    width: 100vw;
+    min-width: 375px;
+    background-color: $background;
+    color: set-inverse-text-color($background);
+
+    @media only screen {
+        @include mat-elevation(24, darken($background, 20));
+    }
+
+    @media screen and (min-width: 1400px) {
+        width: $appContainerWidth;
+    }
+
+    div.router-outlet {
+        @include flex(row, flex-start, center, nowrap);
+    }
+}
+
+.dark {
+    div.app {
+        background-color: $backgroundDark;
+        color: set-inverse-text-color($backgroundDark);
+
+        @media only screen {
+            @include mat-elevation(24, darken($backgroundDark, 20));
+        }
+    }
+}

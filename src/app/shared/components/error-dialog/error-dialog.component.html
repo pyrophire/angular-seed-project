@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+    <p>{{data.message}}</p>
+</div>
+<div mat-dialog-actions
+     class="mat-dialog-actions">
+    <div flex></div>
+    <button class="close-button mat-stroked-button"
+            style="margin-right: 8px"
+            (click)="close()">Close</button>
+
+    <button color="accent"
+            class="refresh-button mat-raised-button mat-primary"
+            (click)="refresh()"
+            cdkFocusInitial>Refresh page</button>
+</div>

@@ -1,0 +1,21 @@
+@import 'src/styles/mixins';
+
+iisdash-tf-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checked {
+  color: $green500;
+}
+
+.unchecked {
+  color: $red500;
+}
+
+.dark {
+  .checked {
+    color: $green300;
+  }
+}

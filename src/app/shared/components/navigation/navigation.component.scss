@@ -1,0 +1,129 @@
+@import 'src/styles/mixins';
+
+nav.top-navigation {
+  max-width: $appContainerWidth;
+  overflow-x: hidden;
+
+  &.sticky {
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-logo-head {
+    height: $headerHeight;
+    $bgColor: white;
+    padding: #{$headerPaddingTopBottom} #{$headerPaddingSides};
+    background-color: $bgColor;
+    color: set-inverse-text-color($bgColor);
+    @include flex(row, center, stretch, nowrap);
+
+    @include media-lt-sm {
+      padding: 8px 16px;
+    }
+
+    svg {
+      height: 130%;
+      width: 100px;
+      margin-right: 16px;
+
+      @include media-lt-sm {
+        width: 60px;
+      }
+    }
+
+    div.text {
+      font-size: 2em;
+      font-weight: 600;
+      line-height: 1em;
+
+      @include media-lt-sm {
+        font-size: 1.5em;
+      }
+    }
+
+    .search-button {
+      margin-left: 8px;
+    }
+  }
+
+  article.header-links {
+    height: $mainNavHeight;
+    $bgColor: $primary;
+    background-color: $bgColor;
+    color: set-inverse-text-color($bgColor);
+    padding: 4px 16px;
+    @include flex(row, center, flex-start, nowrap);
+    gap: 8px;
+
+    a,
+    .mat-button {
+      text-decoration: none;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+  }
+
+  // .header-links {
+  //   @media only print {
+  //     display: none;
+  //   }
+
+  //   height: $mainNavHeight;
+  //   $bgColor: $primary;
+  //   background-color: $bgColor;
+  //   color: set-inverse-text-color($bgColor);
+  //   @include flex(row, center, flex-start, nowrap);
+  //   gap: 8px;
+  //   padding: 4px 16px;
+
+  //   @include media-lt-sm {
+  //     @include flex(row, center, space-around, nowrap);
+  //   }
+
+  //   .header-link {
+  //     border-radius: 4px;
+  //     text-align: center;
+  //     @include basic-transition;
+  //     // @include mat-elevation(2);
+
+  //     &:hover {
+  //       @include mat-elevation(2);
+  //     }
+
+  //     a {
+  //       font-size: 1.25em;
+
+  //       text-decoration: none;
+  //       @include flex(row, center, center, nowrap);
+  //     }
+  //   }
+  // }
+}
+
+.dark {
+  nav.top-navigation {
+    .nav-logo-head {
+      $bgColor: $backgroundDark2;
+      background-color: $bgColor;
+      color: set-inverse-text-color($bgColor);
+    }
+
+    .header-links {
+      $bgColor: $primaryDark;
+      background-color: $bgColor;
+      color: set-inverse-text-color($bgColor);
+
+      // .header-link {
+      //   border-radius: 4px;
+      //   text-align: center;
+      //   @include basic-transition;
+
+      //   &:hover {
+      //     $bgColor: $primaryDark;
+      //     background-color: $bgColor;
+      //     color: set-inverse-text-color($bgColor);
+      //   }
+      // }
+    }
+  }
+}
