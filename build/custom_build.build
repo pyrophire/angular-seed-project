@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Version 1.0.0.0 -->
+<project name="CHANGEME">
+	<!--
+		Convention is to put the build script in a "build" directory in the solution root.
+	-->
+	<property name="build.local.path" value="${directory::get-parent-directory(project::get-base-directory())}" />
+
+	<echo message="---------------------------------------------------------------" />
+	<echo message="--- RxSploder Properties ---" />
+	<echo message="---------------------------------------------------------------" />
+	<property name="env.rxPloder" value="cli.exe" />
+	<property name="env.rxPloderHome" value="\\RxSploder\RxSploder\CLI\Prod" />
+
+	<property name="rxsploder.backup" value="false" />
+	<property name="rxsploder.verbose" value="true" />
+	<property name="rxsploder.clean" value="true" />
+	<property name="rxsploder.debug" value="false" />
+
+	<!-- This will be used to name the log file -->
+	<property name="rxsploder.appname" value="CHANGEME" />
+
+	<property name="deploy.packages.src" value="${build.local.path}\dist" />
+
+	<!-- This defaults to dev, but will be overwritten based on the props set below -->
+	<property name="deploy.url" value="dev-CHANGEME" />
+
+	<!--Set property targets-->
+
+	<target name="PropDev" description="Set properties for dev build">
+
+		<property name="deploy.build.environment" value="dev" />
+
+		<property name="rxsploder.env" value="${deploy.build.environment}" />
+
+		<property name="rxsploder.backup" value="false" />
+
+		<property name="deploy.url" value="dev-CHANGEME" />
+
+	</target>
+
+	<target name="PropTest" description="Set properties for build to TEST">
+
+		<property name="deploy.build.environment" value="test" />
+
+		<property name="rxsploder.env" value="${deploy.build.environment}" />
+
+		<property name="rxsploder.backup" value="false" />
+
+		<property name="deploy.url" value="test-CHANGEME" />
+
+	</target>
+
+	<target name="PropProd" description="Set properties for build to PROD">
+
+		<property name="deploy.build.environment" value="prod" />
+
+		<property name="rxsploder.env" value="${deploy.build.environment}" />
+
+		<property name="rxsploder.backup" value="true" />
+
+		<property name="deploy.url" value="CHANGEME" />
+
+	</target>
+
+	<!--Build Targets: These are the targets that are referenced when building with this script-->
+
+	<target name="devBuild">
+		<call target="PropDev" />
+	</target>
+
+	<target name="testBuild">
+		<call target="PropTest" />
+	</target>
+
+	<target name="prodBuild">
+		<call target="PropProd" />
+	</target>
+
+	<!--Shared Targets: These targets are used by each build target. They should be environment agnostic. 
+		They should be dependend on by other targets and not called directly
+	-->
+
+	<target name="Deploy">
+		<property name="rxsploder.appappendname" value="${rxsploder.appname}" />
+		<exec program = "${env.rxPloder}" basedir="${env.rxPloderHome}">
+			<arg value="AppName=${rxsploder.appname}" />
+			<arg value="Env=${rxsploder.env}" />
+			<arg value="SourcePath=${deploy.packages.src}" />
+			<arg value="url=${deploy.url}" />
+			<arg value="backup=${rxsploder.backup}" />
+			<arg value="verbose=${rxsploder.verbose}" />
+			<arg value="clean=${rxsploder.clean}" />
+			<arg value="debug=${rxsploder.debug}" />
+		</exec>
+	</target>
+
+</project>
