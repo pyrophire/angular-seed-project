@@ -6,7 +6,7 @@
   }
 }
 
-$ng-select-highlight: $primary  !default;
+$ng-select-highlight: $primary !default;
 $ng-select-primary-text: rgba(black, 0.87) !default;
 $ng-select-primary-light-text: rgba(white, 0.87) !default;
 $ng-select-secondary-text: rgba(black, 0.54) !default;
@@ -16,7 +16,7 @@ $ng-select-divider: rgba(black, 0.12) !default;
 $ng-select-bg: #ffffff !default;
 
 .ng-select {
-  padding-bottom: 8px;
+  padding-bottom: 11px;
 
   &.ng-select-disabled {
     .ng-select-container {
@@ -63,7 +63,7 @@ $ng-select-bg: #ffffff !default;
       }
 
       .ng-value-container .ng-placeholder {
-        transform: translateY(-1.28125em) scale(0.75) perspective(100px) translateZ(0.001px);
+        transform: translateY(-22px) scale(0.75) perspective(100px) translateZ(0.001px);
         color: $ng-select-highlight;
       }
 
@@ -83,7 +83,7 @@ $ng-select-bg: #ffffff !default;
   .ng-has-value,
   &.ng-select-opened {
     .ng-placeholder {
-      transform: translateY(-1.28125em) scale(0.75) perspective(100px) translateZ(0.001px);
+      transform: translateY(-22px) scale(0.75) perspective(100px) translateZ(0.001px);
     }
   }
 
@@ -128,6 +128,7 @@ $ng-select-bg: #ffffff !default;
         padding: 0 0.25em;
         background-color: $ng-select-bg;
         z-index: 1;
+        bottom: 16px;
       }
 
       .ng-value {
@@ -137,7 +138,7 @@ $ng-select-bg: #ffffff !default;
 
     .ng-value-container {
       align-items: stretch;
-      padding: 0.4375em 0;
+      padding: 0;
       border-top: 0.84375em solid transparent;
 
       .ng-placeholder {
@@ -476,14 +477,14 @@ ng-select.ng-select-multiple {
   }
 }
 
-$dark-ng-select-highlight: set-inverse-text-color($primaryDark) !default;
+$dark-ng-select-highlight: $primaryDark !default;
 $dark-ng-select-primary-text: rgba(white, 0.87) !default;
 $dark-ng-select-primary-light-text: rgba(black, 0.87) !default;
 $dark-ng-select-secondary-text: rgba(white, 0.54) !default;
 $dark-ng-select-secondary-light-text: rgba(black, 0.54) !default;
 $dark-ng-select-disabled-text: rgba(white, 0.38) !default;
 $dark-ng-select-divider: rgba(white, 0.12) !default;
-$dark-ng-select-bg: $backgroundDark  !default;
+$dark-ng-select-bg: $backgroundDark !default;
 
 .dark {
   .ng-select.ng-invalid.ng-touched {
@@ -559,7 +560,7 @@ $dark-ng-select-bg: $backgroundDark  !default;
       color: $dark-ng-select-primary-text;
 
       &:after {
-        border-bottom: thin solid rgba(white, 0.87);
+        border-bottom: thin solid rgba(white, 0.42);
       }
 
       &.ng-appearance-outline {
@@ -767,7 +768,7 @@ ng-select {
   }
 
   .ng-value {
-    margin-top: 4px;
+    // margin-top: 4px;
   }
 }
 

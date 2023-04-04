@@ -2,7 +2,7 @@
 @import 'src/styles/vars';
 
 @include mat.core();
-@include mat.all-legacy-component-typographies();
+@include mat.all-component-typographies();
 
 // Light theme
 //
@@ -15,11 +15,11 @@
 $light-primary: mat.define-palette($primary-palette, $primary-shade);
 $light-accent: mat.define-palette($accent-palette, $accent-shade);
 $light-warn: mat.define-palette(mat.$red-palette, 500);
-$light-theme: mat.define-light-theme($light-primary, $light-accent, $light-warn);
 
-.light {
-  @include mat.all-component-themes($light-theme);
-}
+$light-theme: mat.define-light-theme((color: (primary: $light-primary, accent: $light-accent, warn: $light-warn),
+      // typography: mat.define-typography-config(),
+      density: 0));
+@include mat.all-component-themes($light-theme);
 
 // Dark theme
 //
@@ -31,8 +31,8 @@ $light-theme: mat.define-light-theme($light-primary, $light-accent, $light-warn)
 $dark-primary: mat.define-palette($primary-palette, $primary-shade-dark);
 $dark-accent: mat.define-palette($accent-palette, $accent-shade-dark);
 $dark-warn: mat.define-palette(mat.$red-palette, 500);
-$dark-theme: mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-theme: mat.define-dark-theme((color: (primary:$dark-primary, accent:$dark-accent, warn:$dark-warn)));
 
 .dark {
-  @include mat.all-component-themes($dark-theme);
+  @include mat.all-component-colors($dark-theme);
 }

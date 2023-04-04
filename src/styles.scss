@@ -147,3 +147,24 @@ form {
     }
   }
 }
+
+// Temporary fixes for angular material 15
+.mdc-text-field--filled:not(.mdc-text-field--disabled),
+.mdc-text-field--disabled.mdc-text-field--filled,
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: unset !important;
+}
+
+.dark .mdc-button,
+.light .mdc-button {
+  letter-spacing: normal !important;
+}

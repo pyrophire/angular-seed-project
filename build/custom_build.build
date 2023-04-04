@@ -10,7 +10,7 @@
 	<echo message="--- RxSploder Properties ---" />
 	<echo message="---------------------------------------------------------------" />
 	<property name="env.rxPloder" value="cli.exe" />
-	<property name="env.rxPloderHome" value="\\RxSploder\RxSploder\CLI\Prod" />
+	<property name="env.rxPloderHome" value="\\capitol\prod\RxSploder\CLI\Prod" />
 
 	<property name="rxsploder.backup" value="false" />
 	<property name="rxsploder.verbose" value="true" />
