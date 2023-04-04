@@ -1,4 +1,4 @@
-# Eli's Amazing Angular Seed Project 2023
+# Eli's Kinda Ok Angular Seed Project 2023
 
 ## Setup
 1. Clone Repository
