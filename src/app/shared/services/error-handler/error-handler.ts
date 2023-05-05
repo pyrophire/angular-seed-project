@@ -1,10 +1,8 @@
-import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 
-import { ErrorNotificationService } from './error-notification.service';
 import { environment } from '@environments/environment';
-import { SlansSeverity } from 'angular-slans-logging-client-library';
-import { LoggingService } from './logging.service';
+import { ErrorNotificationService } from './error-notification.service';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
@@ -13,7 +11,7 @@ export class GlobalErrorHandler implements ErrorHandler {
   handleError(error: Error | HttpErrorResponse | Event): void {
     // display alert
     if (error instanceof Error || error instanceof HttpErrorResponse) {
-      const loggingService = this.injector.get(LoggingService);
+      // const loggingService = this.injector.get(LoggingService);
       const errorNotificationService = this.injector.get(ErrorNotificationService);
       if (environment.local || environment.prefix === 'dev-') {
         console.error(error);
@@ -24,9 +22,9 @@ export class GlobalErrorHandler implements ErrorHandler {
       });
 
       if (navigator.onLine) {
-        const slansModel = loggingService.errorToSlansMapper(error);
+        // const slansModel = loggingService.errorToSlansMapper(error);
         // log unhandled errors
-        loggingService.log(slansModel.feature, slansModel.action, slansModel.details, SlansSeverity.NonFatalError);
+        // loggingService.log(slansModel.feature, slansModel.action, slansModel.details, SlansSeverity.NonFatalError);
       }
     }
   }

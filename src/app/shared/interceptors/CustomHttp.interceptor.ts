@@ -1,10 +1,6 @@
-import {
-  HttpHandler,
-  HttpHeaders,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
@@ -19,11 +15,11 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     if (!req.headers.has('Content-Type')) {
       if (headReq) {
         headReq = headReq.clone({
-          headers: req.headers.set('Content-Type', 'application/json'),
+          headers: req.headers.set('Content-Type', 'application/json')
         });
       } else {
         headReq = req.clone({
-          headers: req.headers.set('Content-Type', 'application/json'),
+          headers: req.headers.set('Content-Type', 'application/json')
         });
       }
     }
@@ -31,11 +27,11 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     if (req.url.includes('authenticate/windows')) {
       if (headReq) {
         headReq = headReq.clone({
-          withCredentials: true,
+          withCredentials: environment.useWinAuth
         });
       } else {
         headReq = req.clone({
-          withCredentials: true,
+          withCredentials: environment.useWinAuth
         });
       }
     }
@@ -44,12 +40,12 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       if (headReq) {
         headReq = headReq.clone({
           withCredentials: false,
-          headers: req.headers.set('Content-Type', 'text/plain'),
+          headers: req.headers.set('Content-Type', 'text/plain')
         });
       } else {
         headReq = req.clone({
           withCredentials: false,
-          headers: req.headers.set('Content-Type', 'text/plain'),
+          headers: req.headers.set('Content-Type', 'text/plain')
         });
       }
     }
