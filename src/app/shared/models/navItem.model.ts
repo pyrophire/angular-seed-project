@@ -12,6 +12,7 @@ export class NavItem {
   target?: string; // Used to navigate the user outside of the app to a new or specific window
 
   children?: NavItem[]; // used to nest navigation
+  queryParamsHandling?: QueryParamsHandling;
 
   constructor(
     name: string,

@@ -24,12 +24,47 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@services/*": [
+        "src/app/shared/services/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@pipes/*": [
+        "src/app/shared/pipes/*"
+      ],
+      "@enums/*": [
+        "src/app/shared/enums/*"
+      ],
+      "@models/*": [
+        "src/app/shared/models/*"
+      ],
+      "@resolvers/*": [
+        "src/app/shared/resolvers/*"
+      ],
+      "@mocks/*": [
+        "src/app/shared/mocks/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+    }
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
+    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  }
+  },
+  "files": [
+    "src/main.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
 }

@@ -1,7 +1,6 @@
 {
     "recommendations": [
         "esbenp.prettier-vscode",
-        "HookyQR.beautify",
         "pkief.material-icon-theme",
         "donjayamanne.githistory",
         "cyrilletuzi.angular-schematics",

@@ -1,7 +1,10 @@
 <ng-container *ngIf="type==='menuItem'">
     <ng-container *ngIf="item.type === 'route'">
         <a mat-menu-item
-           [routerLink]="item.route">{{item.name}}</a>
+           [routerLink]="item.route"
+           [queryParams]="item.queryParams"
+           [queryParamsHandling]="item.queryParamsHandling"
+           routerLinkActive="router-link-active">{{item.name}}</a>
     </ng-container>
     <ng-container *ngIf="item.type === 'link'">
         <a mat-menu-item
@@ -12,7 +15,10 @@
 <ng-container *ngIf="type==='button'">
     <ng-container *ngIf="item.type === 'route'">
         <a mat-button
-           [routerLink]="item.route">{{item.name}}</a>
+           [routerLink]="item.route"
+           [queryParams]="item.queryParams"
+           [queryParamsHandling]="item.queryParamsHandling"
+           routerLinkActive="router-link-active">{{item.name}}</a>
     </ng-container>
     <ng-container *ngIf="item.type === 'link'">
         <a mat-button
