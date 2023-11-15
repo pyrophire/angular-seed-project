@@ -4,11 +4,17 @@
     <router-outlet></router-outlet>
 </div>
 
-<CHANGEME-footer *ngIf="use.globalFooter"></CHANGEME-footer>
+@if (use.globalFooter) {
+<CHANGEME-footer></CHANGEME-footer>
+}
 
+@if (use.globalScrollButton) {
 <ix-scroll-button [scrollableElementId]="'scrollable'"
                   color="accent"
-                  *ngIf="use.globalScrollButton"></ix-scroll-button>
+                 ></ix-scroll-button>
+}
 
+@if (use.globalScrollPosition) {
 <ix-scroll-progress [config]="scrollProgressConfig"
-                    *ngIf="use.globalScrollPosition"></ix-scroll-progress>
+                   ></ix-scroll-progress>
+}

@@ -1,4 +1,4 @@
-import { Params } from '@angular/router';
+import { Params, QueryParamsHandling } from '@angular/router';
 
 export class NavItem {
   name: string;
