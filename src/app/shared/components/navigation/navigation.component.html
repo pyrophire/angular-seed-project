@@ -15,65 +15,89 @@
     <article class="header-links mobile">
 
         <mat-menu #mobileMenu="matMenu">
-            <ng-container *ngFor="let l of navItems; let i = index">
+            @for (l of navItems; track l; let i = $index) {
+  
                 <!-- Layout for navItems with children -->
-                <ng-container *ngIf="l.children">
-                    <mat-menu #navLayerTwo="matMenu">
-                        <ng-container *ngFor="let l2 of l.children; let i2 = index">
-                            <ng-container *ngIf="l2.children">
-                                <mat-menu #navLayerThree="matMenu">
-                                    <ng-container *ngFor="let l3 of l2.children; let i2 = index">
-                                        <ng-container *ngIf="l3.children">
-                                            <mat-menu #navLayerFour="matMenu">
-                                                <ng-container *ngFor="let l4 of l3.children; let i4 = index">
-                                                    <ng-container *ngIf="l4.children">
+                @if (l.children) {
 
-                                                    </ng-container>
-                                                    <ng-container *ngIf="!l4.children">
+                    <mat-menu #navLayerTwo="matMenu">
+                        @for (l2 of l.children; track l2; let i2 = $index) {
+  
+                            @if (l2.children) {
+
+                                <mat-menu #navLayerThree="matMenu">
+                                    @for (l3 of l2.children; track l3; let i2 = $index) {
+  
+                                        @if (l3.children) {
+
+                                            <mat-menu #navLayerFour="matMenu">
+                                                @for (l4 of l3.children; track l4; let i4 = $index) {
+  
+                                                    @if (l4.children) {
+
+
+                                                    
+}
+                                                    @if (!l4.children) {
+
                                                         <CHANGEME-nav-item [item]="l4"
                                                                            type="menuItem"></CHANGEME-nav-item>
-                                                    </ng-container>
-                                                </ng-container>
+                                                    
+}
+                                                
+}
                                             </mat-menu>
 
                                             <button mat-menu-item
                                                     [matMenuTriggerFor]="navLayerFour">
                                                 <span> {{l3.name}} </span>
                                             </button>
-                                        </ng-container>
-                                        <ng-container *ngIf="!l3.children">
+                                        
+}
+                                        @if (!l3.children) {
+
                                             <CHANGEME-nav-item [item]="l3"
                                                                type="menuItem"></CHANGEME-nav-item>
-                                        </ng-container>
-                                    </ng-container>
+                                        
+}
+                                    
+}
                                 </mat-menu>
 
                                 <button mat-menu-item
                                         [matMenuTriggerFor]="navLayerThree">
                                     <span> {{l2.name}} </span>
                                 </button>
-                            </ng-container>
-                            <ng-container *ngIf="!l2.children">
+                            
+}
+                            @if (!l2.children) {
+
 
                                 <CHANGEME-nav-item [item]="l2"
                                                    type="menuItem"></CHANGEME-nav-item>
-                            </ng-container>
-                        </ng-container>
+                            
+}
+                        
+}
                     </mat-menu>
 
                     <button mat-menu-item
                             [matMenuTriggerFor]="navLayerTwo">
                         <span> {{l.name}} </span>
                     </button>
-                </ng-container>
+                
+}
                 <!-- Layout for navItems w/o children -->
-                <ng-container *ngIf="!l.children">
+                @if (!l.children) {
+
                     <CHANGEME-nav-item [item]="l"
                                        type="menuItem"></CHANGEME-nav-item>
 
-                </ng-container>
+                
+}
 
-            </ng-container>
+            
+}
         </mat-menu>
 
         <button mat-icon-button
@@ -83,50 +107,70 @@
 
     </article>
     <article class="header-links desktop">
-        <ng-container *ngFor="let l of navItems; let i = index">
+        @for (l of navItems; track l; let i = $index) {
+  
             <!-- Layout for navItems with children -->
-            <ng-container *ngIf="l.children">
-                <mat-menu #navLayerTwo="matMenu">
-                    <ng-container *ngFor="let l2 of l.children; let i2 = index">
-                        <ng-container *ngIf="l2.children">
-                            <mat-menu #navLayerThree="matMenu">
-                                <ng-container *ngFor="let l3 of l2.children; let i2 = index">
-                                    <ng-container *ngIf="l3.children">
-                                        <mat-menu #navLayerFour="matMenu">
-                                            <ng-container *ngFor="let l4 of l3.children; let i4 = index">
-                                                <ng-container *ngIf="l4.children">
+            @if (l.children) {
 
-                                                </ng-container>
-                                                <ng-container *ngIf="!l4.children">
+                <mat-menu #navLayerTwo="matMenu">
+                    @for (l2 of l.children; track l2; let i2 = $index) {
+  
+                        @if (l2.children) {
+
+                            <mat-menu #navLayerThree="matMenu">
+                                @for (l3 of l2.children; track l3; let i2 = $index) {
+  
+                                    @if (l3.children) {
+
+                                        <mat-menu #navLayerFour="matMenu">
+                                            @for (l4 of l3.children; track l4; let i4 = $index) {
+  
+                                                @if (l4.children) {
+
+
+                                                
+}
+                                                @if (!l4.children) {
+
                                                     <CHANGEME-nav-item [item]="l4"
                                                                        type="menuItem"></CHANGEME-nav-item>
-                                                </ng-container>
-                                            </ng-container>
+                                                
+}
+                                            
+}
                                         </mat-menu>
 
                                         <button mat-menu-item
                                                 [matMenuTriggerFor]="navLayerFour">
                                             <span> {{l3.name}} </span>
                                         </button>
-                                    </ng-container>
-                                    <ng-container *ngIf="!l3.children">
+                                    
+}
+                                    @if (!l3.children) {
+
                                         <CHANGEME-nav-item [item]="l3"
                                                            type="menuItem"></CHANGEME-nav-item>
-                                    </ng-container>
-                                </ng-container>
+                                    
+}
+                                
+}
                             </mat-menu>
 
                             <button mat-menu-item
                                     [matMenuTriggerFor]="navLayerThree">
                                 <span> {{l2.name}} </span>
                             </button>
-                        </ng-container>
-                        <ng-container *ngIf="!l2.children">
+                        
+}
+                        @if (!l2.children) {
+
 
                             <CHANGEME-nav-item [item]="l2"
                                                type="menuItem"></CHANGEME-nav-item>
-                        </ng-container>
-                    </ng-container>
+                        
+}
+                    
+}
                 </mat-menu>
 
                 <button mat-button
@@ -134,12 +178,16 @@
                     <span> {{l.name}} </span>
                     <mat-icon>keyboard_arrow_down</mat-icon>
                 </button>
-            </ng-container>
+            
+}
             <!-- Layout for navItems w/o children -->
-            <ng-container *ngIf="!l.children">
+            @if (!l.children) {
+
                 <CHANGEME-nav-item [item]="l"
                                    type="button"></CHANGEME-nav-item>
-            </ng-container>
-        </ng-container>
+            
+}
+        
+}
     </article>
 </nav>

@@ -1,28 +1,40 @@
-<ng-container *ngIf="type==='menuItem'">
-    <ng-container *ngIf="item.type === 'route'">
+@if (type==='menuItem') {
+
+    @if (item.type === 'route') {
+
         <a mat-menu-item
            [routerLink]="item.route"
            [queryParams]="item.queryParams"
            [queryParamsHandling]="item.queryParamsHandling"
            routerLinkActive="router-link-active">{{item.name}}</a>
-    </ng-container>
-    <ng-container *ngIf="item.type === 'link'">
+    
+}
+    @if (item.type === 'link') {
+
         <a mat-menu-item
            [href]="item.url"
            [target]="item.target? item.target : '_blank'">{{item.name}}</a>
-    </ng-container>
-</ng-container>
-<ng-container *ngIf="type==='button'">
-    <ng-container *ngIf="item.type === 'route'">
+    
+}
+
+}
+@if (type==='button') {
+
+    @if (item.type === 'route') {
+
         <a mat-button
            [routerLink]="item.route"
            [queryParams]="item.queryParams"
            [queryParamsHandling]="item.queryParamsHandling"
            routerLinkActive="router-link-active">{{item.name}}</a>
-    </ng-container>
-    <ng-container *ngIf="item.type === 'link'">
+    
+}
+    @if (item.type === 'link') {
+
         <a mat-button
            [href]="item.url"
            [target]="item.target? item.target : '_blank'">{{item.name}}</a>
-    </ng-container>
-</ng-container>
+    
+}
+
+}
