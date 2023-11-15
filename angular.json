@@ -132,10 +132,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "CHANGEME:build:production"
+              "buildTarget": "CHANGEME:build:production"
             },
             "dev": {
-              "browserTarget": "CHANGEME:build:dev"
+              "buildTarget": "CHANGEME:build:dev"
             }
           },
           "defaultConfiguration": "dev"
@@ -143,7 +143,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CHANGEME:build"
+            "buildTarget": "CHANGEME:build"
           }
         },
         "test": {
