@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { MatIconRegistry } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,4 +16,8 @@ import { SharedModule } from './shared/shared.module';
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(iconRegistry: MatIconRegistry) {
+    iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
+  }
+}

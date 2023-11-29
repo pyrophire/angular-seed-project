@@ -1,9 +1,7 @@
 {
     "recommendations": [
-        "esbenp.prettier-vscode",
         "pkief.material-icon-theme",
         "donjayamanne.githistory",
-        "cyrilletuzi.angular-schematics",
         "aaron-bond.better-comments",
         "wayou.vscode-todo-highlight"
     ]
