@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavItem } from '@models/navItem.model';
-import { IxDarkService, IxMediaQueryService } from 'ix-libs';
+import { IxDarkService } from 'ix-libs';
 
 @Component({
   selector: 'CHANGEME-navigation',
@@ -35,7 +35,7 @@ export class NavigationComponent implements OnInit {
     }
   ];
 
-  constructor(public mq: IxMediaQueryService, private darkService: IxDarkService) {}
+  constructor(private darkService: IxDarkService) {}
 
   public toggleDarkMode(): void {
     this.darkService.toggleDarkLightMode();
