@@ -12,14 +12,16 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     const headers = new HttpHeaders({});
     let headReq: HttpRequest<any> = req.clone({});
 
-    if (!req.headers.has('Content-Type')) {
+    if (!req.headers.has('Content-Type') && req.url.includes('/api/')) {
       if (headReq) {
         headReq = headReq.clone({
-          headers: req.headers.set('Content-Type', 'application/json')
+          headers: req.headers.set('Content-Type', 'application/json'),
+          withCredentials: environment.useWinAuth
         });
       } else {
         headReq = req.clone({
-          headers: req.headers.set('Content-Type', 'application/json')
+          headers: req.headers.set('Content-Type', 'application/json'),
+          withCredentials: environment.useWinAuth
         });
       }
     }
