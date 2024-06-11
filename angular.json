@@ -33,11 +33,12 @@
       "prefix": "CHANGEME",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist",
+            "outputPath": {
+              "base": "dist"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -63,13 +64,15 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "./src"
+                "./src",
+                "."
               ]
             },
             "scripts": [],
             "allowedCommonJsDependencies": [
               "filesize"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "prod": {
@@ -121,9 +124,7 @@
                   "with": "src/environments/environment.dev.ts"
                 }
               ],
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
