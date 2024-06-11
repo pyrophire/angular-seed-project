@@ -466,12 +466,12 @@ ng-select.ng-select-multiple {
 
   .ng-placeholder,
   .ng-arrow {
-    color: rgba(255, 0, 0, 0.875);
+    color: $light-error;
   }
 
   .ng-select-container {
     &:after {
-      border-color: rgba(255, 0, 0, 0.875);
+      border-color: $light-error;
       border-bottom-width: 2px;
     }
   }
@@ -491,12 +491,12 @@ $dark-ng-select-bg: $backgroundDark !default;
 
     .ng-placeholder,
     .ng-arrow {
-      color: rgba(255, 50, 50, 1) !important;
+      color: $dark-error !important;
     }
 
     .ng-select-container {
       &:after {
-        border-color: rgba(255, 50, 50, 1);
+        border-color: $dark-error;
         border-bottom-width: 2px;
       }
     }

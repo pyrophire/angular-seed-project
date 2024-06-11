@@ -61,54 +61,24 @@ nav.top-navigation {
     height: $mainNavHeight;
     $bgColor: $primary;
     background-color: $bgColor;
-    color: set-inverse-text-color($bgColor);
+    // color: set-inverse-text-color($bgColor);
     padding: 4px 16px;
     @include flex(row, center, flex-start, nowrap);
     gap: 8px;
+    font-size: 1.2em;
 
     a,
-    .mat-button {
+    .mdc-button {
       text-decoration: none;
       padding-top: 4px;
       padding-bottom: 4px;
+
+      &.mat-mdc-button:not(:disabled) {
+        color: white;
+      }
     }
   }
 
-  // .header-links {
-  //   @media only print {
-  //     display: none;
-  //   }
-
-  //   height: $mainNavHeight;
-  //   $bgColor: $primary;
-  //   background-color: $bgColor;
-  //   color: set-inverse-text-color($bgColor);
-  //   @include flex(row, center, flex-start, nowrap);
-  //   gap: 8px;
-  //   padding: 4px 16px;
-
-  //   @include media-lt-sm {
-  //     @include flex(row, center, space-around, nowrap);
-  //   }
-
-  //   .header-link {
-  //     border-radius: 4px;
-  //     text-align: center;
-  //     @include basic-transition;
-  //     // @include mat-elevation(2);
-
-  //     &:hover {
-  //       @include mat-elevation(2);
-  //     }
-
-  //     a {
-  //       font-size: 1.25em;
-
-  //       text-decoration: none;
-  //       @include flex(row, center, center, nowrap);
-  //     }
-  //   }
-  // }
 }
 
 .dark {
@@ -124,7 +94,6 @@ nav.top-navigation {
     .header-links {
       $bgColor: $primaryDark;
       background-color: $bgColor;
-      color: set-inverse-text-color($bgColor);
 
       // .header-link {
       //   border-radius: 4px;

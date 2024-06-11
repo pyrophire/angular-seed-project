@@ -1,7 +1,10 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 @import '_colors/material-color-palette';
 @import '_colors/custom-palette';
 @import '_partials/coloring.partial';
+
+
 
 // Theme Color Variables
 //
@@ -12,12 +15,12 @@
 // Styleguide Vars.colors.theme
 
 // EDIT THESE
-$primary-palette: mat.$m2-light-blue-palette;
-$primary-shade: 500;
-$accent-palette: mat.$m2-amber-palette;
-$accent-shade: 400;
-$primary-shade-dark: 800;
-$accent-shade-dark: 500;
+$primary-palette: $phire-light-blue;
+$primary-shade: 50;
+$accent-palette: mat.$yellow-palette;
+$accent-shade: 40;
+$primary-shade-dark: 50;
+$accent-shade-dark: 50;
 
 $headerHeight: 100px;
 $headerPaddingTopBottom: 16px;
@@ -32,12 +35,14 @@ $appContainerWidth: 1400px;
 
 
 // DO NOT EDIT THESE
-$primary: map-get($primary-palette, $primary-shade);
+$primary: map-get($primary-palette, $primary-shade );
 $accent: map-get($accent-palette, $accent-shade);
 $primaryDark: map-get($primary-palette, $primary-shade-dark);
 $accentDark: map-get($accent-palette, $accent-shade-dark);
 $warn: $red500;
 $success: $green500;
+$light-error: map-get(map-get($phire-light-blue, 'error'), 40);
+$dark-error: map-get(map-get($phire-light-blue, 'error'), 80);
 
 // Background Color Variables
 //

@@ -1,0 +1,17 @@
+@import 'src/styles/mixins';
+
+ix-ng-select-error {
+  color: $light-error;
+  font-size: 0.75em;
+  // top: -13px;
+  position: relative;
+  line-height: 0em;
+  display: block;
+  padding: 0 16px;
+}
+
+.dark {
+  ix-ng-select-error {
+    color: $dark-error;
+  }
+}
