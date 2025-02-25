@@ -1,12 +1,12 @@
  @use 'src/styles/mixins' as *;
 
- // @import 'src/styles/_vendor/ng-select';
- // @import 'src/styles/_vendor/ng-picker-datetime';
- // @import 'src/styles/_vendor/summernote';
- // @import 'src/styles/_vendor/ui-placeholder';
- // @import 'src/styles/_vendor/json-viewer';
- // @import 'src/styles/_vendor/hot-toast';
- @import 'node_modules/@ngneat/hot-toast/src/styles/styles.scss';
+ // @use 'src/styles/_vendor/ng-select';
+ // @use 'src/styles/_vendor/ng-picker-datetime';
+ // @use 'src/styles/_vendor/summernote';
+ // @use 'src/styles/_vendor/ui-placeholder';
+ // @use 'src/styles/_vendor/json-viewer';
+ // @use 'src/styles/_vendor/hot-toast';
+ @use 'node_modules/@ngneat/hot-toast/src/styles/styles.scss';
 
  @import 'https://cdn.tlc.texas.gov/ix/fonts/roboto/roboto_300_400_500_700_displaySwap.css';
  // @import 'https://cdn.tlc.texas.gov/ix/icons/material/v125/icon.css';
