@@ -1,27 +1,27 @@
-@import 'src/styles/mixins';
+ @use 'src/styles/mixins' as *;
 
-// @import 'src/styles/_vendor/ng-select';
-// @import 'src/styles/_vendor/ng-picker-datetime';
-// @import 'src/styles/_vendor/summernote';
-// @import 'src/styles/_vendor/ui-placeholder';
-// @import 'src/styles/_vendor/json-viewer';
-// @import 'src/styles/_vendor/hot-toast';
-@import 'node_modules/@ngneat/hot-toast/src/styles/styles.scss';
+ // @import 'src/styles/_vendor/ng-select';
+ // @import 'src/styles/_vendor/ng-picker-datetime';
+ // @import 'src/styles/_vendor/summernote';
+ // @import 'src/styles/_vendor/ui-placeholder';
+ // @import 'src/styles/_vendor/json-viewer';
+ // @import 'src/styles/_vendor/hot-toast';
+ @import 'node_modules/@ngneat/hot-toast/src/styles/styles.scss';
 
-@import 'https://cdn.tlc.texas.gov/ix/fonts/roboto/roboto_300_400_500_700_displaySwap.css';
-// @import 'https://cdn.tlc.texas.gov/ix/icons/material/v125/icon.css';
-// @import 'https://cdn.tlc.texas.gov/ix/fonts/mdi/font/css/materialdesignicons.min.css';
+ @import 'https://cdn.tlc.texas.gov/ix/fonts/roboto/roboto_300_400_500_700_displaySwap.css';
+ // @import 'https://cdn.tlc.texas.gov/ix/icons/material/v125/icon.css';
+ // @import 'https://cdn.tlc.texas.gov/ix/fonts/mdi/font/css/materialdesignicons.min.css';
 
-@import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,1,200'
-//opsz (Optical Size) https://fonts.google.com/knowledge/glossary/optical_size_axis
-// min 0
-// max 1000
-//wght (Weight) https://fonts.google.com/knowledge/glossary/weight_axis
-// min: 1
-// max: 1000
-//FILL (Filled) https://fonts.google.com/knowledge/glossary/fill_axis
-// min: 0 (not filled)
-// max: 1 (filled)
-//GRAD (Grade)  https://fonts.google.com/knowledge/glossary/grade_axis
-// min: -1000 
-// max: 1000
+ @import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,1,200'
+ //opsz (Optical Size) https://fonts.google.com/knowledge/glossary/optical_size_axis
+ // min 0
+ // max 1000
+ //wght (Weight) https://fonts.google.com/knowledge/glossary/weight_axis
+ // min: 1
+ // max: 1000
+ //FILL (Filled) https://fonts.google.com/knowledge/glossary/fill_axis
+ // min: 0 (not filled)
+ // max: 1 (filled)
+ //GRAD (Grade)  https://fonts.google.com/knowledge/glossary/grade_axis
+ // min: -1000 
+ // max: 1000

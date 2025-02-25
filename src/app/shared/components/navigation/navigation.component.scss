@@ -1,111 +1,111 @@
-@import 'src/styles/mixins';
+ @use 'src/styles/mixins' as *;
 
-nav.top-navigation {
-  max-width: $appContainerWidth;
-  overflow-x: hidden;
+ nav.top-navigation {
+   max-width: $appContainerWidth;
+   overflow-x: hidden;
 
-  &.sticky {
-    position: sticky;
-    top: 0;
-  }
+   &.sticky {
+     position: sticky;
+     top: 0;
+   }
 
-  .nav-logo-head {
-    height: $headerHeight;
-    $bgColor: white;
-    padding: #{$headerPaddingTopBottom} #{$headerPaddingSides};
-    background-color: $bgColor;
-    color: set-inverse-text-color($bgColor);
-    @include flex(row, center, stretch, nowrap);
+   .nav-logo-head {
+     height: $headerHeight;
+     $bgColor: white;
+     padding: #{$headerPaddingTopBottom} #{$headerPaddingSides};
+     background-color: $bgColor;
+     color: set-inverse-text-color($bgColor);
+     @include flex(row, center, stretch, nowrap);
 
-    @include media-lt-sm {
-      padding: 8px 16px;
-    }
+     @include media-lt-sm {
+       padding: 8px 16px;
+     }
 
-    #nav-logo {
-      height: 100%;
-      width: 64px;
-      margin-right: 16px;
-      background-image: url(/assets/img/favicon-196x196.png);
-      background-size: contain;
-      background-repeat: no-repeat no-repeat;
-      filter: invert(65%) blur(0px) sepia(60%) hue-rotate(90deg) saturate(0%);
-      transition: filter 0.75s ease-in-out;
-    }
+     #nav-logo {
+       height: 100%;
+       width: 64px;
+       margin-right: 16px;
+       background-image: url(/assets/img/favicon-196x196.png);
+       background-size: contain;
+       background-repeat: no-repeat no-repeat;
+       filter: invert(65%) blur(0px) sepia(60%) hue-rotate(90deg) saturate(0%);
+       transition: filter 0.75s ease-in-out;
+     }
 
-    svg {
-      height: 100%;
-      width: 100px;
-      margin-right: 16px;
+     svg {
+       height: 100%;
+       width: 100px;
+       margin-right: 16px;
 
-      @include media-lt-sm {
-        width: 60px;
-      }
-    }
+       @include media-lt-sm {
+         width: 60px;
+       }
+     }
 
-    div.text {
-      font-size: 2em;
-      font-weight: 600;
-      line-height: 1em;
+     div.text {
+       font-size: 2em;
+       font-weight: 600;
+       line-height: 1em;
 
-      @include media-lt-sm {
-        font-size: 1.5em;
-      }
-    }
+       @include media-lt-sm {
+         font-size: 1.5em;
+       }
+     }
 
-    .search-button {
-      margin-left: 8px;
-    }
-  }
+     .search-button {
+       margin-left: 8px;
+     }
+   }
 
-  article.header-links {
-    height: $mainNavHeight;
-    $bgColor: $primary;
-    background-color: $bgColor;
-    // color: set-inverse-text-color($bgColor);
-    padding: 4px 16px;
-    @include flex(row, center, flex-start, nowrap);
-    gap: 8px;
-    font-size: 1.2em;
+   article.header-links {
+     height: $mainNavHeight;
+     $bgColor: $primary;
+     background-color: $bgColor;
+     // color: set-inverse-text-color($bgColor);
+     padding: 4px 16px;
+     @include flex(row, center, flex-start, nowrap);
+     gap: 8px;
+     font-size: 1.2em;
 
-    a,
-    .mdc-button {
-      text-decoration: none;
-      padding-top: 4px;
-      padding-bottom: 4px;
+     a,
+     .mdc-button {
+       text-decoration: none;
+       padding-top: 4px;
+       padding-bottom: 4px;
 
-      &.mat-mdc-button:not(:disabled) {
-        color: white;
-      }
-    }
-  }
+       &.mat-mdc-button:not(:disabled) {
+         color: white;
+       }
+     }
+   }
 
-}
+ }
 
-.dark {
-  nav.top-navigation {
-    .nav-logo-head {
-      $bgColor: $backgroundDark2;
-      background-color: $bgColor;
-      color: set-inverse-text-color($bgColor);
+ .dark {
+   nav.top-navigation {
+     .nav-logo-head {
+       $bgColor: $backgroundDark2;
+       background-color: $bgColor;
+       color: set-inverse-text-color($bgColor);
 
 
-    }
+     }
 
-    .header-links {
-      $bgColor: $primaryDark;
-      background-color: $bgColor;
+     .header-links {
+       $bgColor: $primaryDark;
+       background-color: $bgColor;
 
-      // .header-link {
-      //   border-radius: 4px;
-      //   text-align: center;
-      //   @include basic-transition;
+       // .header-link {
+       //   border-radius: 4px;
+       //   text-align: center;
+       //   @include basic-transition;
 
-      //   &:hover {
-      //     $bgColor: $primaryDark;
-      //     background-color: $bgColor;
-      //     color: set-inverse-text-color($bgColor);
-      //   }
-      // }
-    }
-  }
-}
+       //   &:hover {
+       //     $bgColor: $primaryDark;
+       //     background-color: $bgColor;
+       //     color: set-inverse-text-color($bgColor);
+       //   }
+       // }
+     }
+   }
+ }

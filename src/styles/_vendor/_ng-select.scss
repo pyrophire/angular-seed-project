@@ -18,6 +18,13 @@ $ng-select-bg: #ffffff !default;
 .ng-select {
   padding-bottom: 11px;
 
+  :not(.ng-has-value) {
+    .ng-value-container .ng-placeholder {
+
+      font-size: 16px;
+    }
+  }
+
   &.ng-select-disabled {
     .ng-select-container {
 
@@ -35,6 +42,7 @@ $ng-select-bg: #ffffff !default;
         }
 
         .ng-placeholder {
+
           color: $ng-select-disabled-text;
         }
       }
@@ -63,6 +71,7 @@ $ng-select-bg: #ffffff !default;
       }
 
       .ng-value-container .ng-placeholder {
+
         transform: translateY(-22px) scale(0.75) perspective(100px) translateZ(0.001px);
         color: $ng-select-highlight;
       }
@@ -144,7 +153,7 @@ $ng-select-bg: #ffffff !default;
       .ng-placeholder {
         position: absolute;
         color: $ng-select-secondary-text;
-        transform-origin: left 24px;
+        transform-origin: left 36px;
         transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
           width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
@@ -437,7 +446,11 @@ $ng-select-bg: #ffffff !default;
 ng-select.ng-select-multiple {
   .ng-value {
     border-radius: 20px !important;
-    @include flex(row, center, flex-start, nowrap);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
     background-color: #e0e0e0 !important;
     color: rgba(0, 0, 0, 0.87) !important;
 
@@ -668,7 +681,11 @@ $dark-ng-select-bg: $backgroundDark !default;
 ng-select.ng-select-multiple {
   .ng-value {
     border-radius: 20px !important;
-    @include flex(row, center, flex-start, nowrap);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
     background-color: #e0e0e0 !important;
     color: rgba(0, 0, 0, 0.87) !important;
 

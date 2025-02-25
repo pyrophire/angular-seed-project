@@ -1,170 +1,170 @@
-@import 'src/styles/mixins';
+ @use 'src/styles/mixins' as *;
 
-// used for loading page only
+ // used for loading page only
 
-.loading {
-  background-color: rgb(50, 50, 50);
-  height: 100vh;
-  width: 100vw;
-  @include flex(row, center, center, nowrap);
+ .loading {
+   background-color: rgb(50, 50, 50);
+   height: 100vh;
+   width: 100vw;
+   @include flex(row, center, center, nowrap);
 
-  .logo {
-    height: 50vh;
-    width: 50vw;
-    @include flex(row, center, center, nowrap);
+   .logo {
+     height: 50vh;
+     width: 50vw;
+     @include flex(row, center, center, nowrap);
 
-    svg {
-      .st0 {
-        fill: $primary;
-      }
+     svg {
+       .st0 {
+         fill: $primary;
+       }
 
-      .st1 {
-        fill: #ffffff;
-      }
+       .st1 {
+         fill: #ffffff;
+       }
 
-      height: 100%;
-    }
-  }
-}
+       height: 100%;
+     }
+   }
+ }
 
-* {
-  box-sizing: border-box;
-}
+ * {
+   box-sizing: border-box;
+ }
 
-/* Hide focus styles if they're not needed, for example, 
+ /* Hide focus styles if they're not needed, for example, 
 when an element receives focus via the mouse. */
-:focus:not(:focus-visible) {
-  outline: 0;
-}
+ :focus:not(:focus-visible) {
+   outline: 0;
+ }
 
-/* Show focus styles on keyboard focus. */
-:focus-visible {
-  outline: 3px solid blue;
-}
+ /* Show focus styles on keyboard focus. */
+ :focus-visible {
+   outline: 3px solid blue;
+ }
 
-html {
-  top: 0 !important;
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-}
+ html {
+   top: 0 !important;
+   padding: 0;
+   margin: 0;
+   height: 100vh;
+   overflow: hidden;
+ }
 
-body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  width: 100vw;
-  overflow-x: hidden;
+ body {
+   height: 100%;
+   padding: 0;
+   margin: 0;
+   width: 100vw;
+   overflow-x: hidden;
 
-  @media only print {
-    overflow-x: unset;
-    height: unset;
-  }
-}
+   @media only print {
+     overflow-x: unset;
+     height: unset;
+   }
+ }
 
-body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-size: 400% 400%;
-  animation: AnimationName 15s ease infinite;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  @include flex(row, flex-start, center, nowrap);
-}
+ body {
+   font-family: Roboto, 'Helvetica Neue', sans-serif;
+   background-size: 400% 400%;
+   animation: AnimationName 15s ease infinite;
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: cover;
+   @include flex(row, flex-start, center, nowrap);
+ }
 
-body.light {
-  background-color: $background;
-  color: set-inverse-text-color($background);
-}
+ body.light {
+   background-color: $background;
+   color: set-inverse-text-color($background);
+ }
 
-body.dark {
-  background-color: $backgroundDark1;
-  color: set-inverse-text-color($backgroundDark1);
-}
+ body.dark {
+   background-color: $backgroundDark1;
+   color: set-inverse-text-color($backgroundDark1);
+ }
 
-@include flex-directive;
-@include clickable-link($blue700);
+ @include flex-directive;
+ @include clickable-link($blue700);
 
 
-.desktop {
-  @include media-lt-sm {
-    display: none !important;
-  }
-}
+ .desktop {
+   @include media-lt-sm {
+     display: none !important;
+   }
+ }
 
-.mobile {
-  @include media-gt-sm {
-    display: none !important;
-  }
-}
+ .mobile {
+   @include media-gt-sm {
+     display: none !important;
+   }
+ }
 
-ix-scroll-button {
-  z-index: 9999;
+ ix-scroll-button {
+   z-index: 9999;
 
-  @media only print {
-    display: none;
-  }
-}
+   @media only print {
+     display: none;
+   }
+ }
 
-.no-print {
-  @media only print {
-    display: none !important;
-  }
-}
+ .no-print {
+   @media only print {
+     display: none !important;
+   }
+ }
 
-// fixes forms with auto complete to remove chrome's blue background
-form {
+ // fixes forms with auto complete to remove chrome's blue background
+ form {
 
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-    -webkit-text-fill-color: set-inverse-text-color(white);
-    transition: background-color 5000s ease-in-out 0s;
-  }
-}
+   input:-webkit-autofill,
+   input:-webkit-autofill:hover,
+   input:-webkit-autofill:focus,
+   textarea:-webkit-autofill,
+   textarea:-webkit-autofill:hover,
+   textarea:-webkit-autofill:focus,
+   select:-webkit-autofill,
+   select:-webkit-autofill:hover,
+   select:-webkit-autofill:focus {
+     -webkit-text-fill-color: set-inverse-text-color(white);
+     transition: background-color 5000s ease-in-out 0s;
+   }
+ }
 
-.dark {
-  form {
+ .dark {
+   form {
 
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    textarea:-webkit-autofill,
-    textarea:-webkit-autofill:hover,
-    textarea:-webkit-autofill:focus,
-    select:-webkit-autofill,
-    select:-webkit-autofill:hover,
-    select:-webkit-autofill:focus {
-      -webkit-text-fill-color: set-inverse-text-color(black);
-      transition: background-color 5000s ease-in-out 0s;
-    }
-  }
-}
+     input:-webkit-autofill,
+     input:-webkit-autofill:hover,
+     input:-webkit-autofill:focus,
+     textarea:-webkit-autofill,
+     textarea:-webkit-autofill:hover,
+     textarea:-webkit-autofill:focus,
+     select:-webkit-autofill,
+     select:-webkit-autofill:hover,
+     select:-webkit-autofill:focus {
+       -webkit-text-fill-color: set-inverse-text-color(black);
+       transition: background-color 5000s ease-in-out 0s;
+     }
+   }
+ }
 
-// Temporary fixes for angular material 15
-.mdc-text-field--filled:not(.mdc-text-field--disabled),
-.mdc-text-field--disabled.mdc-text-field--filled,
-.mat-mdc-form-field-focus-overlay {
-  background-color: transparent !important;
-}
+ // Temporary fixes for angular material 15
+ .mdc-text-field--filled:not(.mdc-text-field--disabled),
+ .mdc-text-field--disabled.mdc-text-field--filled,
+ .mat-mdc-form-field-focus-overlay {
+   background-color: transparent !important;
+ }
 
-.mat-mdc-text-field-wrapper.mdc-text-field {
-  padding-left: 0px;
-  padding-right: 0px;
-}
+ .mat-mdc-text-field-wrapper.mdc-text-field {
+   padding-left: 0px;
+   padding-right: 0px;
+ }
 
-.mat-mdc-form-field-infix {
-  min-height: unset !important;
-}
+ .mat-mdc-form-field-infix {
+   min-height: unset !important;
+ }
 
-.dark .mdc-button,
-.light .mdc-button {
-  letter-spacing: normal !important;
-}
+ .dark .mdc-button,
+ .light .mdc-button {
+   letter-spacing: normal !important;
+ }

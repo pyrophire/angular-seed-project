@@ -20,7 +20,7 @@
 	<!-- This will be used to name the log file -->
 	<property name="rxsploder.appname" value="CHANGEME" />
 
-	<property name="deploy.packages.src" value="${build.local.path}\dist" />
+	<property name="deploy.packages.src" value="${build.local.path}\dist\browser" />
 
 	<!-- This defaults to dev, but will be overwritten based on the props set below -->
 	<property name="deploy.url" value="dev-CHANGEME" />

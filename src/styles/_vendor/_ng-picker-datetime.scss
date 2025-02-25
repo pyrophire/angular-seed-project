@@ -5,7 +5,7 @@
 //
 // Styleguide Vendor.ng-picker-datetime
 
-@import 'src/styles/mixins';
+@use 'src/styles/mixins' as *;
 
 .cdk-global-overlay-wrapper {
   pointer-events: none;

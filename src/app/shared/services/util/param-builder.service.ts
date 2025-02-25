@@ -8,19 +8,16 @@ export class ParamBuilderService {
 
   // tslint:disable-next-line: ban-types
   buildParams(params: Object): string {
-    let paramString = Object.keys(params)
-      .map((key) => {
-        if (params[key] != null && params[key].trim().length > 0) {
-          return `${key}=${params[key]}`;
-        } else {
-          return;
-        }
-      })
-      .join('&');
+  let paramString = Object.keys(params)
+    .map((key) => {
+      if (params[key] != undefined && params[key] != null && params[key].trim().length > 0) {
+        return `${key}=${params[key]}`;
+      } else {
+        return null;
+      }
+    })
+    .filter(param => param !== null)
+    .join('&');
 
-    while (paramString.charAt(0) === '&') {
-      paramString = paramString.substr(1);
-    }
-    return paramString;
-  }
+  return paramString;
 }
