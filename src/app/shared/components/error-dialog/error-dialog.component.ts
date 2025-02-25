@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { WindowsService } from '@services/error-handler/windows.service';
 
 @Component({
-  selector: 'app-error-dialog',
-  templateUrl: 'error-dialog.component.html'
+    selector: 'app-error-dialog',
+    templateUrl: 'error-dialog.component.html',
+    standalone: false
 })
 export class ErrorDialogComponent {
   constructor(

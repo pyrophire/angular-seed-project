@@ -3,10 +3,11 @@ import { NavItem } from '@models/navItem.model';
 import { IxDarkService } from 'ix-libs';
 
 @Component({
-  selector: 'CHANGEME-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'CHANGEME-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NavigationComponent implements OnInit {
   @Input() sticky: boolean;

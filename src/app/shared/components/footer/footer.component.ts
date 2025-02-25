@@ -3,10 +3,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'CHANGEME-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'CHANGEME-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class FooterComponent implements OnInit {
   constructor(private dialog: MatDialog) {}
