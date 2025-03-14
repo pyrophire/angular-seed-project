@@ -4,7 +4,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { IxIconsModule, IxPipesModule, IxScrollModule, IxScrollProgressModule, IxTableHeaderModule, IxThemeButtonModule } from 'ix-libs';
+import {
+  IxIconsModule,
+  IxPipesModule,
+  IxScrollModule,
+  IxScrollProgressModule,
+  IxTableHeaderModule,
+  IxThemeButtonModule
+} from '@pyrophire/ix-libs';
 import { NgPipesModule } from 'ngx-pipes';
 import { MaterialModule } from '../material.module';
 import { FooterComponent } from './components/footer/footer.component';

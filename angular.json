@@ -51,7 +51,7 @@
               "src/web.config",
               {
                 "glob": "**/*",
-                "input": "./node_modules/ix-libs/ix-img/",
+                "input": "./node_modules/@pyrophire/ix-libs/ix-img/",
                 "output": "./ix-img"
               }
             ],

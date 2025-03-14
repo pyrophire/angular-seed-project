@@ -31,6 +31,7 @@
     "@ng-select/ng-select": "^12.0.4",
     "@ngneat/bind-query-params": "^6.0.0",
     "@ngneat/hot-toast": "^6.0.1",
+    "@pyrophire/ix-libs": "^19.3.0",
     "angular-rpns-client-library": "file:./libs/angular-rpns-client-library-0.13.1-alpha.tgz",
     "date-fns": "^2.30.0",
     "ix-libs": "file:./libs/ix-libs-19.0.0.tgz",

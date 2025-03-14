@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavItem } from '@models/navItem.model';
-import { IxDarkService } from 'ix-libs';
+import { IxDarkService } from '@pyrophire/ix-libs';
 
 @Component({
-    selector: 'CHANGEME-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'CHANGEME-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class NavigationComponent implements OnInit {
   @Input() sticky: boolean;
