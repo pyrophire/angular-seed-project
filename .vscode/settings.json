@@ -1,16 +1,16 @@
 {
     "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#525252",
-        "activityBar.activeBorder": "#000000",
-        "activityBar.background": "#ff0000",
-        "activityBar.foreground": "#ffffff",
-        "activityBar.inactiveForeground": "#262626",
-        "activityBarBadge.background": "#212121",
-        "activityBarBadge.foreground": "#ffffff",
-        "titleBar.activeBackground": "#ff0000",
-        "titleBar.activeForeground": "#ffffff",
-        "titleBar.border": "#202e77",
-        "titleBar.inactiveBackground": "#ff0000",
-        "titleBar.inactiveForeground": "#949494"
+        "activityBar.activeBackground": "#525252", // Background of selected tool on left bar
+        "activityBar.activeBorder": "#000000", // Color of left bar on selected tool
+        "activityBar.background": "#ff0000", // Whole left bar
+        "activityBar.foreground": "#ffffff", // Selected left bar icon color
+        "activityBar.inactiveForeground": "#262626", // Unselected left bar icon color
+        "activityBarBadge.background": "#212121", // background of notification badge
+        "activityBarBadge.foreground": "#ffffff", // text color of notification badge
+        "titleBar.activeBackground": "#ff0000", // background of top bar
+        "titleBar.activeForeground": "#ffffff", // color of text on top bar
+        "titleBar.border": "#202e77", // color of bar under top bar
+        "titleBar.inactiveBackground": "#ff0000", // color of top bar when not focused
+        "titleBar.inactiveForeground": "#949494" // color of text background when not focused
     }
 }

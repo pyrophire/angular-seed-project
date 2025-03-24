@@ -493,7 +493,7 @@ ng-select.ng-select-multiple {
 $dark-ng-select-highlight: $primaryDark !default;
 $dark-ng-select-primary-text: rgba(white, 0.87) !default;
 $dark-ng-select-primary-light-text: rgba(black, 0.87) !default;
-$dark-ng-select-secondary-text: rgba(white, 0.54) !default;
+$dark-ng-select-secondary-text: rgba(white, 0.68) !default;
 $dark-ng-select-secondary-light-text: rgba(black, 0.54) !default;
 $dark-ng-select-disabled-text: rgba(white, 0.38) !default;
 $dark-ng-select-divider: rgba(white, 0.12) !default;
@@ -573,7 +573,8 @@ $dark-ng-select-bg: $backgroundDark !default;
       color: $dark-ng-select-primary-text;
 
       &:after {
-        border-bottom: thin solid rgba(white, 0.42);
+        border-bottom: 1px solid rgba(white, 0.68);
+
       }
 
       &.ng-appearance-outline {
