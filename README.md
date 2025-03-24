@@ -1,5 +1,4 @@
-# Eli's Kinda Ok Angular Seed Project 2023
-
+# Eli's Kinda Ok Angular Seed Project
 ## Setup
 1. Clone Repository
 2. Search and replace all instances of `CHANGEME` with your own project name (no-spaces)
