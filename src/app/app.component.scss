@@ -1,7 +1,7 @@
  @use 'src/styles/mixins' as *;
  @use 'sass:color';
 
- div.app {
+ main.app {
      min-height: calc(100vh - #{$headerHeight} - (#{$headerPaddingTopBottom} * 0) - #{$mainNavHeight} - #{$footerHeight} - 0px);
      @include flex(column, stretch, stretch, nowrap);
      width: 100vw;
@@ -23,7 +23,7 @@
  }
 
  .dark {
-     div.app {
+     main.app {
          background-color: $backgroundDark;
          color: set-inverse-text-color($backgroundDark);
 

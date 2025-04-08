@@ -1,0 +1,58 @@
+name: dev build and deploy
+run-name: dev build ${{ github.run_number }} triggered by ${{ github.triggering_actor }}
+on:
+    push:
+        branches: [dev]
+    workflow_dispatch:
+jobs:
+    build-and-deploy:
+        runs-on:
+            group: southstar
+        defaults:
+            run:
+                shell: powershell
+        environment: dev
+        steps:
+            - name: print build properties
+              run: |
+                Write-Output "::group::Path Property"
+                Write-Output "build.local.path: ${{ github.workspace }}"
+                Write-Output "::endgroup::"
+
+                Write-Output "::group::Deploy Properties"
+                Write-Output "deploy.assets.src: ${{ github.workspace }}${{ vars.RXPLODER_DEPLOY_PACKAGES_SRC }}"
+                Write-Output "deploy.assets.url: ${{ vars.RXPLODER_DEPLOY_URL }}"
+                Write-Output "::endgroup::"
+
+                Write-Output "::group::Rxploder Properties"
+                Write-Output "env.rxPloder: $RXPLODER"
+                Write-Output "env.rxPloderHome: $RXPLODER_HOME"
+                Write-Output "env.verbose: ${{ vars.RXPLODER_VERBOSE }}"
+                Write-Output "env.clean: ${{ vars.RXPLODER_CLEAN }}"
+                Write-Output "env.debug: ${{ vars.RXPLODER_DEBUG }}"
+                Write-Output "env.backup: ${{ vars.RXPLODER_BACKUP }}"
+                Write-Output "env.appname: ${{ vars.RXPLODER_APPNAME }}"
+                Write-Output "::endgroup::"
+            - name: run base angular build
+              uses: Texas-Legislative-Council-IS/southstar-github-actions-workflows/.github/actions/base-angular-build@main
+              with:
+                  branch: "dev"
+                  environment: "dev"
+            - name: run base rxploder deploy
+              uses: Texas-Legislative-Council-IS/southstar-github-actions-workflows/.github/actions/base-rxploder-deploy@main
+              with:
+                  app-name: ${{ vars.RXPLODER_APPNAME }}
+                  environment: ${{ vars.RXPLODER_ENVIRONMENT }}
+                  source-path: ${{ github.workspace }}${{ vars.RXPLODER_DEPLOY_PACKAGES_SRC }}
+                  url: ${{ vars.RXPLODER_DEPLOY_URL }}
+                  backup: ${{ vars.RXPLODER_BACKUP }}
+                  verbose: ${{ vars.RXPLODER_VERBOSE }}
+                  clean: ${{ vars.RXPLODER_CLEAN }}
+                  debug: ${{ vars.RXPLODER_DEBUG }}
+            - name: send npm dependencies to the depview api
+              uses: Texas-Legislative-Council-IS/southstar-github-actions-workflows/.github/actions/base-send-nodejs-dependency-report@main
+              with:
+                  team-name: "SouthStar"
+                  app-name: ${{ vars.DEPVIEW_APP_NAME }}
+                  environment: "dev"
+                  depview-environment: "dev"

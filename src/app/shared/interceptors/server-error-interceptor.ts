@@ -28,7 +28,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'An unexpected error occurred';
 
-        if (error.error instanceof ErrorEvent) {
+        if (error.error) {
           // Client-side error
           errorMessage = `Error: ${error.error.message}`;
         } else {
@@ -71,7 +71,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
           width: '400px',
           data: {
             title: 'Error',
-            message: errorMessage,
+            message: `${errorMessage} <br><br>  Please contact your system administrator, the TLC Support Team, or the IT Support Center at (512) 463-1158.`,
             status: error.status
           },
           disableClose: true
