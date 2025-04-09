@@ -7,8 +7,14 @@
     "requirePragma": false,
     "semi": true,
     "singleQuote": true,
-    "tabWidth": 2,
+    "tabWidth": 4,
     "trailingComma": "none",
+    "bracketSameLine": true,
+    "singleAttributePerLine": true,
+    "plugins": [
+        "prettier-plugin-organize-attributes",
+        "prettier-plugin-tailwindcss"
+    ],
     "overrides": [
         {
             "files": [
@@ -16,6 +22,22 @@
             ],
             "options": {
                 "parser": "scss"
+            }
+        },
+        {
+            "files": [
+                "*.yml"
+            ],
+            "options": {
+                "parser": "yaml"
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "options": {
+                "parser": "angular"
             }
         }
     ]
