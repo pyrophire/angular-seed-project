@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
+    loadComponent: () => import('./components/home/home.component').then((c) => c.HomeComponent),
     data: { breadcrumb: { label: 'Home' } }
   },
   // { path: 'license', loadChildren: () => import('./modules/license/license.module').then((m) => m.LicenseModule) },

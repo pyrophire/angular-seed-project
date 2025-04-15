@@ -29,11 +29,14 @@
       "@app/*": [
         "src/app/*"
       ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
       "@services/*": [
         "src/app/shared/services/*"
       ],
-      "@shared/*": [
-        "src/app/shared/*"
+      "@constants/*": [
+        "src/app/shared/constants/*"
       ],
       "@pipes/*": [
         "src/app/shared/pipes/*"
@@ -53,6 +56,9 @@
       "@environments/*": [
         "src/environments/*"
       ],
+      "@styles/*": [
+        "src/styles/*"
+      ]
     }
   },
   "angularCompilerOptions": {
@@ -60,6 +66,7 @@
     "strictTemplates": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
+    "strictNullChecks": false
   },
   "files": [
     "src/main.ts"
