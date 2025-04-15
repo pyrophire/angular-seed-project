@@ -11,10 +11,6 @@
     "trailingComma": "none",
     "bracketSameLine": true,
     "singleAttributePerLine": true,
-    "plugins": [
-        "prettier-plugin-organize-attributes",
-        "prettier-plugin-tailwindcss"
-    ],
     "overrides": [
         {
             "files": [
