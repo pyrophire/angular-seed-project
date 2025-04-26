@@ -55,9 +55,6 @@
       ],
       "@environments/*": [
         "src/environments/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
       ]
     }
   },

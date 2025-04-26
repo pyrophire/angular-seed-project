@@ -169,6 +169,7 @@ $ng-select-bg: #ffffff !default;
       .ng-input>input {
         font-family: inherit;
         font-size: 1em;
+        color: $ng-select-primary-text;
       }
     }
   }
