@@ -113,57 +113,6 @@ when an element receives focus via the mouse. */
    }
  }
 
- // fixes forms with auto complete to remove chrome's blue background
- form {
-
-   input:-webkit-autofill,
-   input:-webkit-autofill:hover,
-   input:-webkit-autofill:focus,
-   textarea:-webkit-autofill,
-   textarea:-webkit-autofill:hover,
-   textarea:-webkit-autofill:focus,
-   select:-webkit-autofill,
-   select:-webkit-autofill:hover,
-   select:-webkit-autofill:focus {
-     -webkit-text-fill-color: set-inverse-text-color(white);
-     transition: background-color 5000s ease-in-out 0s;
-   }
- }
-
- .dark {
-   form {
-
-     input:-webkit-autofill,
-     input:-webkit-autofill:hover,
-     input:-webkit-autofill:focus,
-     textarea:-webkit-autofill,
-     textarea:-webkit-autofill:hover,
-     textarea:-webkit-autofill:focus,
-     select:-webkit-autofill,
-     select:-webkit-autofill:hover,
-     select:-webkit-autofill:focus {
-       -webkit-text-fill-color: set-inverse-text-color(black);
-       transition: background-color 5000s ease-in-out 0s;
-     }
-   }
- }
-
- // Temporary fixes for angular material 15
- .mdc-text-field--filled:not(.mdc-text-field--disabled),
- .mdc-text-field--disabled.mdc-text-field--filled,
- .mat-mdc-form-field-focus-overlay {
-   background-color: transparent !important;
- }
-
- .mat-mdc-text-field-wrapper.mdc-text-field {
-   padding-left: 0px;
-   padding-right: 0px;
- }
-
- .mat-mdc-form-field-infix {
-   min-height: unset !important;
- }
-
  .dark .mdc-button,
  .light .mdc-button {
    letter-spacing: normal !important;
