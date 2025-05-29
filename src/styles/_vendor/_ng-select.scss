@@ -111,7 +111,7 @@
     color: var(--ng-select-primary-text);
     align-items: baseline;
     min-height: 48px;
-    background-color: var(--mdc-filled-text-field-container-color);
+    background-color: var(--mat-form-field-filled-container-color);
 
     &:not(.ng-has-value) {
       padding-bottom: 10px;
