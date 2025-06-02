@@ -4,6 +4,11 @@ on:
     push:
         branches: [dev]
     workflow_dispatch:
+        inputs:
+            branch:
+                type: string
+                description: 'The branch to build from'
+                default: 'dev'
 jobs:
     build-and-deploy:
         runs-on:
