@@ -16,7 +16,7 @@
     "declaration": false,
     "noImplicitAny": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
@@ -63,7 +63,8 @@
     "strictTemplates": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "typeCheckHostBindings": true
   },
   "files": [
     "src/main.ts"
