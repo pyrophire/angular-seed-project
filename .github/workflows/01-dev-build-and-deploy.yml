@@ -41,7 +41,7 @@ jobs:
             - name: run base angular build
               uses: Texas-Legislative-Council-IS/southstar-github-actions-workflows/.github/actions/base-angular-build@main
               with:
-                  branch: 'dev'
+                  branch: ${{ github.event.inputs.branch }}
                   environment: 'dev'
             - name: run base rxploder deploy
               uses: Texas-Legislative-Council-IS/southstar-github-actions-workflows/.github/actions/base-rxploder-deploy@main

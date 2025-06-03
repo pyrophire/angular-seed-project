@@ -39,7 +39,7 @@
   &.ng-select-focused {
     .ng-select-container {
       &:after {
-        border-color: var(--mdc-filled-text-field-caret-color);
+        border-color: var(--mat-form-field-filled-caret-color);
         border-width: 2px;
       }
 
@@ -81,7 +81,7 @@
     color: var(--mdc-filled-text-field-label-text-color);
     align-items: baseline;
     min-height: 51.5px;
-    background-color: var(--mdc-filled-text-field-container-color);
+    background-color: var(--mdc-filled-text-field-container-color, var(--mat-form-field-filled-container-color));
     padding-left: 16px;
     border-bottom: 1px solid var(--mdc-filled-text-field-label-text-color);
 
