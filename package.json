@@ -28,7 +28,7 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/platform-browser-dynamic": "^20.0.0",
     "@angular/router": "^20.0.0",
-    "@ng-select/ng-select": "^12.0.4",
+    "@ng-select/ng-select": "^15.1.1",
     "@ngneat/bind-query-params": "^6.0.0",
     "@ngneat/hot-toast": "^6.0.1",
     "@ngneat/overview": "6.1.1",
