@@ -3,19 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  envName: 'local',
-  slansAppName: 'CHANGEME-SLANS',
-  prefix: 'dev-',
-  baseUrl: `https://dev-CHANGEME-service/api/v1`,
-  globalScrollButton: true,
-  globalScrollPosition: true,
-  globalFooter: false,
-  tokenCreds: {
-    principal: '',
-    passCode: ''
-  },
-  useWinAuth: false
+    production: false,
+    envName: 'local',
+    slansAppName: 'CHANGEME-SLANS',
+    prefix: 'dev-',
+    baseUrl: `https://dev-CHANGEME-service/api/v1`,
+    globalScrollButton: true,
+    globalScrollPosition: true,
+    globalFooter: false,
+    tokenCreds: {
+        principal: '',
+        passCode: ''
+    },
+    useWinAuth: false,
+    storageKey: 'CHANGEMEkey'
 };
 
 /*

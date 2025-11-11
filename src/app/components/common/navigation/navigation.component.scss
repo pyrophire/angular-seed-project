@@ -25,11 +25,15 @@
        height: 100%;
        width: 64px;
        margin-right: 16px;
-       background-image: url(/assets/img/favicon-196x196.png);
-       background-size: contain;
-       background-repeat: no-repeat no-repeat;
-       filter: invert(65%) blur(0px) sepia(60%) hue-rotate(90deg) saturate(0%);
-       transition: filter 0.75s ease-in-out;
+
+       //  Remove this when you have a proper logo
+       mat-icon {
+         height: 100%;
+         width: 100%;
+         font-size: 5em;
+       }
+
+       // End remove
      }
 
      svg {

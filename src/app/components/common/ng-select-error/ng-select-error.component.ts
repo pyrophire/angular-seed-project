@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -5,10 +6,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     templateUrl: './ng-select-error.component.html',
     styleUrls: ['./ng-select-error.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class NgSelectErrorComponent implements OnInit {
-  constructor() {}
+    constructor() {}
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 }

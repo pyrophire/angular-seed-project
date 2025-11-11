@@ -26,32 +26,29 @@
       "dom"
     ],
     "paths": {
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@shared/*": [
-        "src/app/shared/*"
+      "@common/*": [
+        "src/app/components/common/*"
       ],
       "@services/*": [
-        "src/app/shared/services/*"
+        "src/app/services/*"
       ],
       "@constants/*": [
-        "src/app/shared/constants/*"
+        "src/app/constants/*"
       ],
       "@pipes/*": [
-        "src/app/shared/pipes/*"
+        "src/app/pipes/*"
       ],
       "@enums/*": [
-        "src/app/shared/enums/*"
+        "src/app/enums/*"
       ],
       "@models/*": [
-        "src/app/shared/models/*"
+        "src/app/models/*"
       ],
       "@resolvers/*": [
-        "src/app/shared/resolvers/*"
+        "src/app/resolvers/*"
       ],
       "@mocks/*": [
-        "src/app/shared/mocks/*"
+        "src/app/mocks/*"
       ],
       "@environments/*": [
         "src/environments/*"

@@ -1,0 +1,151 @@
+<nav
+    class="top-navigation"
+    [ngClass]="{ sticky: sticky }">
+    <article class="nav-logo-head">
+        <div id="nav-logo">
+            <mat-icon>robot</mat-icon>
+        </div>
+        <div class="text">
+            <div>CHANGEME</div>
+        </div>
+        <div flex></div>
+        <div class="light-dark-modes">
+            <ix-theme-button></ix-theme-button>
+        </div>
+    </article>
+    <article class="header-links mobile">
+        <mat-menu #mobileMenu="matMenu">
+            @for (l of navItems; track l; let i = $index) {
+                <!-- Layout for navItems with children -->
+                @if (l.children) {
+                    <mat-menu #navLayerTwo="matMenu">
+                        @for (l2 of l.children; track l2; let i2 = $index) {
+                            @if (l2.children) {
+                                <mat-menu #navLayerThree="matMenu">
+                                    @for (l3 of l2.children; track l3; let i2 = $index) {
+                                        @if (l3.children) {
+                                            <mat-menu #navLayerFour="matMenu">
+                                                @for (l4 of l3.children; track l4; let i4 = $index) {
+                                                    @if (l4.children) {}
+                                                    @if (!l4.children) {
+                                                        <CHANGEME-nav-item
+                                                            [item]="l4"
+                                                            type="menuItem"></CHANGEME-nav-item>
+                                                    }
+                                                }
+                                            </mat-menu>
+
+                                            <button
+                                                mat-menu-item
+                                                [matMenuTriggerFor]="navLayerFour">
+                                                <span> {{ l3.name }} </span>
+                                            </button>
+                                        }
+                                        @if (!l3.children) {
+                                            <CHANGEME-nav-item
+                                                [item]="l3"
+                                                type="menuItem"></CHANGEME-nav-item>
+                                        }
+                                    }
+                                </mat-menu>
+
+                                <button
+                                    mat-menu-item
+                                    [matMenuTriggerFor]="navLayerThree">
+                                    <span> {{ l2.name }} </span>
+                                </button>
+                            }
+                            @if (!l2.children) {
+                                <CHANGEME-nav-item
+                                    [item]="l2"
+                                    type="menuItem"></CHANGEME-nav-item>
+                            }
+                        }
+                    </mat-menu>
+
+                    <button
+                        mat-menu-item
+                        [matMenuTriggerFor]="navLayerTwo">
+                        <span> {{ l.name }} </span>
+                    </button>
+                }
+                <!-- Layout for navItems w/o children -->
+                @if (!l.children) {
+                    <CHANGEME-nav-item
+                        [item]="l"
+                        type="menuItem"></CHANGEME-nav-item>
+                }
+            }
+        </mat-menu>
+
+        <button
+            mat-icon-button
+            [matMenuTriggerFor]="mobileMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </article>
+    <article class="header-links desktop">
+        @for (l of navItems; track l; let i = $index) {
+            <!-- Layout for navItems with children -->
+            @if (l.children) {
+                <mat-menu #navLayerTwo="matMenu">
+                    @for (l2 of l.children; track l2; let i2 = $index) {
+                        @if (l2.children) {
+                            <mat-menu #navLayerThree="matMenu">
+                                @for (l3 of l2.children; track l3; let i2 = $index) {
+                                    @if (l3.children) {
+                                        <mat-menu #navLayerFour="matMenu">
+                                            @for (l4 of l3.children; track l4; let i4 = $index) {
+                                                @if (l4.children) {}
+                                                @if (!l4.children) {
+                                                    <CHANGEME-nav-item
+                                                        [item]="l4"
+                                                        type="menuItem"></CHANGEME-nav-item>
+                                                }
+                                            }
+                                        </mat-menu>
+
+                                        <button
+                                            mat-menu-item
+                                            [matMenuTriggerFor]="navLayerFour">
+                                            <span> {{ l3.name }} </span>
+                                        </button>
+                                    }
+                                    @if (!l3.children) {
+                                        <CHANGEME-nav-item
+                                            [item]="l3"
+                                            type="menuItem"></CHANGEME-nav-item>
+                                    }
+                                }
+                            </mat-menu>
+
+                            <button
+                                mat-menu-item
+                                [matMenuTriggerFor]="navLayerThree">
+                                <span> {{ l2.name }} </span>
+                            </button>
+                        }
+                        @if (!l2.children) {
+                            <CHANGEME-nav-item
+                                [item]="l2"
+                                type="menuItem"></CHANGEME-nav-item>
+                        }
+                    }
+                </mat-menu>
+
+                <button
+                    mat-button
+                    [matMenuTriggerFor]="navLayerTwo">
+                    <span> {{ l.name }} </span>
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+            }
+            <!-- Layout for navItems w/o children -->
+            @if (!l.children) {
+                <CHANGEME-nav-item
+                    [item]="l"
+                    type="button"></CHANGEME-nav-item>
+            }
+        }
+    </article>
+</nav>

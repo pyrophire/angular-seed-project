@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -5,12 +6,13 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
     templateUrl: './tf-icon.component.html',
     styleUrls: ['./tf-icon.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class TfIconComponent implements OnInit {
-  @Input() data: boolean;
+    @Input() data!: boolean;
 
-  constructor() {}
+    constructor() {}
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 }
