@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "witreg": {
+    "CHANGEME": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -152,13 +152,13 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "witreg:build:production"
+              "buildTarget": "CHANGEME:build:production"
             },
             "dev": {
-              "buildTarget": "witreg:build:dev"
+              "buildTarget": "CHANGEME:build:dev"
             },
             "local": {
-              "buildTarget": "witreg:build:local"
+              "buildTarget": "CHANGEME:build:local"
             }
           },
           "defaultConfiguration": "local"
@@ -166,7 +166,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "witreg:build"
+            "buildTarget": "CHANGEME:build"
           }
         },
         "test": {
