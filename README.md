@@ -1,15 +1,26 @@
 # Eli's Kinda Ok Angular Seed Project
 
-A comprehensive Angular seed project with pre-configured environment settings, theming system, and useful utilities for rapid application development.
+A comprehensive Angular seed project with **100% standalone components architecture**, pre-configured environment settings, theming system, and useful utilities for rapid application development.
+
+## ✨ Latest Updates
+
+**🎯 Standalone Components Migration (November 2025)**
+- Fully migrated to Angular standalone components (no NgModules)
+- Modern bootstrap process using `bootstrapApplication`
+- Improved tree-shaking and bundle optimization
+- Simplified component dependencies with explicit imports
+- See [CHANGELOG.md](./CHANGELOG.md) for detailed migration notes
 
 ## Features
 
+- **🚀 Modern Architecture**: 100% standalone components (no NgModules required)
 - **Environment Configuration**: Flexible boolean toggles for UI features
 - **Custom Theming**: SCSS variable system for consistent styling
 - **Utility Components**: Go-to-top button, scroll tracker, and footer components
 - **License Management**: Built-in license checker and display module
 - **Development Tools**: Automated dependency management and audit reporting
 - **CI/CD Pipeline**: GitHub Actions workflows for automated building and deployment
+- **Type-Safe Paths**: Configured TypeScript path aliases for cleaner imports
 
 ## Setup
 
@@ -28,11 +39,57 @@ src/
 │   └── styles/
 │       └── vars.scss      # Global SCSS variables and theming
 ├── app/
-│   ├── components/        # Reusable UI components
-│   ├── models/           # TypeScript interfaces and data models
-│   ├── services/         # Application services
-│   └── modules/          # Feature modules (including license module)
+│   ├── app.config.ts      # Application configuration (providers)
+│   ├── app.routes.ts      # Route definitions
+│   ├── app.component.ts   # Root component (standalone)
+│   ├── material-imports.ts # Material Design imports helper
+│   ├── shared-imports.ts  # Shared module imports helper
+│   ├── components/
+│   │   ├── common/        # Shared standalone components
+│   │   └── home/          # Feature components
+│   ├── models/            # TypeScript interfaces and data models
+│   ├── services/          # Application services
+│   ├── interceptors/      # HTTP interceptors
+│   └── pipes/             # Custom pipes
 └── ...
+```
+
+## Architecture Overview
+
+This project uses **Angular Standalone Components** architecture:
+
+### Core Files
+
+- **`app.config.ts`**: Application-level configuration and providers (replaces AppModule)
+- **`app.routes.ts`**: Route definitions (replaces routing modules)
+- **`main.ts`**: Bootstrap entry point using `bootstrapApplication()`
+
+### Component Structure
+
+All components are standalone and explicitly declare their dependencies:
+
+```typescript
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [CommonModule, MaterialModule, ...]
+})
+export class ExampleComponent {}
+```
+
+### Import Helpers
+
+- **`material-imports.ts`**: Export array of all Material Design modules
+- **`shared-imports.ts`**: Export array of commonly used modules
+
+Usage:
+```typescript
+import { SHARED_IMPORTS } from '@app/shared-imports';
+
+@Component({
+  standalone: true,
+  imports: [...SHARED_IMPORTS]
+})
 ```
 
 ## Environment Configuration
@@ -140,11 +197,59 @@ The project includes TypeScript models for:
 
 ## Development Workflow
 
-1. **Feature Development**: Use environment flags to toggle new features during development
-2. **Styling**: Modify `vars.scss` for theme changes, use CSS custom properties for component-specific styling
-3. **Testing**: Run `ng test` for unit tests, `ng e2e` for end-to-end tests
-4. **Building**: Use `ng build --prod` for production builds
-5. **Deployment**: Configure environment files for different deployment targets
+1. **Creating Components**: Always use the `--standalone` flag
+   ```bash
+   ng generate component my-component --standalone
+   ```
+
+2. **Feature Development**: Use environment flags to toggle new features during development
+
+3. **Adding Routes**: Edit `app.routes.ts` for route configuration
+   ```typescript
+   {
+     path: 'feature',
+     loadComponent: () => import('./components/feature/feature.component')
+       .then(m => m.FeatureComponent)
+   }
+   ```
+
+4. **Styling**: Modify `vars.scss` for theme changes, use CSS custom properties for component-specific styling
+
+5. **Testing**: Components are tested individually without module configuration
+   ```typescript
+   TestBed.configureTestingModule({
+     imports: [MyComponent] // Import standalone component directly
+   })
+   ```
+
+6. **Building**: Use `ng build` for production builds
+   ```bash
+   ng build --configuration production
+   ```
+
+7. **Deployment**: Configure environment files for different deployment targets
+
+## TypeScript Path Aliases
+
+The project uses configured path aliases for cleaner imports:
+
+```typescript
+import { MyService } from '@services/my.service';
+import { NavItem } from '@models/navItem.model';
+import { NavigationComponent } from '@common/navigation/navigation.component';
+import { environment } from '@environments/environment';
+```
+
+Available aliases:
+- `@common/*` - Common/shared components
+- `@services/*` - Application services
+- `@models/*` - Data models and interfaces
+- `@environments/*` - Environment configurations
+- `@constants/*` - Application constants
+- `@pipes/*` - Custom pipes
+- `@enums/*` - Enumerations
+- `@resolvers/*` - Route resolvers
+- `@mocks/*` - Test mocks
 
 ## License Management
 
@@ -161,7 +266,7 @@ The project includes automated CI/CD pipelines using GitHub Actions:
 
 #### 1. DEV Build and Deploy (`01-dev-build-and-deploy.yml`)
 - **Trigger**: Push to `dev` branch or manual workflow dispatch
-- **Runner**: Self-hosted runner group
+- **Runner**: Self-hosted runner group (Make sure to update to your team's runner)
 - **Environment**: Development
 - **Actions**:
   - Builds Angular application for development environment
@@ -175,22 +280,33 @@ The project includes automated CI/CD pipelines using GitHub Actions:
 - **Dependency Tracking**: Automatically reports npm dependencies for security analysis
 - **Environment-Specific**: Uses environment variables for configuration management
 
-### Required Environment Variables
+### Required GitHub Variables
 
-Configure these in your GitHub repository settings:
+Configure these in your GitHub repository settings under **Settings → Secrets and variables → Actions**.
 
-#### RXploder Deployment Variables
-- `RXPLODER_DEPLOY_PACKAGES_SRC`: Source path for deployment packages
-- `RXPLODER_DEPLOY_URL`: Target deployment URL
-- `RXPLODER_APPNAME`: Application name for deployment
-- `RXPLODER_ENVIRONMENT`: Deployment environment (dev/staging/prod)
-- `RXPLODER_VERBOSE`: Enable verbose logging (true/false)
-- `RXPLODER_CLEAN`: Clean deployment directory before deploy (true/false)
-- `RXPLODER_DEBUG`: Enable debug mode (true/false)
-- `RXPLODER_BACKUP`: Create backup before deployment (true/false)
+#### Environment Variables
+Environment-specific variables configured per environment (dev/test/prod):
 
-#### Dependency Monitoring Variables
-- `DEPVIEW_APP_NAME`: Application name for dependency tracking
+| Variable               | Description                           | Example Values                                                                           |
+| ---------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `RXPLODER_BACKUP`      | Create backup before deployment       | `false` (dev/test), `true` (prod)                                                        |
+| `RXPLODER_DEPLOY_URL`  | Target deployment URL for environment | `dev-appname.legis.texas.gov`, `test-appname.legis.texas.gov`, `appname.legis.texas.gov` |
+| `RXPLODER_ENVIRONMENT` | Deployment environment identifier     | `Dev`, `Test`, `Prod`                                                                    |
+
+#### Repository Variables
+Global variables available across all environments:
+
+| Variable                       | Description                              | Example Value    |
+| ------------------------------ | ---------------------------------------- | ---------------- |
+| `DEPVIEW_APP_NAME`             | Application name for dependency tracking | `AppName-Webapp` |
+| `DEPVIEW_ENV`                  | Environment for dependency monitoring    | `dev`            |
+| `RXPLODER_APPNAME`             | Application name for RXploder deployment | `AppName-webapp` |
+| `RXPLODER_CLEAN`               | Clean deployment directory before deploy | `true`           |
+| `RXPLODER_DEBUG`               | Enable debug mode during deployment      | `false`          |
+| `RXPLODER_DEPLOY_PACKAGES_SRC` | Source path for deployment packages      | `\dist\browser`  |
+| `RXPLODER_VERBOSE`             | Enable verbose logging during deployment | `true`           |
+
+**Note**: Environment variables take precedence over repository variables when both are defined. Use environment variables for values that differ between dev/test/prod, and repository variables for values shared across all environments.
 
 ### Deployment Process
 
