@@ -1,4 +1,4 @@
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
 import { AppComponent } from './app/app.component';
@@ -6,7 +6,7 @@ import { appConfig } from './app/app.config';
 
 bootstrapApplication(AppComponent, {
     ...appConfig,
-    providers: [...(appConfig.providers || [])]
+    providers: [provideZoneChangeDetection(),...(appConfig.providers || [])]
 }).catch((err) => console.error(err));
 
 // Globally silence console logs in production while keeping warnings/errors
