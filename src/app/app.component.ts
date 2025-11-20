@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
@@ -13,7 +13,7 @@ import { NavigationComponent } from './components/common/navigation/navigation.c
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [CommonModule, RouterOutlet, NavigationComponent, FooterComponent, IxScrollModule, IxScrollProgressModule]
+    imports: [RouterOutlet, NavigationComponent, FooterComponent, IxScrollModule, IxScrollProgressModule]
 })
 export class AppComponent implements OnInit {
     use = environment;
