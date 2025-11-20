@@ -1,0 +1,8 @@
+{
+    "servers": {
+        "angular-workspace": {
+            "command": "./mcp/run-mcp.sh",
+            "args": []
+        }
+    }
+}
