@@ -1,5 +1,6 @@
 export const environment = {
     production: true,
+    displayConsoleLogs: true,
     prefix: 'test-',
     envName: 'tst',
     slansAppName: 'CHANGEME-SLANS',
