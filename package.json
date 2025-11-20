@@ -52,6 +52,7 @@
     "@modelcontextprotocol/sdk": "^1.22.0",
     "@ngneat/falso": "^7.2.0",
     "@ngneat/overview": "^5.1.1",
+    "@types/node": "^22.8.2",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
