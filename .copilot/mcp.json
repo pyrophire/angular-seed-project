@@ -1,0 +1,20 @@
+{
+    "$schema": "https://modelcontextprotocol.io/schemas/client-config.json",
+    "servers": [
+        {
+            "id": "angular-workspace",
+            "name": "Angular Workspace MCP",
+            "command": "npm",
+            "args": [
+                "run",
+                "mcp"
+            ],
+            "env": {},
+            "autoStart": true,
+            "capabilities": {
+                "resources": true,
+                "tools": true
+            }
+        }
+    ]
+}

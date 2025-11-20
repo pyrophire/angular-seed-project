@@ -313,3 +313,41 @@ Global variables available across all environments:
 1. **Build Phase**: Compiles Angular application with environment-specific configuration
 2. **Deploy Phase**: Uses RXploder system to deploy to target environment
 3. **Monitoring Phase**: Reports dependencies to DepView for security analysis
+
+## Troubleshooting
+
+### Buffer / Uint8Array Type Errors After Updating to Angular 21
+If you see errors like:
+
+```
+TS2430: Interface 'Buffer' incorrectly extends interface 'Uint8Array<ArrayBufferLike>'
+TS2344: Type 'Buffer' does not satisfy the constraint 'ArrayBufferView'
+```
+
+They are caused by an older `@types/node` package (e.g. v20.x) being used with Node 22 / TypeScript 5.9, which tightened lib definitions. Fix:
+
+1. Upgrade `@types/node` to a version matching your runtime (e.g. `^22.x`).
+2. Optionally enable `"skipLibCheck": true` in `tsconfig.json` to avoid third‑party lib noise.
+3. Reinstall and rebuild: `npm install && ng build`.
+
+Already applied in this repo: `@types/node@^22.8.2` and `skipLibCheck` enabled.
+
+### Production Build Configuration Not Found
+If `ng build` errors with:
+```
+Configuration 'production' for target 'build' ... is not set in the workspace
+```
+Ensure `angular.json` includes a `production` configuration or set `defaultConfiguration` to an existing key (e.g. `prod`). This project now includes both `prod` and `production` for compatibility.
+
+### MCP Server Method Not Found
+If the MCP server logs `Method not found`, confirm you've updated to the SDK-based server and tool names (`angular_listComponents`, etc.). Restart VS Code after changes to `.vscode/mcp.json`.
+
+### Common Fix Commands
+```bash
+npm install           # Ensure dependencies match package.json
+ng build              # Verify browser build succeeds
+ng serve --configuration dev  # Run development server explicitly
+```
+
+### When To Use skipLibCheck
+Prefer fixing version mismatches first. Use `skipLibCheck` only to suppress non-app library declaration noise; avoid relying on it to hide real app type issues.
