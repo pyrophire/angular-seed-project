@@ -1,8 +1,7 @@
-
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
-import { ScrollTopButtonComponent, ScrollBarProgressComponent, ProgressBarConfig } from '@pyrophire/ix-libs';
+import { ProgressBarConfig, ScrollBarProgressComponent, ScrollTopButtonComponent } from '@pyrophire/ix-libs';
 import { environment } from 'src/environments/environment';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { NavigationComponent } from './components/common/navigation/navigation.component';
