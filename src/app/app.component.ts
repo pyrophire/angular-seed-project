@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
-import { IxScrollModule, IxScrollProgressModule, ProgressBarConfig } from '@pyrophire/ix-libs';
+import { ScrollTopButtonComponent, ScrollBarProgressComponent, ProgressBarConfig } from '@pyrophire/ix-libs';
 import { environment } from 'src/environments/environment';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { NavigationComponent } from './components/common/navigation/navigation.component';
@@ -13,7 +13,7 @@ import { NavigationComponent } from './components/common/navigation/navigation.c
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [RouterOutlet, NavigationComponent, FooterComponent, IxScrollModule, IxScrollProgressModule]
+    imports: [RouterOutlet, NavigationComponent, FooterComponent, ScrollTopButtonComponent, ScrollBarProgressComponent]
 })
 export class AppComponent implements OnInit {
     use = environment;

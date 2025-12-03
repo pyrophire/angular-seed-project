@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, effect } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavItem } from '@models/navItem.model';
-import { IxDarkService, IxThemeButtonModule } from '@pyrophire/ix-libs';
+import { IxDarkService, ThemeButtonComponent } from '@pyrophire/ix-libs';
 import { NavItemComponent } from './nav-item/nav-item.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { NavItemComponent } from './nav-item/nav-item.component';
     styleUrls: ['./navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [CommonModule, MatMenuModule, MatButtonModule, MatIconModule, IxThemeButtonModule, NavItemComponent]
+    imports: [CommonModule, MatMenuModule, MatButtonModule, MatIconModule, ThemeButtonComponent, NavItemComponent]
 })
 export class NavigationComponent implements OnInit {
     @Input() sticky: boolean;
@@ -42,21 +42,18 @@ export class NavigationComponent implements OnInit {
         }
     ];
 
-    constructor(private darkService: IxDarkService) {}
+    constructor(private darkService: IxDarkService) {
+        // Use signal-based theme tracking (ix-libs 21.1.0+)
+        effect(() => {
+            this.theme = this.darkService.theme();
+        });
+    }
 
     public toggleDarkMode(): void {
         this.darkService.toggleDarkLightMode();
     }
 
-    private _subToTheme() {
-        this.darkService.themeStream.subscribe((ev) => {
-            // console.log(ev);
-            this.theme = ev;
-        });
-    }
-
     ngOnInit(): void {
-        this._subToTheme();
         this.darkService.setDarkModePreference();
     }
 }

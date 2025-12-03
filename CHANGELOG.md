@@ -1,12 +1,103 @@
 # Changelog - Angular Standalone Components Migration
 
+---
+
+## 🔄 @pyrophire/ix-libs 21.1.0 Update
+
+**Date**: December 3, 2025  
+**Version**: @pyrophire/ix-libs ^21.1.0  
+**Type**: Breaking Changes - Standalone Components Migration
+
+### Overview
+
+Updated to ix-libs 21.1.0 which removes all NgModule exports and migrates to 100% standalone components and pipes. This update aligns with Angular 21's standalone-first architecture and introduces signal-based patterns.
+
+### Breaking Changes Addressed
+
+1. **Removed NgModule Imports**: All `Ix*Module` imports replaced with standalone component/pipe imports
+   - `IxScrollModule` → `ScrollTopButtonComponent`
+   - `IxScrollProgressModule` → `ScrollBarProgressComponent`
+   - `IxThemeButtonModule` → `ThemeButtonComponent`
+   - `IxPipesModule` → Individual pipes (`AmPmPipe`, `CamelToTitlePipe`, `FileSizePipe`, `PhonePipe`, `SafePipe`)
+   - `IxIconsModule` → `provideIxIcons()` provider
+
+2. **Icon Registration**: Added `provideIxIcons()` to `app.config.ts` for centralized icon registration
+
+3. **Signal-Based Theme State**: Migrated from RxJS `themeStream` subscription to signal-based `theme()` approach in `NavigationComponent`
+
+### Files Modified
+
+- **`src/app/app.config.ts`**: Added `provideIxIcons()` provider
+- **`src/app/app.component.ts`**: Replaced `IxScrollModule`, `IxScrollProgressModule` with `ScrollTopButtonComponent`, `ScrollBarProgressComponent`
+- **`src/app/components/common/navigation/navigation.component.ts`**: 
+  - Replaced `IxThemeButtonModule` with `ThemeButtonComponent`
+  - Migrated from `themeStream.subscribe()` to `effect()` with `theme()` signal
+- **`src/app/shared-imports.ts`**: Updated to import standalone components and pipes instead of modules
+
+### Migration Details
+
+#### Icon Registration
+```typescript
+// app.config.ts
+import { provideIxIcons } from '@pyrophire/ix-libs';
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        // ... other providers
+        provideIxIcons(),  // Replaces IxIconsModule
+    ]
+};
+```
+
+#### Component Imports
+```typescript
+// Before
+import { IxScrollModule, IxThemeButtonModule } from '@pyrophire/ix-libs';
+imports: [IxScrollModule, IxThemeButtonModule]
+
+// After
+import { ScrollTopButtonComponent, ThemeButtonComponent } from '@pyrophire/ix-libs';
+imports: [ScrollTopButtonComponent, ThemeButtonComponent]
+```
+
+#### Signal-Based Theme State
+```typescript
+// Before
+private _subToTheme() {
+    this.darkService.themeStream.subscribe((ev) => {
+        this.theme = ev;
+    });
+}
+
+// After
+constructor(private darkService: IxDarkService) {
+    effect(() => {
+        this.theme = this.darkService.theme();
+    });
+}
+```
+
+### Build Status
+
+✅ **Build successful** - All changes verified with production build
+⚠️ **Warning**: lodash CommonJS dependency warning (non-breaking, from ix-libs)
+
+### References
+
+- [ix-libs CHANGELOG](https://github.com/pyrophire/ix-libs/blob/master/projects/ix-libs/CHANGELOG.md)
+- [ix-libs 21.1.0 Migration Guide](https://github.com/pyrophire/ix-libs/blob/master/projects/ix-libs/CHANGELOG.md#migration-guide-angular-21-standalone)
+
+---
+
+## 🎯 Initial Standalone Components Migration
+
 **Date**: November 11, 2025  
 **Branch**: dev  
 **Migration Type**: Complete NgModule to Standalone Components Architecture
 
 ---
 
-## 🎯 Overview
+## 📦 Overview
 
 This release represents a **complete architectural migration** from traditional Angular NgModule-based architecture to 100% standalone components. This is a foundational change that modernizes the application structure, improves tree-shaking, simplifies dependency management, and aligns with Angular's recommended best practices for modern applications.
 
