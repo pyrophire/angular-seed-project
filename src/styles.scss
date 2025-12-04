@@ -4,7 +4,7 @@
 
  .loading {
    background-color: rgb(50, 50, 50);
-   height: 100vh;
+   height: 100dvh;
    width: 100vw;
    @include flex(row, center, center, nowrap);
 
@@ -36,7 +36,7 @@
    top: 0 !important;
    padding: 0;
    margin: 0;
-   height: 100vh;
+   height: 100dvh;
    overflow: hidden;
  }
 
