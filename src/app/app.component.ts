@@ -1,18 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { RouterOutlet } from '@angular/router';
-import { ProgressBarConfig, ScrollBarProgressComponent, ScrollTopButtonComponent } from '@pyrophire/ix-libs';
+import { ProgressBarConfig } from '@pyrophire/ix-libs';
 import { environment } from 'src/environments/environment';
-import { FooterComponent } from './components/common/footer/footer.component';
-import { NavigationComponent } from './components/common/navigation/navigation.component';
 
 @Component({
     selector: 'CHANGEME-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [RouterOutlet, NavigationComponent, FooterComponent, ScrollTopButtonComponent, ScrollBarProgressComponent]
+    standalone: false,
+    encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
     use = environment;
@@ -24,9 +19,7 @@ export class AppComponent implements OnInit {
         left: 0
     };
 
-    constructor(iconRegistry: MatIconRegistry) {
-        iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
-    }
+    constructor() {}
 
     ngOnInit(): void {}
 }
