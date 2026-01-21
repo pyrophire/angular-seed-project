@@ -23,6 +23,9 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "paths": {
+      "@components/*": [
+        "src/app/components/*"
+      ],
       "@common/*": [
         "src/app/components/common/*"
       ],
@@ -49,6 +52,9 @@
       ],
       "@environments/*": [
         "src/environments/*"
+      ],
+      "@shared-imports": [
+        "src/app/shared-imports.ts"
       ]
     }
   },

@@ -12,7 +12,7 @@ platformBrowserDynamic()
     .catch((err) => console.error(err));
 
 // Globally silence console logs in production while keeping warnings/errors
-if (environment.displayConsoleLogs) {
+if (!environment.displayConsoleLogs) {
     try {
         enableProdMode();
     } catch {}
