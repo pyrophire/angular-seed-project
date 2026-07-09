@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -24,37 +23,37 @@
     "useDefineForClassFields": false,
     "paths": {
       "@components/*": [
-        "src/app/components/*"
+        "./src/app/components/*"
       ],
       "@common/*": [
-        "src/app/components/common/*"
+        "./src/app/components/common/*"
       ],
       "@services/*": [
-        "src/app/services/*"
+        "./src/app/services/*"
       ],
       "@constants/*": [
-        "src/app/constants/*"
+        "./src/app/constants/*"
       ],
       "@pipes/*": [
-        "src/app/pipes/*"
+        "./src/app/pipes/*"
       ],
       "@enums/*": [
-        "src/app/enums/*"
+        "./src/app/enums/*"
       ],
       "@models/*": [
-        "src/app/models/*"
+        "./src/app/models/*"
       ],
       "@resolvers/*": [
-        "src/app/resolvers/*"
+        "./src/app/resolvers/*"
       ],
       "@mocks/*": [
-        "src/app/mocks/*"
+        "./src/app/mocks/*"
       ],
       "@environments/*": [
-        "src/environments/*"
+        "./src/environments/*"
       ],
       "@shared-imports": [
-        "src/app/shared-imports.ts"
+        "./src/app/shared-imports.ts"
       ]
     }
   },
@@ -73,9 +72,9 @@
     "typeCheckHostBindings": true
   },
   "files": [
-    "src/main.ts"
+    "./src/main.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
+    "./src/**/*.d.ts"
   ]
 }

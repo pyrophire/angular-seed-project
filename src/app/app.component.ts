@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ProgressBarConfig } from '@pyrophire/ix-libs';
-import { environment } from 'src/environments/environment';
+import { environment } from '@environments/environment';
 
 @Component({
     selector: 'CHANGEME-root',
