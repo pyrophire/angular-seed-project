@@ -1,5 +1,4 @@
-
-import { Component, Inject, Injector, Type } from '@angular/core';
+import { Component, Inject, Injector, Type, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -9,6 +8,7 @@ import { WindowsService } from '@services/error-handler/windows.service';
     selector: 'app-error-dialog',
     templateUrl: 'error-dialog.component.html',
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [MatDialogModule, MatButtonModule]
 })
 export class ErrorDialogComponent {

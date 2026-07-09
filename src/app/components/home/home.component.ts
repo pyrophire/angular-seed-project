@@ -1,5 +1,4 @@
-
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +7,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./home.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: []
 })
 export class HomeComponent implements OnInit {

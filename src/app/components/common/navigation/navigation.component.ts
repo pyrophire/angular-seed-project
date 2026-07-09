@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation, effect } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, effect, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -13,6 +13,7 @@ import { NavItemComponent } from './nav-item/nav-item.component';
     styleUrls: ['./navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [CommonModule, MatMenuModule, MatButtonModule, MatIconModule, ThemeButtonComponent, NavItemComponent]
 })
 export class NavigationComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ProgressBarConfig } from '@pyrophire/ix-libs';
 import { environment } from 'src/environments/environment';
 
@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     standalone: false,
+    changeDetection: ChangeDetectionStrategy.Eager,
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
