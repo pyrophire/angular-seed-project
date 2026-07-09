@@ -51,3 +51,19 @@
   background-color: $color;
   color: set-inverse-text-color($color);
 }
+
+
+// Material theme color
+//
+// Markup: Uses Material Design 3 theme tokens to set background and text color.
+// .class {
+//   @include mat-theme-color('--mat-sys-primary');
+// }
+//
+// Styleguide Coloring.mat-theme-color
+
+@mixin mat-theme-color($color-token) {
+  background-color: var(#{$color-token});
+  color: var(#{str-insert($color-token, '-on', str-index($color-token, '-sys-') + 4)});
+}
+

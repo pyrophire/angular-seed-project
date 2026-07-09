@@ -11,6 +11,12 @@
         "titleBar.activeForeground": "#ffffff", // color of text on top bar
         "titleBar.border": "#202e77", // color of bar under top bar
         "titleBar.inactiveBackground": "#005fb8", // color of top bar when not focused
-        "titleBar.inactiveForeground": "#949494" // color of text background when not focused
+        "titleBar.inactiveForeground": "#949494", // color of text background when not focused
+        "css.customData": [
+            ".vscode/css-custom-data.json"
+        ],
+        "scss.customData": [
+            ".vscode/css-custom-data.json"
+        ]
     }
 }
