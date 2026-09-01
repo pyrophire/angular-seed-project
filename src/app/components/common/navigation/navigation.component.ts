@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation, effect, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, effect } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { RouterLink } from '@angular/router';
 import { NavItem } from '@models/navItem.model';
 import { IxDarkService, ThemeButtonComponent } from '@pyrophire/ix-libs';
 import { NavItemComponent } from './nav-item/nav-item.component';
@@ -14,7 +15,7 @@ import { NavItemComponent } from './nav-item/nav-item.component';
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [CommonModule, MatMenuModule, MatButtonModule, MatIconModule, ThemeButtonComponent, NavItemComponent]
+    imports: [CommonModule, MatMenuModule, MatButtonModule, MatIconModule, ThemeButtonComponent, NavItemComponent, RouterLink]
 })
 export class NavigationComponent implements OnInit {
     @Input() sticky: boolean;
@@ -29,6 +30,7 @@ export class NavigationComponent implements OnInit {
             // target: '' // optional when type is 'link', defaults to '_blank'
             children: null
         },
+
         {
             name: 'Angular',
             type: 'link',
