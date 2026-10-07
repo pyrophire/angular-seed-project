@@ -64,19 +64,13 @@
 // Styleguide Text.manual-label
 @mixin manual-label() {
   label.manual {
-    color: rgba(set-inverse-text-color($backgroundA1), 0.5);
+    color: var(--mat-sys-on-surface-variant);
     display: block;
     font-size: 0.75em;
     line-height: 1em;
     margin-top: 16px;
     margin-right: 8px;
     margin-bottom: 4px;
-  }
-
-  .dark {
-    label.manual {
-      color: rgba(set-inverse-text-color($backgroundDark2), 0.5);
-    }
   }
 }
 

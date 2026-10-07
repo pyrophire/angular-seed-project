@@ -4,11 +4,12 @@ import { Injectable, signal } from '@angular/core';
     providedIn: 'root'
 })
 export class StoreService {
-    public items = signal<any>([]);
+    public readonly items = signal<unknown[]>([]);
 
-    constructor() {}
-
-    clearAll() {
+    /**
+     * Resets every piece of shared state to its initial value.
+     */
+    clearAll(): void {
         this.items.set([]);
     }
 }

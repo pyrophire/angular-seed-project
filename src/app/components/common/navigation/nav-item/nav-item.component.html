@@ -1,40 +1,41 @@
-@if (type==='menuItem') {
-
-    @if (item.type === 'route') {
-
-        <a mat-menu-item
-           [routerLink]="item.route"
-           [queryParams]="item.queryParams"
-           [queryParamsHandling]="item.queryParamsHandling"
-           routerLinkActive="router-link-active">{{item.name}}</a>
-    
+@let navItem = item();
+@if (type() === 'menuItem') {
+    @if (navItem.type === 'route') {
+        <a
+            mat-menu-item
+            [routerLink]="navItem.route"
+            [queryParams]="navItem.queryParams"
+            [queryParamsHandling]="navItem.queryParamsHandling"
+            routerLinkActive="router-link-active"
+            >{{ navItem.name }}</a
+        >
+    }
+    @if (navItem.type === 'link') {
+        <a
+            mat-menu-item
+            [href]="navItem.url"
+            [target]="navItem.target ? navItem.target : '_blank'"
+            >{{ navItem.name }}</a
+        >
+    }
 }
-    @if (item.type === 'link') {
-
-        <a mat-menu-item
-           [href]="item.url"
-           [target]="item.target? item.target : '_blank'">{{item.name}}</a>
-    
-}
-
-}
-@if (type==='button') {
-
-    @if (item.type === 'route') {
-
-        <a mat-button
-           [routerLink]="item.route"
-           [queryParams]="item.queryParams"
-           [queryParamsHandling]="item.queryParamsHandling"
-           routerLinkActive="router-link-active">{{item.name}}</a>
-    
-}
-    @if (item.type === 'link') {
-
-        <a mat-button
-           [href]="item.url"
-           [target]="item.target? item.target : '_blank'">{{item.name}}</a>
-    
-}
-
+@if (type() === 'button') {
+    @if (navItem.type === 'route') {
+        <a
+            matButton
+            [routerLink]="navItem.route"
+            [queryParams]="navItem.queryParams"
+            [queryParamsHandling]="navItem.queryParamsHandling"
+            routerLinkActive="router-link-active"
+            >{{ navItem.name }}</a
+        >
+    }
+    @if (navItem.type === 'link') {
+        <a
+            matButton
+            [href]="navItem.url"
+            [target]="navItem.target ? navItem.target : '_blank'"
+            >{{ navItem.name }}</a
+        >
+    }
 }

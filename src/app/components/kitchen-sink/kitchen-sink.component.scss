@@ -1,0 +1,112 @@
+@use 'src/styles/mixins' as *;
+
+.kitchen-sink {
+    padding: 0 16px 32px;
+
+    .kitchen-sink-intro {
+        color: var(--mat-sys-on-surface-variant);
+        margin: 0 0 16px;
+    }
+
+    .kitchen-sink-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 16px;
+        align-items: start;
+    }
+
+    .sink-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-width: 0;
+        padding: 16px;
+        border: 1px solid var(--mat-sys-outline-variant);
+        border-radius: 12px;
+        background: var(--mat-sys-surface-container-low);
+        color: var(--mat-sys-on-surface);
+
+        h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        h3 {
+            margin: 8px 0 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--mat-sys-on-surface-variant);
+        }
+
+        label {
+            font-size: 0.8rem;
+            color: var(--mat-sys-on-surface-variant);
+            margin-bottom: -8px;
+        }
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .swatches {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .swatch {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        border: 1px solid var(--mat-sys-outline-variant);
+        border-radius: 6px;
+        font-size: 0.75rem;
+
+        // The label sits on a neutral chip so it stays readable on every swatch color.
+        span {
+            padding: 1px 6px;
+            border-radius: 4px;
+            background: var(--mat-sys-surface);
+            color: var(--mat-sys-on-surface);
+        }
+    }
+
+    .sink-list {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 6px 16px;
+        margin: 0;
+
+        dt {
+            color: var(--mat-sys-on-surface-variant);
+            font-size: 0.85rem;
+        }
+
+        dd {
+            margin: 0;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+    }
+
+    .sink-value,
+    .sink-note {
+        margin: 0;
+        font-size: 0.85rem;
+        overflow-wrap: anywhere;
+    }
+
+    .sink-note {
+        color: var(--mat-sys-on-surface-variant);
+    }
+}

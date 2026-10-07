@@ -1,12 +1,11 @@
  @use 'src/styles/mixins' as *;
- @use 'sass:color';
 
  footer {
    position: sticky;
    top: 100dvh;
 
-   background-color: $footerBg;
-   color: set-inverse-text-color($footerBg);
+   background-color: var(--mat-sys-surface-container-highest);
+   color: var(--mat-sys-on-surface);
    max-width: 1400px;
 
    display: grid;
@@ -23,7 +22,7 @@
    }
 
    @media only screen {
-     @include mat-elevation(24, color.adjust($background, $lightness: -10%));
+     @include mat-elevation(24, var(--mat-sys-shadow));
    }
 
    @include mobile {
@@ -49,7 +48,7 @@
        padding: 16px;
      }
 
-     border-color: rgba(set-inverse-text-color($footerBg), 0.25);
+     border-color: var(--mat-sys-outline-variant);
      border-style: solid;
      border-width: 0;
 
@@ -73,18 +72,6 @@
      button.mat-icon-button {
        font-size: 1.625em;
        margin: 4px;
-     }
-   }
- }
-
- .dark {
-   footer {
-     background-color: $footerBgDark;
-
-     color: set-inverse-text-color($footerBgDark);
-
-     @media only screen {
-       @include mat-elevation(24, color.adjust($footerBgDark, $lightness: -30%));
      }
    }
  }

@@ -12,10 +12,9 @@
 
    .nav-logo-head {
      height: $headerHeight;
-     $bgColor: white;
      padding: #{$headerPaddingTopBottom} #{$headerPaddingSides};
-     background-color: $bgColor;
-     color: set-inverse-text-color($bgColor);
+     background-color: var(--mat-sys-surface-container-lowest);
+     color: var(--mat-sys-on-surface);
      @include flex(row, center, stretch, nowrap);
 
      @include media-lt-sm {
@@ -64,9 +63,8 @@
 
    article.header-links {
      height: $mainNavHeight;
-     $bgColor: $primary;
-     background-color: $bgColor;
-     // color: set-inverse-text-color($bgColor);
+     background-color: var(--mat-sys-primary);
+     color: var(--mat-sys-on-primary);
      padding: 4px 16px;
      @include flex(row, center, flex-start, nowrap);
      gap: 8px;
@@ -79,38 +77,9 @@
        padding-bottom: 4px;
 
        &.mat-mdc-button:not(:disabled) {
-         color: white;
+         color: var(--mat-sys-on-primary);
        }
      }
    }
 
- }
-
- .dark {
-   nav.top-navigation {
-     .nav-logo-head {
-       $bgColor: $backgroundDark2;
-       background-color: $bgColor;
-       color: set-inverse-text-color($bgColor);
-
-
-     }
-
-     .header-links {
-       $bgColor: $primaryDark;
-       background-color: $bgColor;
-
-       // .header-link {
-       //   border-radius: 4px;
-       //   text-align: center;
-       //   @include basic-transition;
-
-       //   &:hover {
-       //     $bgColor: $primaryDark;
-       //     background-color: $bgColor;
-       //     color: set-inverse-text-color($bgColor);
-       //   }
-       // }
-     }
-   }
  }

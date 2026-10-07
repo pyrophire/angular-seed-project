@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -25,10 +24,12 @@ import { MATERIAL_IMPORTS } from './material-imports';
  *
  * Note: With ix-libs 21.1.0+, all components and pipes are standalone. Import them directly where needed.
  * Icons are registered via provideIxIcons() in app.config.ts.
+ *
+ * HttpClient is intentionally absent: it is provided once in app.config.ts. Importing HttpClientModule here would give
+ * each importing component its own HttpClient that bypasses the app's interceptors.
  */
 export const SHARED_IMPORTS = [
     CommonModule,
-    HttpClientModule,
     NgPipesModule,
     RouterModule,
     FormsModule,

@@ -1,13 +1,6 @@
-<mat-icon class="tf-check"
-          [ngClass]="{'checked': data, 'unchecked': !data}">
-    @if (data) {
-
-        check_circle
-    
-}
-    @if (!data) {
-
-        highlight_off
-    
-}
-</mat-icon>
+<mat-icon
+    class="tf-check"
+    [class.checked]="data()"
+    [class.unchecked]="!data()"
+    >{{ data() ? 'check_circle' : 'highlight_off' }}</mat-icon
+>

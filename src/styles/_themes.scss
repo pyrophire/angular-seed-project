@@ -5,51 +5,46 @@
 @include mat.app-background();
 @include mat.all-component-typographies();
 
-// Light theme
+// Theme
 //
-// Defined primary, accent and warn colors to be used in the .light theme.
-// Requires a primary, accent and warn declarations to be set inside the mat.m2-define-light-theme() function to generate Angular Material's light theme.
-// Setting it inside of the .light class will take advantage of the light/dark. If no dark theme will be provided. Unwrap the @include from the .light class
+// One Material 3 theme for both modes. `mat.theme` emits every `--mat-sys-*` system variable
+// (color, typography, elevation, shape, and state) and each color is a `light-dark()` pair,
+// so the browser picks the right value from the element's `color-scheme`.
 //
-// Styleguide Themes.light
+// To rebrand, change the `primary` (and optionally `tertiary`) palette below.
+// Secondary, neutral, and error colors are derived from the primary palette.
+//
+// Styleguide Themes
 
+html {
+  @include mat.theme((
+    color: (
+      theme-type: color-scheme,
+      primary: $phire-institutional-blue,
+      tertiary: $phire-institutional-blue
+    ),
+    typography: (
+      plain-family: 'Roboto',
+      brand-family: 'Roboto',
+      bold-weight: 900
+    ),
+    density: -1
+  ));
 
-$light-theme: mat.define-theme((color: (theme-type: light,
-        primary: $phire-light-blue,
-        tertiary: $phire-light-blue ),
-      typography: (brand-family: 'Roboto',
-        bold-weight: 900),
-      density: (scale: -1)));
-
-:root {
-  @include mat.elevation-classes();
-  @include mat.app-background();
-  @include mat.all-component-themes($light-theme);
-  @include mat.system-level-colors($light-theme);
-  @include mat.system-level-typography($light-theme);
+  // Follows the operating system until a mode class is applied.
+  color-scheme: light dark;
 }
 
-// Dark theme
+// Light and dark modes
 //
-// Defined primary, accent and warn colors to be used in the .dark theme.
-// Requires a primary, accent and warn declarations to be set inside the mat.m2-define-dark-theme() function to generate Angular Material's dark theme.
+// The theme button from ix-libs toggles these classes on <body>.
 //
-// Styleguide Themes.dark
+// Styleguide Themes.modes
 
+.light {
+  color-scheme: light;
+}
 
-$dark-theme: mat.define-theme((color: (theme-type: dark,
-        primary: $phire-light-blue,
-        tertiary: $phire-light-blue ),
-      typography: (brand-family: 'Roboto',
-        bold-weight: 900),
-      density: (scale: -1)));
-
-:root {
-
-  .dark {
-    // --mat-sys-surface: #222 !important;
-    @include mat.all-component-colors($dark-theme);
-    @include mat.system-level-colors($dark-theme);
-    @include mat.system-level-typography($dark-theme);
-  }
+.dark {
+  color-scheme: dark;
 }

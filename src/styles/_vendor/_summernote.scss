@@ -17,8 +17,8 @@
   }
 
   input[type='button'] {
-    background-color: $primary;
-    color: set-inverse-text-color($primary) !important;
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary) !important;
     opacity: 1;
   }
 }
@@ -31,10 +31,10 @@
   }
 
   .note-editor.note-frame {
-    color: set-inverse-text-color($backgroundDark);
+    color: var(--mat-sys-on-surface);
 
     .note-toolbar {
-      background-color: $backgroundDark2;
+      background-color: var(--mat-sys-surface-container-lowest);
       border-bottom-color: black;
 
       button[disabled] {
@@ -42,18 +42,18 @@
       }
 
       button {
-        background-color: $backgroundDark;
-        border-color: $backgroundDark2;
-        color: set-inverse-text-color($backgroundDark);
+        background-color: var(--mat-sys-surface-container);
+        border-color: var(--mat-sys-surface-container-lowest);
+        color: var(--mat-sys-on-surface);
 
         &.active {
-          background-color: lighten($backgroundDark, 25);
-          border-color: set-inverse-text-color(lighten($backgroundDark, 25));
+          background-color: var(--mat-sys-surface-bright);
+          border-color: var(--mat-sys-outline);
         }
       }
 
       .note-dropdown-menu {
-        background-color: $backgroundDark2;
+        background-color: var(--mat-sys-surface-container-lowest);
 
         .note-dimension-display {
           color: white;
@@ -66,12 +66,12 @@
     }
 
     .note-editing-area {
-      background-color: $backgroundDark1;
-      color: set-inverse-text-color($backgroundDark1);
+      background-color: var(--mat-sys-surface-container-low);
+      color: var(--mat-sys-on-surface);
     }
 
     .note-statusbar {
-      background-color: $backgroundDark2;
+      background-color: var(--mat-sys-surface-container-lowest);
 
       .note-resizebar .note-icon-bar {
         border-top-color: rgba(white, 0.5);
@@ -80,12 +80,12 @@
   }
 
   .note-modal-content {
-    background-color: $backgroundDark;
-    color: set-inverse-text-color($backgroundDark1);
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface);
 
     .note-modal-title,
     label {
-      color: set-inverse-text-color($backgroundDark1);
+      color: var(--mat-sys-on-surface);
     }
 
     .note-modal-header {
@@ -99,31 +99,32 @@
         }
 
         .note-icon-close {
-          color: set-inverse-text-color($backgroundDark);
+          color: var(--mat-sys-on-surface);
         }
       }
     }
 
     button {
-      background-color: $backgroundDark;
-      border-color: $backgroundDark2;
-      color: set-inverse-text-color($backgroundDark);
+      background-color: var(--mat-sys-surface-container);
+      border-color: var(--mat-sys-surface-container-lowest);
+      color: var(--mat-sys-on-surface);
 
       &.active {
-        background-color: lighten($backgroundDark, 25);
-        border-color: set-inverse-text-color(lighten($backgroundDark, 25));
+        background-color: var(--mat-sys-surface-bright);
+        border-color: var(--mat-sys-outline);
       }
     }
 
     input {
-      background-color: $backgroundDark1;
-      color: set-inverse-text-color($backgroundDark1);
+      background-color: var(--mat-sys-surface-container-low);
+      color: var(--mat-sys-on-surface);
       border: none;
     }
 
+    // re-assert the themed button over the dark `input` rule above
     input[type='button'] {
-      background-color: $primaryDark;
-      color: set-inverse-text-color($primaryDark) !important;
+      background-color: var(--mat-sys-primary);
+      color: var(--mat-sys-on-primary) !important;
       opacity: 1;
     }
   }

@@ -1,16 +1,15 @@
  @use 'src/styles/mixins' as *;
- @use 'sass:color';
 
  main.app {
      min-height: calc(100dvh - #{$headerHeight} - (#{$headerPaddingTopBottom} * 0) - #{$mainNavHeight} - #{$footerHeight} - 0px);
      @include flex(column, stretch, stretch, nowrap);
      width: 100vw;
      min-width: 375px;
-     background-color: $background;
-     color: set-inverse-text-color($background);
+     background-color: var(--mat-sys-surface-container);
+     color: var(--mat-sys-on-surface);
 
      @media only screen {
-         @include mat-elevation(24, color.adjust($background, $lightness: -20%));
+         @include mat-elevation(24, var(--mat-sys-shadow));
      }
 
      @media screen and (min-width: 1400px) {
@@ -19,16 +18,5 @@
 
      div.router-outlet {
          @include flex(row, flex-start, center, nowrap);
-     }
- }
-
- .dark {
-     main.app {
-         background-color: $backgroundDark;
-         color: set-inverse-text-color($backgroundDark);
-
-         @media only screen {
-             @include mat-elevation(24, color.adjust($backgroundDark, $lightness: -20%));
-         }
      }
  }

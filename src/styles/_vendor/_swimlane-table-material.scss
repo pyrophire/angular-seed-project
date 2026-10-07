@@ -866,7 +866,7 @@ $active-3: darken($active-2, 10%);
       border-color: white;
     }
     &:checked:after {
-      background: $accent;
+      background: var(--mat-sys-secondary);
     }
   }
 }

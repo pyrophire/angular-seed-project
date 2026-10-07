@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HotToastService, ToastConfig, ToastType } from '@ngxpert/hot-toast';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ToastService {
-    constructor(private toast: HotToastService) {}
+    private readonly toast = inject(HotToastService);
 
     public open(message: string, dismissible: boolean, duration?: number, type?: ToastType) {
         let config: Partial<ToastConfig> = {
@@ -72,7 +72,7 @@ export class ToastService {
             dismissible: true,
             theme: 'snackbar'
         };
-        this.toast.warning(message, config);
+        this.toast.info(message, config);
     }
 
     error(message: string) {

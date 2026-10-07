@@ -173,7 +173,7 @@
     &.nw-button--active,
     &:hover {
       opacity: 1;
-      border: 3px solid $primary;
+      border: 3px solid var(--mat-sys-primary);
     }
   }
 
@@ -261,15 +261,15 @@
     .ng-wig,
     [class^="nw-"] {
       .nw-editor {
-        background: $backgroundDark;
-        color: set-inverse-text-color($backgroundDark);
+        background: var(--mat-sys-surface-container);
+        color: var(--mat-sys-on-surface);
       }
 
       .nw-toolbar {
-        color: set-inverse-text-color($backgroundDarkA1);
+        color: var(--mat-sys-on-surface);
         background: linear-gradient(180deg,
-            $backgroundDarkA1,
-            $backgroundDarkA3 100%);
+            var(--mat-sys-surface-container-high),
+            var(--mat-sys-surface-container-highest) 100%);
       }
     }
   }

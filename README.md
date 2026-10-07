@@ -1,8 +1,15 @@
 # Eli's Kinda Ok Angular Seed Project
 
-A comprehensive Angular seed project with **100% standalone components architecture**, pre-configured environment settings, theming system, and useful utilities for rapid application development.
+An Angular 22 seed project: standalone components, zoneless change detection, functional HTTP interceptors with JWT support, a Material 3 theme with light and dark modes, and Vitest unit tests.
 
 ## ✨ Latest Updates
+
+**🧪 Angular 22 Modernization (October 2026)**
+- Material 3 theme through `mat.theme`; colors come from `--mat-sys-*` system variables
+- Standalone bootstrap restored (`bootstrapApplication` + `app.config.ts`); `AppModule` removed
+- Zoneless: `zone.js` removed
+- Functional HTTP interceptors, including a working JWT interceptor
+- Vitest replaces Karma/Jasmine
 
 **🎯 Standalone Components Migration (November 2025)**
 - Fully migrated to Angular standalone components (no NgModules)
@@ -13,14 +20,14 @@ A comprehensive Angular seed project with **100% standalone components architect
 
 ## Features
 
-- **🚀 Modern Architecture**: 100% standalone components (no NgModules required)
-- **Environment Configuration**: Flexible boolean toggles for UI features
-- **Custom Theming**: SCSS variable system for consistent styling
-- **Utility Components**: Go-to-top button, scroll tracker, and footer components
-- **License Management**: Built-in license checker and display module
-- **Development Tools**: Automated dependency management and audit reporting
-- **CI/CD Pipeline**: GitHub Actions workflows for automated building and deployment
-- **Type-Safe Paths**: Configured TypeScript path aliases for cleaner imports
+- **Modern Angular**: standalone components, zoneless, OnPush, signals, `inject()`
+- **HTTP interceptors**: request defaults, error dialog with retry for transient failures, and JWT with automatic re-authentication
+- **Material 3 theme**: one palette drives light and dark modes through `--mat-sys-*` system variables
+- **Environment toggles**: scroll-to-top button, scroll progress bar, and footer switched per environment
+- **Docs viewer**: Markdown under `src/assets/markdown` is served at `/docs` through `@pyrophire/ix-libs`
+- **Unit tests**: Vitest through the Angular `unit-test` builder
+- **CI/CD**: GitHub Actions workflows for dev, test, and prod build and deploy
+- **Path aliases**: `@common`, `@services`, `@models`, `@environments`, and more
 
 ## Setup
 
@@ -34,24 +41,36 @@ A comprehensive Angular seed project with **100% standalone components architect
 
 ```
 src/
-├── environments/           # Environment configuration files
+├── environments/            # environment.ts plus dev / test / prod replacements
 ├── assets/
-│   └── styles/
-│       └── vars.scss      # Global SCSS variables and theming
-├── app/
-│   ├── app.config.ts      # Application configuration (providers)
-│   ├── app.routes.ts      # Route definitions
-│   ├── app.component.ts   # Root component (standalone)
-│   ├── material-imports.ts # Material Design imports helper
-│   ├── shared-imports.ts  # Shared module imports helper
-│   ├── components/
-│   │   ├── common/        # Shared standalone components
-│   │   └── home/          # Feature components
-│   ├── models/            # TypeScript interfaces and data models
-│   ├── services/          # Application services
-│   ├── interceptors/      # HTTP interceptors
-│   └── pipes/             # Custom pipes
-└── ...
+│   ├── img/                 # Favicons and touch icons
+│   └── markdown/            # Content for the /docs viewer
+├── styles/
+│   ├── _themes.scss         # Material 3 theme (palette, typography, density)
+│   ├── _vars.scss           # Layout sizes and breakpoints
+│   ├── _colors/             # Palettes
+│   ├── _partials/           # Mixins grouped by concern
+│   └── _vendor/             # Styles for third-party widgets
+├── styles.scss              # Global styles
+├── third-party.scss         # Vendor CSS, loaded as a separate non-blocking file
+└── app/
+    ├── app.config.ts        # Application providers
+    ├── app.routes.ts        # Route definitions
+    ├── app.component.ts     # Root component
+    ├── material-imports.ts  # Array of all Material modules
+    ├── shared-imports.ts    # Array of commonly used imports
+    ├── components/
+    │   ├── common/          # confirm-dialog, error-dialog, footer, navigation, ng-select-error, tf-icon
+    │   ├── docs/            # Shell for the /docs routes
+    │   ├── kitchen-sink/    # Renders every third-party library; used to check npm upgrades
+    │   └── home/            # Example page
+    ├── interceptors/        # Functional HTTP interceptors
+    ├── models/              # Data models and interfaces
+    ├── services/
+    │   ├── error-handler/   # Error dialog service, global handler, HTTP error message reader
+    │   ├── jwt/             # Token request, storage, and resolution
+    │   └── util/            # Toast, session storage, forms, query strings
+    └── testing/             # Helpers shared by spec files
 ```
 
 ## Architecture Overview
@@ -71,11 +90,16 @@ All components are standalone and explicitly declare their dependencies:
 ```typescript
 @Component({
   selector: 'app-example',
-  standalone: true,
-  imports: [CommonModule, MaterialModule, ...]
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatButtonModule, ...]
 })
-export class ExampleComponent {}
+export class ExampleComponent {
+  private readonly api = inject(ApiService);
+  readonly title = input.required<string>();
+}
 ```
+
+The app is **zoneless**: `zone.js` is not loaded. Keep template state in signals so views update.
 
 ### Import Helpers
 
@@ -87,119 +111,169 @@ Usage:
 import { SHARED_IMPORTS } from '@app/shared-imports';
 
 @Component({
-  standalone: true,
   imports: [...SHARED_IMPORTS]
 })
 ```
 
-## Environment Configuration
+### HTTP Interceptors
 
-Environment files (`.env`, `environment.ts`, `environment.prod.ts`) contain boolean flags to control global UI features:
+Interceptors are functional and are registered once, in `app.config.ts`:
 
-### Available Settings
-
-- **`goToTop`**: Enables/disables the floating "go to top" button that appears when scrolling
-- **`scrollTracker`**: Shows/hides the scroll progress indicator
-- **`footer`**: Controls the visibility of the application footer
-
-### Usage Example
 ```typescript
-// environment.ts
-export const environment = {
-  production: false,
-  goToTop: true,
-  scrollTracker: true,
-  footer: true
-};
+provideHttpClient(withInterceptors(httpInterceptors))
 ```
 
-## Styling System (vars.scss)
+`httpInterceptors` is exported from `src/app/interceptors/index.ts`, in outside-in order:
 
-The `vars.scss` file contains the theming system and shared styling variables:
+| Interceptor | What it does |
+| --- | --- |
+| `customHttpInterceptor` | Defaults API calls to `application/json` (never for `FormData`/`Blob` bodies), applies `withCredentials` when `environment.useWinAuth` is on, and sends RPNS calls as `text/plain` |
+| `serverErrorInterceptor` | Retries GET/HEAD/OPTIONS once on status 0/502/503/504, shows the error dialog once, and rethrows the original `HttpErrorResponse` |
+| `jwtInterceptor` | Attaches the bearer token, shares one authenticate call between concurrent requests, and on a 401 re-authenticates and replays the request once |
 
-### Theme Variables
-- **Color Palette**: Primary, secondary, accent colors
-- **Typography**: Font families, sizes, weights, line heights
-- **Spacing**: Consistent margin and padding scales
-- **Breakpoints**: Responsive design breakpoints
-- **Animations**: Transition durations and easing functions
+Rules that keep the chain working:
 
-### Component-Specific Variables
-- Button styles and states
-- Form input styling
-- Card and container layouts
-- Navigation styling
+- Never import `HttpClientModule`, in `SHARED_IMPORTS` or anywhere else. A component that imports it gets a private `HttpClient` that skips every interceptor.
+- Never register class interceptors on `HTTP_INTERCEPTORS`. They are ignored without an error.
+- Not using JWT? Remove `jwtInterceptor` from the array in `interceptors/index.ts`.
+- To show a failed request's message yourself, use `extractHttpErrorMessage(error)` from `@services/error-handler/http-error-message`. It understands TransactionResult, ASP.NET Core ProblemDetails, and older ASP.NET Web API error bodies.
+- `HttpClient` uses the fetch backend. Add `withXhr()` to `provideHttpClient` if an app needs upload progress events.
+- The support line under the error dialog comes from `environment.supportMessage`.
+
+## Environment Configuration
+
+`src/environments/environment.ts` is used for local development. `angular.json` swaps in `environment.dev.ts`, `environment.test.ts`, or `environment.prod.ts` for the `dev`, `test`, and `prod` build configurations.
+
+| Setting | Purpose |
+| --- | --- |
+| `production` | Marks a deployed build |
+| `displayConsoleLogs` | When false, `console.log`, `debug`, `info`, and `trace` are silenced; warnings and errors still show |
+| `envName`, `prefix` | Environment label and hostname prefix |
+| `baseUrl` | API root. Requests whose URL contains `/api` receive the JWT |
+| `globalScrollButton` | Shows the floating scroll-to-top button |
+| `globalScrollPosition` | Shows the scroll progress bar |
+| `globalFooter` | Shows the footer. Also set `$footerHeight` in `_vars.scss` |
+| `tokenCreds` | Application credentials posted to `/authenticate/credentials` to obtain a JWT |
+| `useWinAuth` | Sends credentials (`withCredentials`) on API calls for Windows authentication |
+| `storageKey` | Session storage key for the JWT |
+| `supportMessage` | Contact line shown under every error dialog |
+| `slansAppName` | Application name used by SLANS |
+
+## Styling System
+
+### Theme
+
+`src/styles/_themes.scss` defines one Material 3 theme with `mat.theme(...)`. It emits the `--mat-sys-*` system variables for color, typography, elevation, shape, and state. Every color is a `light-dark()` pair, so the `.light` and `.dark` classes on `<body>` only need to set `color-scheme`. The ix-libs theme button toggles those classes.
+
+To rebrand, change the `primary` palette in `_themes.scss`. Palettes live in `src/styles/_colors/_custom-palette.scss`.
+
+### Colors in your own styles
+
+Use the system variables, not Sass color variables. They follow the theme and switch with the mode automatically, so no `.dark` overrides are needed.
+
+| Use | Variable |
+| --- | --- |
+| Brand color / text on it | `--mat-sys-primary` / `--mat-sys-on-primary` |
+| Accent | `--mat-sys-secondary` |
+| Errors and warnings | `--mat-sys-error` |
+| Page and panel backgrounds | `--mat-sys-surface`, `--mat-sys-surface-container-low` … `-highest` |
+| Text / secondary text | `--mat-sys-on-surface` / `--mat-sys-on-surface-variant` |
+| Borders and dividers | `--mat-sys-outline` / `--mat-sys-outline-variant` |
+
+```scss
+.panel {
+    background: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface);
+    border: 1px solid var(--mat-sys-outline-variant);
+}
+
+// A system variable cannot go through Sass color functions. Use color-mix for transparency.
+.overlay {
+    background: color-mix(in srgb, var(--mat-sys-primary) 20%, transparent);
+}
+```
+
+Full list: https://material.angular.dev/guide/system-variables
+
+### Layout variables
+
+`src/styles/_vars.scss` holds what the theme does not: header, navigation, and footer heights, the app container width, and the media-query breakpoints.
 
 ## Key Packages & Dependencies
 
-### Core Framework
-- **Angular**: Latest stable version with CLI tools
-- **RxJS**: Reactive programming utilities
-- **TypeScript**: Type-safe JavaScript development
-
-### UI & Styling
-- **SCSS**: Enhanced CSS preprocessing
-- **Angular Material** (if included): UI component library
-
-### Development Tools
-- **ESLint/TSLint**: Code quality and style enforcement
-- **Prettier**: Code formatting
-- **Karma/Jasmine**: Unit testing framework
-
-### Utility Packages
-- **npm-audit-html**: Security audit report generation
-- **license-checker**: License compliance monitoring
-- **rimraf**: Cross-platform file/directory removal
+- **Angular 22** with **Angular Material / CDK 22**
+- **@pyrophire/ix-libs**: theme button, scroll button and progress bar, table, pipes, icons, docs viewer
+- **@ngxpert/hot-toast**: toasts, wrapped by `ToastService`
+- **@ng-select/ng-select**: select and autocomplete control
+- **jwt-decode**, **date-fns**: token parsing and expiry checks
+- **marked**: Markdown rendering for the docs viewer
+- **Vitest + jsdom**: unit tests (`npm test`)
+- **Prettier**: formatting
 
 ## Models & Interfaces
 
-The project includes TypeScript models for:
-
-### Core Models
-- **User**: User account and profile information
-- **ApiResponse**: Standardized API response wrapper
-- **NavigationItem**: Menu and routing structure
-- **Theme**: Theme configuration object
-
-### Utility Models
-- **License**: Software license information for compliance display
-- **ScrollPosition**: Scroll tracking data structure
-- **ComponentState**: Generic component state management
+| Model | File | Purpose |
+| --- | --- | --- |
+| `NavItem` | `models/navItem.model.ts` | One entry in the top navigation; nests through `children` |
+| `TransactionResult<T>` | `models/transaction.model.ts` | Standard API response wrapper (`success`, `message`, `results`) |
+| `TLCJwtToken`, `JwtAuthenticationResponse` | `models/jwt-token.model.ts` | Decoded token claims and the authenticate response |
+| `ErrorDialogData` | `models/error-dialog-data.model.ts` | Data passed to the error dialog |
 
 ## Components & Services
 
-### Utility Components
-- **GoToTopComponent**: Floating scroll-to-top button
-- **ScrollTrackerComponent**: Visual scroll progress indicator
-- **FooterComponent**: Application footer with configurable content
-- **LicenseComponent**: Displays project license information
+### Components (`components/common`)
 
-### Core Services
-- **ThemeService**: Manages application theming and dark/light mode
-- **ScrollService**: Handles scroll position tracking and smooth scrolling
+- **NavigationComponent**: top bar and menu, built from the `navItems` array in the component
+- **FooterComponent**: shown when `environment.globalFooter` is true
+- **ErrorDialogComponent**: opened by the error interceptor; offers Close and Refresh page
+- **ConfirmDialogComponent**: closes with `true` or `false`
+- **TfIconComponent**: check or cross icon for a boolean
+- **NgSelectErrorComponent**: wrapper for showing validation errors under an ng-select
+
+The scroll-to-top button, scroll progress bar, and theme button come from `@pyrophire/ix-libs`.
+
+### Services
+
+- **ApiService**: example API calls that write results to the store
+- **StoreService**: shared state held in signals
+- **ToastService**: `success`, `error`, `warning`, `info`, `loading`
+- **JwtService**, **TokenResolver**, **TokenStorageService**: request, share, and store the JWT
+- **SessionStorageService**: session storage with an in-memory fallback
+- **FormService**, **ParamBuilderService**: form label and query-string helpers
+- **ErrorNotificationService**: opens the error dialog from code
+
+### Optional, off by default
+
+- **GlobalErrorHandler**: shows the error dialog for uncaught errors. Enable with `{ provide: ErrorHandler, useClass: GlobalErrorHandler }` in `app.config.ts`
+- **LowerCaseUrlSerializer**: makes routes case-insensitive. Enable with `{ provide: UrlSerializer, useClass: LowerCaseUrlSerializer }`
 
 ## Customizing
 
-* Environment files control global UI feature toggles (goToTop, scrollTracker, footer)
-* `vars.scss` contains all theme variables and shared styling configurations
-* Component styles can be customized by modifying SCSS variables
-* New features can be toggled via environment configuration
+* Replace `CHANGEME` everywhere with the project name
+* Set `baseUrl`, `tokenCreds`, `storageKey`, and `supportMessage` in each environment file
+* Edit `navItems` in `navigation.component.ts` for the menu
+* Change the palette in `_themes.scss` to rebrand
+* Remove `jwtInterceptor` from `interceptors/index.ts` if the app does not use JWT
+* Add Markdown under `src/assets/markdown` to populate `/docs`
 
 ## NPM Commands
 
-* `npm run update-all` - Update all Angular-specific libraries to latest compatible versions
-* `npm run fresh` - Delete node_modules and package-lock.json, then reinstall all dependencies
+* `npm start` - Regenerate the docs manifest and serve on http://localhost:4200
+* `npm run build` - Regenerate the docs manifest and build the `prod` configuration
+* `npm test` - Run the Vitest unit tests
+* `npm run docs:manifest` - Rebuild the manifest for `src/assets/markdown`
+* `npm run update-all` - Update Angular CLI, core, Material, and RxJS
+* `npm run fresh` - Delete `node_modules` and `package-lock.json`, then reinstall
   * Requires `rimraf`: `npm install -g rimraf`
-* `npm run audit` - Run npm audit and generate an HTML security report
-  * Requires `npm-audit-html`: `npm install -g npm-audit-html`
-* `npm run license-checker` - Generate JSON file of all package licenses for the license module
-  * View results at `http://localhost:4200/license`
+* `npm run audit` - Run npm audit and write `reports/build-audit.html`
+* `npm run license-checker` - Write the licenses of direct dependencies to `src/assets/license.json`
+* `npm run mcp` - Start the Angular MCP server in `mcp/`
 
 ## Development Workflow
 
-1. **Creating Components**: Always use the `--standalone` flag
+1. **Creating Components**: Components are standalone and OnPush by default, and are generated with a spec file
    ```bash
-   ng generate component my-component --standalone
+   ng generate component my-component
    ```
 
 2. **Feature Development**: Use environment flags to toggle new features during development
@@ -213,21 +287,40 @@ The project includes TypeScript models for:
    }
    ```
 
-4. **Styling**: Modify `vars.scss` for theme changes, use CSS custom properties for component-specific styling
+4. **Styling**: Change the palette in `_themes.scss` for theme changes, and use the `--mat-sys-*` variables for colors in component styles
 
-5. **Testing**: Components are tested individually without module configuration
+5. **Testing**: `npm test` runs Vitest once in CI and in watch mode in a terminal. Only `*.spec.ts` files are picked up
+   (not `*.test.ts`, because `environment.test.ts` is an environment file). Vitest globals (`describe`, `it`, `expect`, `vi`) need no import.
    ```typescript
-   TestBed.configureTestingModule({
-     imports: [MyComponent] // Import standalone component directly
-   })
+   const fixture = TestBed.createComponent(MyComponent);
+   fixture.componentRef.setInput('title', 'Hello');
+   await fixture.whenStable();
+   ```
+   For anything that makes HTTP calls, use the real providers so the interceptors are exercised:
+   ```typescript
+   TestBed.configureTestingModule({ providers: [appConfig.providers, provideHttpClientTesting()] });
    ```
 
 6. **Building**: Use `ng build` for production builds
    ```bash
-   ng build --configuration production
+   ng build --configuration prod
    ```
 
 7. **Deployment**: Configure environment files for different deployment targets
+
+## Kitchen Sink (library upgrade check)
+
+`/kitchen-sink` renders every third-party library the seed depends on, on one page: Angular Material, ng-select, hot-toast, ix-libs, ngx-pipes, date-fns, jwt-decode, the dialogs, and a sample API call that runs the interceptors. It is lazy loaded and is not linked from the navigation.
+
+The page exists only when running locally. Its route lives in `src/environments/local-routes.ts`, which the `dev`, `test`, and `prod` build configurations replace with the empty `local-routes.deployed.ts`, so the page and its code are absent from every deployed bundle. Add other local-only pages to the same file.
+
+After upgrading npm packages:
+
+1. Run `npm test`. `kitchen-sink.component.spec.ts` asserts the exact output of each pipe and formatter and that each control renders, so a library that changed behavior fails there.
+2. Run `npm start`, open http://localhost:4200/kitchen-sink, and check every card in light and dark mode. Open the dropdowns, the datepicker, both dialogs, and each toast.
+3. Click **Call the sample API**. With the placeholder `baseUrl` it fails; expect exactly one error dialog.
+
+When a library is added to the seed, add a card for it to this page and an assertion to its spec.
 
 ## TypeScript Path Aliases
 
@@ -245,18 +338,13 @@ Available aliases:
 - `@services/*` - Application services
 - `@models/*` - Data models and interfaces
 - `@environments/*` - Environment configurations
-- `@constants/*` - Application constants
-- `@pipes/*` - Custom pipes
-- `@enums/*` - Enumerations
-- `@resolvers/*` - Route resolvers
-- `@mocks/*` - Test mocks
+- `@components/*` - All components
+- `@shared-imports` - The `SHARED_IMPORTS` array
+- `@constants/*`, `@pipes/*`, `@enums/*`, `@resolvers/*`, `@mocks/*` - Reserved; create the folder under `src/app` when needed
 
 ## License Management
 
-The project includes a built-in license checker that:
-- Scans all npm dependencies for license information
-- Generates a compliance report accessible at `/license` route
-- Helps maintain legal compliance for commercial applications
+`npm run license-checker` writes the license of every direct dependency to `src/assets/license.json`. The seed does not include a page that displays it.
 
 ## GitHub Actions Workflows
 
@@ -337,7 +425,7 @@ If `ng build` errors with:
 ```
 Configuration 'production' for target 'build' ... is not set in the workspace
 ```
-Ensure `angular.json` includes a `production` configuration or set `defaultConfiguration` to an existing key (e.g. `prod`). This project now includes both `prod` and `production` for compatibility.
+This project names its production configuration `prod`, because the build pipeline passes that name, and `prod` is the default. Use `ng build` or `ng build --configuration prod`; there is no `production` configuration.
 
 ### MCP Server Method Not Found
 If the MCP server logs `Method not found`, confirm you've updated to the SDK-based server and tool names (`angular_listComponents`, etc.). Restart VS Code after changes to `.vscode/mcp.json`.

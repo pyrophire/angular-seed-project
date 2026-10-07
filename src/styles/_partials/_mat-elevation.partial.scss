@@ -3,7 +3,7 @@
 // theming file, which bloats the style files if imported in every component.
 
 @function _get-umbra-map($color, $opacity) {
-  $shadow-color: if(type-of($color) ==color, rgba($color, $opacity * 0.2), $color);
+  $shadow-color: if(type-of($color) ==color, rgba($color, $opacity * 0.2), color-mix(in srgb, #{$color} #{$opacity * 0.2 * 100%}, transparent));
 
   @return (
     0: '0px 0px 0px 0px #{$shadow-color}',
@@ -35,7 +35,7 @@
 }
 
 @function _get-penumbra-map($color, $opacity) {
-  $shadow-color: if(type-of($color) ==color, rgba($color, $opacity * 0.14), $color);
+  $shadow-color: if(type-of($color) ==color, rgba($color, $opacity * 0.14), color-mix(in srgb, #{$color} #{$opacity * 0.14 * 100%}, transparent));
 
   @return (
     0: '0px 0px 0px 0px #{$shadow-color}',
@@ -67,7 +67,7 @@
 }
 
 @function _get-ambient-map($color, $opacity) {
-  $shadow-color: if(type-of($color) ==color, rgba($color, $opacity * 0.12), $color);
+  $shadow-color: if(type-of($color) ==color, rgba($color, $opacity * 0.12), color-mix(in srgb, #{$color} #{$opacity * 0.12 * 100%}, transparent));
 
   @return (
     0: '0px 0px 0px 0px #{$shadow-color}',
@@ -140,6 +140,8 @@ $_mat-elevation-prefix: 'mat-elevation-z';
 
 // ### USAGE NOTES ###
 //
+// $color may be a Sass color or a CSS custom property, e.g. var(--mat-sys-shadow).
+// Custom properties cannot go through rgba(), so they are faded with color-mix() instead.
 //
 // will set
 @mixin mat-elevation($zValue, $color: #000, $opacity: 1) {

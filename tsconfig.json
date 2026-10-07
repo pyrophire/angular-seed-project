@@ -1,4 +1,4 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
+/* To learn more about this file see: https://angular.dev/reference/configs/file-structure#typescript-configuration. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -20,7 +20,6 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false,
     "paths": {
       "@components/*": [
         "./src/app/components/*"
@@ -58,7 +57,6 @@
     }
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
     "extendedDiagnostics": {
       "checks": {
         "nullishCoalescingNotNullable": "suppress",
@@ -71,10 +69,5 @@
     "strictNullChecks": false,
     "typeCheckHostBindings": true
   },
-  "files": [
-    "./src/main.ts"
-  ],
-  "include": [
-    "./src/**/*.d.ts"
-  ]
+  "files": []
 }

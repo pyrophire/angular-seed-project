@@ -15,7 +15,7 @@
 
      svg {
        .st0 {
-         fill: $primary;
+         fill: var(--mat-sys-primary);
        }
 
        .st1 {
@@ -63,18 +63,13 @@
    @include flex(row, flex-start, center, nowrap);
  }
 
- body.light {
-   background-color: $background;
-   color: set-inverse-text-color($background);
- }
-
- body.dark {
-   background-color: $backgroundDark1;
-   color: set-inverse-text-color($backgroundDark1);
+ body {
+   background-color: var(--mat-sys-surface-container-low);
+   color: var(--mat-sys-on-surface);
  }
 
  @include flex-directive;
- @include clickable-link($blue700);
+ @include clickable-link(var(--mat-sys-primary));
 
 
  .desktop {

@@ -1,6 +1,6 @@
 <nav
     class="top-navigation"
-    [ngClass]="{ sticky: sticky }">
+    [class.sticky]="sticky()">
     <article class="nav-logo-head">
         <div id="nav-logo">
             <mat-icon>robot</mat-icon>
@@ -84,7 +84,7 @@
         </mat-menu>
 
         <button
-            mat-icon-button
+            matIconButton
             [matMenuTriggerFor]="mobileMenu">
             <mat-icon>menu</mat-icon>
         </button>
@@ -139,7 +139,7 @@
                 </mat-menu>
 
                 <button
-                    mat-button
+                    matButton
                     [matMenuTriggerFor]="navLayerTwo">
                     <span> {{ l.name }} </span>
                     <mat-icon>keyboard_arrow_down</mat-icon>

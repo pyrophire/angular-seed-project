@@ -1,9 +1,10 @@
 // Inverse text color
 //
 // Markup: Will return the inverse color, usually the background with an alpha of .875 to match Material Design spec.
+// Only works with real Sass colors. For theme colors use the matching `--mat-sys-on-*` token instead.
 // .class {
-// background: $background
-// color: set-inverse-text-color($background)
+// background: $grey200
+// color: set-inverse-text-color($grey200)
 // }
 //
 // Styleguide Coloring.set-inverse-text-color
@@ -21,9 +22,10 @@
 // Inverse color
 //
 // Markup: Similar to set-inverse-text-color, but just returns a full opacity color.
+// Only works with real Sass colors. For theme colors use the matching `--mat-sys-on-*` token instead.
 // .class {
-// background: $background
-// color: get-inverse-color($background)
+// background: $grey200
+// color: get-inverse-color($grey200)
 // }
 //
 // Styleguide Coloring.get-inverse-color

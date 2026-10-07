@@ -1,5 +1,5 @@
 // This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// `ng build --configuration prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
@@ -17,7 +17,8 @@ export const environment = {
         passCode: ''
     },
     useWinAuth: false,
-    storageKey: 'CHANGEMEkey'
+    storageKey: 'CHANGEMEkey',
+    supportMessage: 'Please contact your system administrator, the TLC Support Team, or the IT Support Center at (512) 463-1158.'
 };
 
 /*

@@ -1,0 +1,391 @@
+<section class="kitchen-sink">
+    <div class="section-header">
+        <div class="section-title">Kitchen Sink</div>
+    </div>
+    <p class="kitchen-sink-intro">
+        Every third-party library in the seed, rendered on one page. After upgrading npm packages, check each card in light and dark mode.
+    </p>
+
+    <div
+        class="kitchen-sink-grid"
+        [formGroup]="form">
+        <article
+            class="sink-card"
+            data-section="theme">
+            <h2>Theme colors</h2>
+            <div class="swatches">
+                @for (
+                    token of [
+                        'primary',
+                        'secondary',
+                        'tertiary',
+                        'error',
+                        'surface',
+                        'surface-container-low',
+                        'surface-container',
+                        'surface-container-highest',
+                        'outline',
+                        'outline-variant'
+                    ];
+                    track token
+                ) {
+                    <div
+                        class="swatch"
+                        [style.background]="'var(--mat-sys-' + token + ')'">
+                        <span>{{ token }}</span>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <ix-theme-button></ix-theme-button>
+                <span>ix-libs theme button</span>
+            </div>
+        </article>
+
+        <article
+            class="sink-card"
+            data-section="material-buttons">
+            <h2>Material: buttons and indicators</h2>
+            <div class="row">
+                <button matButton>Text</button>
+                <button matButton="filled">Filled</button>
+                <button matButton="tonal">Tonal</button>
+                <button matButton="outlined">Outlined</button>
+                <button matButton="elevated">Elevated</button>
+                <button
+                    matButton="filled"
+                    disabled>
+                    Disabled
+                </button>
+            </div>
+            <div class="row">
+                <button
+                    matIconButton
+                    matTooltip="Tooltip on an icon button"
+                    aria-label="Favorite">
+                    <mat-icon>favorite</mat-icon>
+                </button>
+                <button
+                    matFab
+                    aria-label="Add">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button
+                    matButton="outlined"
+                    [matMenuTriggerFor]="sampleMenu">
+                    Menu
+                </button>
+                <mat-menu #sampleMenu="matMenu">
+                    <button mat-menu-item>First item</button>
+                    <button mat-menu-item>Second item</button>
+                    <ix-theme-menu-item></ix-theme-menu-item>
+                </mat-menu>
+                <mat-icon
+                    matBadge="4"
+                    aria-hidden="false"
+                    aria-label="4 notifications"
+                    >notifications</mat-icon
+                >
+            </div>
+            <mat-chip-set aria-label="Sample chips">
+                <mat-chip>Chip one</mat-chip>
+                <mat-chip highlighted>Highlighted</mat-chip>
+            </mat-chip-set>
+            <mat-progress-bar
+                mode="determinate"
+                value="60"></mat-progress-bar>
+            <div class="row">
+                <mat-spinner diameter="32"></mat-spinner>
+                <mat-button-toggle-group
+                    value="b"
+                    aria-label="Sample toggle group">
+                    <mat-button-toggle value="a">A</mat-button-toggle>
+                    <mat-button-toggle value="b">B</mat-button-toggle>
+                    <mat-button-toggle value="c">C</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+        </article>
+
+        <article
+            class="sink-card"
+            data-section="material-forms">
+            <h2>Material: form controls</h2>
+            <mat-form-field appearance="outline">
+                <mat-label>Text input</mat-label>
+                <input
+                    matInput
+                    formControlName="text" />
+                <mat-hint>A hint</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Material select</mat-label>
+                <mat-select formControlName="matSelect">
+                    @for (option of options; track option.id) {
+                        <mat-option
+                            [value]="option.id"
+                            [disabled]="option.disabled"
+                            >{{ option.name }}</mat-option
+                        >
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Datepicker</mat-label>
+                <input
+                    matInput
+                    [matDatepicker]="picker"
+                    formControlName="date" />
+                <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="row">
+                <mat-checkbox formControlName="isChecked">Checkbox</mat-checkbox>
+                <mat-slide-toggle formControlName="isToggled">Slide toggle</mat-slide-toggle>
+            </div>
+            <mat-radio-group
+                formControlName="radio"
+                aria-label="Sample radio group">
+                <mat-radio-button value="a">Option A</mat-radio-button>
+                <mat-radio-button value="b">Option B</mat-radio-button>
+            </mat-radio-group>
+            <mat-slider
+                min="0"
+                max="100">
+                <input
+                    matSliderThumb
+                    value="40"
+                    aria-label="Sample slider" />
+            </mat-slider>
+        </article>
+
+        <article
+            class="sink-card"
+            data-section="material-layout">
+            <h2>Material: layout and data</h2>
+            <mat-tab-group>
+                <mat-tab label="Table">
+                    <table
+                        mat-table
+                        [dataSource]="rows">
+                        @for (column of materialTableColumns; track column) {
+                            <ng-container [matColumnDef]="column">
+                                <th
+                                    mat-header-cell
+                                    *matHeaderCellDef>
+                                    {{ column | c2t }}
+                                </th>
+                                <td
+                                    mat-cell
+                                    *matCellDef="let row">
+                                    @if (column === 'isActive') {
+                                        <ix-tf-icon [data]="row.isActive"></ix-tf-icon>
+                                    } @else {
+                                        {{ row[column] }}
+                                    }
+                                </td>
+                            </ng-container>
+                        }
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="materialTableColumns"></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let row; columns: materialTableColumns"></tr>
+                    </table>
+                </mat-tab>
+                <mat-tab label="Expansion">
+                    <mat-accordion>
+                        <mat-expansion-panel expanded>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>Panel one</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p>Expansion panel content.</p>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>Panel two</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p>More content.</p>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-tab>
+                <mat-tab label="List">
+                    <mat-list>
+                        <mat-list-item>List item one</mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>List item two</mat-list-item>
+                    </mat-list>
+                </mat-tab>
+            </mat-tab-group>
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>Material card</mat-card-title>
+                    <mat-card-subtitle>Outlined appearance</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>Card content.</mat-card-content>
+            </mat-card>
+        </article>
+
+        <article
+            class="sink-card"
+            data-section="ng-select">
+            <h2>ng-select</h2>
+            <label for="sink-single">Single, clearable, searchable</label>
+            <ng-select
+                labelForId="sink-single"
+                [items]="options"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Pick a city"
+                formControlName="single"></ng-select>
+
+            <label for="sink-multiple">Multiple</label>
+            <ng-select
+                labelForId="sink-multiple"
+                [items]="options"
+                bindLabel="name"
+                bindValue="id"
+                [multiple]="true"
+                [closeOnSelect]="false"
+                placeholder="Pick several"
+                formControlName="multiple"></ng-select>
+
+            <label for="sink-grouped">Grouped, with a disabled item</label>
+            <ng-select
+                labelForId="sink-grouped"
+                [items]="options"
+                bindLabel="name"
+                bindValue="id"
+                groupBy="group"
+                placeholder="Grouped by region"
+                formControlName="grouped"></ng-select>
+
+            <label for="sink-required">Required, showing its error</label>
+            <ng-select
+                labelForId="sink-required"
+                [items]="options"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Required"
+                formControlName="required"></ng-select>
+            @if (form.controls.required.invalid && form.controls.required.touched) {
+                <ix-ng-select-error>A city is required</ix-ng-select-error>
+            }
+
+            <label for="sink-disabled">Disabled</label>
+            <ng-select
+                labelForId="sink-disabled"
+                [items]="options"
+                bindLabel="name"
+                bindValue="id"
+                formControlName="disabled"></ng-select>
+
+            <p class="sink-value">
+                Values: single={{ form.controls.single.value }}, multiple={{ form.controls.multiple.value | json }}, grouped={{
+                    form.controls.grouped.value
+                }}
+            </p>
+        </article>
+
+        <article
+            class="sink-card"
+            data-section="dialogs">
+            <h2>Dialogs, toasts, and HTTP</h2>
+            <div class="row">
+                <button
+                    matButton="outlined"
+                    class="open-confirm"
+                    (click)="openConfirmDialog()">
+                    Confirm dialog
+                </button>
+                <button
+                    matButton="outlined"
+                    class="open-error"
+                    (click)="openErrorDialog()">
+                    Error dialog
+                </button>
+            </div>
+            <p class="sink-value confirm-result">Confirm result: {{ confirmResult() ?? 'not answered' }}</p>
+
+            <h3>&#64;ngxpert/hot-toast</h3>
+            <div class="row">
+                @for (kind of ['success', 'error', 'warning', 'info', 'loading']; track kind) {
+                    <button
+                        matButton="tonal"
+                        [class]="'toast-' + kind"
+                        (click)="showToast($any(kind))">
+                        {{ kind }}
+                    </button>
+                }
+            </div>
+
+            <h3>Interceptors</h3>
+            <div class="row">
+                <button
+                    matButton="outlined"
+                    class="call-api"
+                    (click)="callApi()">
+                    Call the sample API
+                </button>
+            </div>
+            <p class="sink-value api-status">API status: {{ apiStatus() }}</p>
+            <p class="sink-note">
+                With the placeholder <code>baseUrl</code> this call fails. Expect one error dialog with the support message, not several.
+            </p>
+        </article>
+
+        <article
+            class="sink-card"
+            data-section="ix-libs">
+            <h2>&#64;pyrophire/ix-libs</h2>
+            <dl class="sink-list">
+                <dt>phone</dt>
+                <dd class="pipe-phone">{{ '5124631158' | phone }}</dd>
+                <dt>filesize</dt>
+                <dd class="pipe-filesize">{{ 1536000 | filesize }}</dd>
+                <dt>ampm</dt>
+                <dd class="pipe-ampm">{{ '14:30' | ampm }}</dd>
+                <dt>c2t</dt>
+                <dd class="pipe-c2t">{{ 'camelCaseToTitle' | c2t }}</dd>
+                <dt>safe</dt>
+                <dd
+                    class="pipe-safe"
+                    [innerHTML]="safeHtml | safe: 'html'"></dd>
+                <dt>tf-icon</dt>
+                <dd>
+                    <ix-tf-icon [data]="true"></ix-tf-icon>
+                    <ix-tf-icon [data]="false"></ix-tf-icon>
+                </dd>
+            </dl>
+        </article>
+
+        <article
+            class="sink-card"
+            data-section="utilities">
+            <h2>Utility libraries</h2>
+            <dl class="sink-list">
+                <dt>date-fns format</dt>
+                <dd class="date-format">{{ formattedDate }}</dd>
+                <dt>date-fns formatDistance</dt>
+                <dd class="date-distance">{{ dateDistance }}</dd>
+                <dt>Angular date pipe</dt>
+                <dd class="date-pipe">{{ sampleDate | date: 'short' }}</dd>
+                <dt>jwt-decode</dt>
+                <dd class="jwt-decoded">{{ decodedToken | json }}</dd>
+                <dt>ngx-pipes orderBy</dt>
+                <dd class="ngx-order">{{ words | orderBy | json }}</dd>
+                <dt>ngx-pipes ucwords</dt>
+                <dd class="ngx-ucwords">{{ 'kitchen sink page' | ucwords }}</dd>
+                <dt>ngx-pipes slugify</dt>
+                <dd class="ngx-slugify">{{ 'Kitchen Sink Page' | slugify }}</dd>
+            </dl>
+            <p class="sink-note">
+                <code>marked</code> is exercised by the docs viewer:
+                <a routerLink="/docs">open /docs</a>
+                and open a page.
+            </p>
+        </article>
+    </div>
+</section>

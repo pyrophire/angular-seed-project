@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { localRoutes } from '@environments/local-routes';
 import { DocsShellComponent } from './components/docs/docs-shell.component';
 
 export const routes: Routes = [
@@ -8,6 +9,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/home/home.component').then((c) => c.HomeComponent),
         title: 'CHANGEME - Home'
     },
+    ...localRoutes,
     {
         path: 'docs',
         component: DocsShellComponent,

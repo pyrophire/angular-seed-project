@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, Validators } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class FormService {
-  constructor() {}
-
-  public hasValidationError(control: FormControl, errorCode: string): boolean {
-    return control.hasError(errorCode) && control.touched;
-  }
-
-  public requiredLabel(label: string, control: any): string {
-    let validators;
-    try {
-      validators = control?.validator('');
-    } catch (error) {
-      return label;
+    /**
+     * @param control - The control to inspect
+     * @param errorCode - The validation error key, e.g. `required`
+     * @returns True when the control has been touched and carries that error
+     */
+    public hasValidationError(control: AbstractControl, errorCode: string): boolean {
+        return control.hasError(errorCode) && control.touched;
     }
-    if (validators?.required) {
-      return `${label} *`;
-    } else {
-      return label;
+
+    /**
+     * @param label - The field label
+     * @param control - The control behind the field
+     * @returns The label with ` *` appended when the control is required
+     */
+    public requiredLabel(label: string, control: AbstractControl | null | undefined): string {
+        return control?.hasValidator(Validators.required) ? `${label} *` : label;
     }
-  }
 }

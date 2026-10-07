@@ -1,3 +1,58 @@
+# Changelog
+
+---
+
+## 🧪 Angular 22 Modernization
+
+**Date**: October 7, 2026
+**Type**: Breaking Changes - bootstrap, HTTP interceptors, test runner
+
+### Bootstrap
+
+- `main.ts` uses `bootstrapApplication(AppComponent, appConfig)`. `AppModule` is deleted; its providers live in `src/app/app.config.ts`.
+- The app is zoneless. `zone.js`, `@angular/platform-browser-dynamic`, and `@angular/animations` are no longer dependencies.
+- Components use OnPush, `inject()`, signal inputs, `styleUrl`, and class bindings instead of `ngClass`.
+
+### HTTP interceptors (breaking)
+
+- Class interceptors on `HTTP_INTERCEPTORS` are replaced by functional ones registered with `provideHttpClient(withInterceptors(httpInterceptors))`.
+- `CustomHttp.interceptor.ts` → `custom-http.interceptor.ts`; `server-error-interceptor.ts` → `server-error.interceptor.ts`.
+- The JWT interceptor is on by default. Remove it from `interceptors/index.ts` if unused.
+- Failed requests now reject with the original `HttpErrorResponse`, not `{ error, message, status, originalError }`. Use `extractHttpErrorMessage(error)` for display text.
+- Only GET/HEAD/OPTIONS are retried, once, and only on status 0/502/503/504. Writes and 4xx responses are never retried.
+- An API 401 clears the stored token, re-authenticates, and replays the request once.
+- Concurrent requests share a single authenticate call.
+- `FormData`, `Blob`, `ArrayBuffer`, and `URLSearchParams` bodies no longer have their content type forced to `application/json`.
+- `HttpClient` uses the fetch backend (the Angular 22 default). Add `withXhr()` if upload progress events are needed.
+- `HttpClientModule` is removed from `SHARED_IMPORTS`.
+
+### Other
+
+- `environment.supportMessage` holds the support line shown in the error dialog.
+- `TokenStorageService.role` and `permissions` are signals instead of Subjects.
+- `ToastService.info()` now shows an info toast (it showed a warning).
+- `angular.json`: the duplicate `production` configuration is removed; `prod` is the default. Schematics no longer skip spec files.
+- `tsconfig.json` is split into `tsconfig.app.json` and `tsconfig.spec.json`; every file under `src` is now type-checked.
+- `@pyrophire/ix-libs` updated to 22.2.0, which drops its unused peer dependencies and its undeclared `lodash` import.
+
+### Styling
+
+- Sass color variables (`$primary`, `$accent`, `$warn`, `$background*`, `$linkColor*`) are replaced by Material system variables (`--mat-sys-*`).
+- `_themes.scss` uses a single `mat.theme(...)` call; `.light` / `.dark` only set `color-scheme`.
+- Material buttons use the `matButton` / `matIconButton` syntax.
+
+### Dependencies
+
+- Angular 22.2.1, Material/CDK 22.2.2, `@ng-select/ng-select` 24.2.1, `@ngneat/overview` 7.
+- Removed `@ngneat/hot-toast` (unused).
+
+### Tests
+
+- `/kitchen-sink` renders every third-party library on one page for checking npm upgrades; its spec asserts their output. Local only: the route is file-replaced out of `dev`, `test`, and `prod` builds.
+- `npm test` runs Vitest through `@angular/build:unit-test`. Karma and Jasmine are removed.
+
+---
+
 # Changelog - Angular Standalone Components Migration
 
 ---

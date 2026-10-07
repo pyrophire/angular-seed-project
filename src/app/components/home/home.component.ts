@@ -1,19 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'CHANGEME-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
+    styleUrl: './home.component.scss',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    changeDetection: ChangeDetectionStrategy.Eager,
-    imports: []
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
-    constructor(private router: Router) {}
-
-    ngOnInit(): void {
-        // Initialization code
-    }
-}
+export class HomeComponent {}

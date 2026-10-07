@@ -13,5 +13,6 @@ export const environment = {
         passCode: ''
     },
     useWinAuth: false,
-    storageKey: 'CHANGEMEkey'
+    storageKey: 'CHANGEMEkey',
+    supportMessage: 'Please contact your system administrator, the TLC Support Team, or the IT Support Center at (512) 463-1158.'
 };

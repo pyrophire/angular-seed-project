@@ -1,37 +1,36 @@
-import { Component, Inject, Injector, Type, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ErrorDialogData } from '@models/error-dialog-data.model';
 import { WindowsService } from '@services/error-handler/windows.service';
 
 @Component({
     selector: 'app-error-dialog',
     templateUrl: 'error-dialog.component.html',
-    standalone: true,
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [MatDialogModule, MatButtonModule]
 })
 export class ErrorDialogComponent {
-    constructor(
-        public dialogRef: MatDialogRef<ErrorDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any,
-        private injector: Injector,
-        private windowsService: WindowsService
-    ) {
+    private readonly dialogRef = inject<MatDialogRef<ErrorDialogComponent>>(MatDialogRef);
+    private readonly windowsService = inject(WindowsService);
+    protected readonly data = inject<ErrorDialogData>(MAT_DIALOG_DATA);
+
+    constructor() {
         this.dialogRef.disableClose = true;
     }
 
+    /**
+     * Dismisses the dialog.
+     */
     close(): void {
         this.dialogRef.close();
     }
 
+    /**
+     * Reloads the whole page so the app restarts from a clean state.
+     */
     refresh(): void {
-        const router = this.injector.get<Router>(Router as Type<Router>);
-        router.routeReuseStrategy.shouldReuseRoute = () => {
-            return false;
-        };
-        this.windowsService.reloadWindow();
-
         this.dialogRef.close();
+        this.windowsService.reloadWindow();
     }
 }

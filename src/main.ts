@@ -1,28 +1,21 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
-import { AppModule } from './app/app.module';
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
 
-if (environment.production) {
-    enableProdMode();
+/**
+ * Replaces the informational console methods with no-ops while leaving warnings and errors intact.
+ */
+function silenceConsoleLogs(): void {
+    const noop = (): void => undefined;
+    console.log = noop;
+    console.debug = noop;
+    console.info = noop;
+    console.trace = noop;
 }
 
-platformBrowserDynamic()
-    .bootstrapModule(AppModule)
-    .catch((err) => console.error(err));
-
-// Globally silence console logs in production while keeping warnings/errors
 if (!environment.displayConsoleLogs) {
-    try {
-        enableProdMode();
-    } catch {}
-    const noop = () => undefined;
-    const methods: Array<keyof Console> = ['log', 'debug', 'info', 'trace'];
-    methods.forEach((m) => {
-        try {
-            (console as any)[m] = noop;
-        } catch {
-            /* no-op */
-        }
-    });
+    silenceConsoleLogs();
 }
+
+bootstrapApplication(AppComponent, appConfig).catch((err: unknown) => console.error(err));

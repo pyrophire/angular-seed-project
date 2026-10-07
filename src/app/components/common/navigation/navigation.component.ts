@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,15 +10,18 @@ import { NavItemComponent } from './nav-item/nav-item.component';
 @Component({
     selector: 'CHANGEME-navigation',
     templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss'],
+    styleUrl: './navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [CommonModule, MatMenuModule, MatButtonModule, MatIconModule, ThemeButtonComponent, NavItemComponent, RouterLink]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [MatMenuModule, MatButtonModule, MatIconModule, ThemeButtonComponent, NavItemComponent, RouterLink]
 })
 export class NavigationComponent implements OnInit {
-    @Input() sticky: boolean;
-    theme: string;
+    private readonly darkService = inject(IxDarkService);
+
+    readonly sticky = input(false);
+    /** Current theme name, tracked from ix-libs. */
+    readonly theme = this.darkService.theme;
+
     navItems: NavItem[] = [
         {
             name: 'Home',
@@ -34,29 +36,25 @@ export class NavigationComponent implements OnInit {
         {
             name: 'Angular',
             type: 'link',
-            url: 'https://angular.io/docs',
+            url: 'https://angular.dev/overview',
             children: null
         },
         {
             name: 'Angular Material',
             type: 'link',
-            url: 'https://material.angular.io/components/categories',
+            url: 'https://material.angular.dev/components/categories',
             children: null
         }
     ];
 
-    constructor(private darkService: IxDarkService) {
-        // Use signal-based theme tracking (ix-libs 21.1.0+)
-        effect(() => {
-            this.theme = this.darkService.theme();
-        });
-    }
-
-    public toggleDarkMode(): void {
-        this.darkService.toggleDarkLightMode();
-    }
-
     ngOnInit(): void {
         this.darkService.setDarkModePreference();
+    }
+
+    /**
+     * Switches between the light and dark themes.
+     */
+    public toggleDarkMode(): void {
+        this.darkService.toggleDarkLightMode();
     }
 }

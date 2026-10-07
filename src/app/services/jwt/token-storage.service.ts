@@ -1,79 +1,91 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '@environments/environment';
-import { TLCJwtToken } from '@models/jwt-token.model';
 import { isAfter } from 'date-fns';
-import { jwtDecode } from 'jwt-decode';
-import { Subject } from 'rxjs';
 import { SessionStorageService } from '../util/session-storage.service';
-import { JwtService } from './jwt.service';
 
 const TOKEN_KEY = environment.storageKey;
+
+/** Shape of the entry kept in session storage. */
+interface StoredToken {
+    token: string;
+    /** Expiry as seconds since the Unix epoch (the JWT `exp` claim). */
+    expires: string | number;
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class TokenStorageService {
-    public role = new Subject<string>();
-    public permissions = new Subject<any[]>();
-    // Store token in session storage consistently
+    private readonly storage = inject(SessionStorageService);
 
-    public userId = signal<string>(null);
-    public officeId = signal<string>(null);
+    public readonly role = signal<string | null>(null);
+    public readonly permissions = signal<string[]>([]);
+    public readonly userId = signal<string | null>(null);
+    public readonly officeId = signal<string | null>(null);
 
-    constructor(
-        private storage: SessionStorageService,
-        private jwt: JwtService
-    ) {}
+    /**
+     * Stores the token, replacing any previous one.
+     *
+     * @param token - The encoded JWT
+     * @param expires - Expiry as seconds since the Unix epoch (the JWT `exp` claim)
+     */
+    public saveToken(token: string, expires: string | number): void {
+        const storedToken: StoredToken = { token, expires };
+        this.storage.setItem(TOKEN_KEY, JSON.stringify(storedToken));
+    }
 
-    public saveToken(token: string, expires: string): void {
+    /**
+     * Removes the stored token so the next request authenticates again.
+     */
+    public clearToken(): void {
         this.storage.removeItem(TOKEN_KEY);
-
-        const tokenStorageItem = {
-            token,
-            expires
-        };
-
-        this.storage.setItem(TOKEN_KEY, JSON.stringify(tokenStorageItem));
-
-        this.getToken();
     }
 
+    /**
+     * @returns True when an unexpired token is stored
+     */
     public hasToken(): boolean {
-        const token = this.getToken();
-
-        return token !== null && token !== undefined;
+        return this.getToken() !== null;
     }
 
-    public getToken(): string {
-        const serializedToken = this.storage.getItem(TOKEN_KEY);
-
-        if (serializedToken !== null && serializedToken !== undefined) {
-            const token = JSON.parse(serializedToken);
-
-            const jwtToken: TLCJwtToken = jwtDecode(token.token);
-
-            const utcSeconds = token.expires;
-            const expiryDate = new Date(0);
-            expiryDate.setUTCSeconds(utcSeconds);
-
-            const _isStillValid = isAfter(new Date(expiryDate), new Date());
-
-            // console.group('Token Storage');
-            // console.log(expiryDate);
-            // console.log(new Date(expiryDate));
-            // console.log(new Date());
-            // console.log(_isStillValid);
-            // console.groupEnd();
-
-            if (!_isStillValid) {
-                this.storage.removeItem(TOKEN_KEY);
-
-                return null;
-            }
-
-            return token.token;
+    /**
+     * Reads the stored token. An expired or unreadable entry is removed.
+     *
+     * @returns The encoded JWT, or null when none is stored or it has expired
+     */
+    public getToken(): string | null {
+        const storedToken = this.readStoredToken();
+        if (storedToken === null) {
+            return null;
         }
 
+        const expiryDate = new Date(Number(storedToken.expires) * 1000);
+        if (!isAfter(expiryDate, new Date())) {
+            this.clearToken();
+            return null;
+        }
+
+        return storedToken.token;
+    }
+
+    /**
+     * @returns The parsed storage entry, or null when it is missing or malformed
+     */
+    private readStoredToken(): StoredToken | null {
+        const serializedToken = this.storage.getItem(TOKEN_KEY);
+        if (!serializedToken) {
+            return null;
+        }
+        try {
+            const storedToken = JSON.parse(serializedToken) as Partial<StoredToken>;
+            if (typeof storedToken?.token === 'string' && storedToken.expires !== undefined) {
+                return storedToken as StoredToken;
+            }
+        } catch {
+            // Fall through: a corrupt entry is treated the same as an invalid one.
+        }
+        console.warn('Stored token entry was malformed and has been removed.');
+        this.clearToken();
         return null;
     }
 }

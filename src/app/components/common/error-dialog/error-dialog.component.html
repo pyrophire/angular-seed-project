@@ -1,17 +1,23 @@
-<h1 mat-dialog-title
-    class="mat-mdc-dialog-title mdc-dialog__title">{{data.title}}</h1>
-<div mat-dialog-content
-     class="mat-mdc-dialog-content mdc-dialog__content">
-        <p>{{data.message}}</p>
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+    <p class="error-message">{{ data.message }}</p>
+    @if (data.supportMessage) {
+        <p class="support-message">{{ data.supportMessage }}</p>
+    }
 </div>
-<div mat-dialog-actions
-     class="mat-mdc-dialog-actions mdc-dialog__actions">
-        <div flex></div>
-        <button class="close-button mdc-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed mat-mdc-button-base"
-                style="margin-right: 8px"
-                (click)="close()">Close</button>
-
-        <button class="refresh-button  mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base"
-                (click)="refresh()"
-                cdkFocusInitial>Refresh page</button>
+<div mat-dialog-actions>
+    <div flex></div>
+    <button
+        matButton="outlined"
+        class="close-button"
+        (click)="close()">
+        Close
+    </button>
+    <button
+        matButton="filled"
+        class="refresh-button"
+        (click)="refresh()"
+        cdkFocusInitial>
+        Refresh page
+    </button>
 </div>

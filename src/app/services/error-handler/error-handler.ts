@@ -1,24 +1,26 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
-
-import { environment } from '@environments/environment';
+import { ErrorHandler, Injectable, inject } from '@angular/core';
 import { ErrorNotificationService } from './error-notification.service';
 
+/**
+ * Shows the error dialog for uncaught application errors.
+ *
+ * Not registered by default. To enable it, add to `app.config.ts`:
+ * `{ provide: ErrorHandler, useClass: GlobalErrorHandler }`
+ *
+ * Failed HTTP requests are skipped because `serverErrorInterceptor` has already reported them.
+ */
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private injector: Injector, private ngZone: NgZone) {}
+    private readonly errorNotificationService = inject(ErrorNotificationService);
 
-  handleError(error: Error | HttpErrorResponse | Event): void {
-    // display alert
-    if (error instanceof Error || error instanceof HttpErrorResponse) {
-      const errorNotificationService = this.injector.get(ErrorNotificationService);
-      if (environment.local || environment.prefix === 'dev-') {
+    /**
+     * @param error - The uncaught error
+     */
+    handleError(error: unknown): void {
         console.error(error);
-      }
-
-      this.ngZone.run(() => {
-        errorNotificationService.showErrorDialog();
-      });
+        if (error instanceof Error && !(error instanceof HttpErrorResponse)) {
+            this.errorNotificationService.showErrorDialog();
+        }
     }
-  }
 }

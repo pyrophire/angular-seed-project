@@ -1,18 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'ix-tf-icon',
     templateUrl: './tf-icon.component.html',
-    styleUrls: ['./tf-icon.component.scss'],
+    styleUrl: './tf-icon.component.scss',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [CommonModule]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [MatIconModule]
 })
-export class TfIconComponent implements OnInit {
-    @Input() data!: boolean;
-
-    constructor() {}
-
-    ngOnInit(): void {}
+export class TfIconComponent {
+    /** The value to display: a check for true, a cross for false. */
+    readonly data = input.required<boolean>();
 }

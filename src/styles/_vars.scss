@@ -1,78 +1,42 @@
-@use 'sass:map';
-@use '@angular/material' as mat;
 @import '_colors/material-color-palette';
 @import '_colors/custom-palette';
 @import '_partials/coloring.partial';
 
-
-
-// Theme Color Variables
+// Theme Colors
 //
-// Copies of the _themes file to be used within the app.
-// Angular Material's theming prevents pulling the colors directly from the theme file without bloating complied css.
-// View source for better definition of settings
+// Theme colors are NOT Sass variables anymore. Use the Angular Material system tokens
+// (CSS custom properties) emitted by src/styles/_themes.scss. They switch between the
+// light and dark theme on their own, so no `.dark { ... }` color overrides are needed.
+//
+//   primary            var(--mat-sys-primary)            / text on it: var(--mat-sys-on-primary)
+//   accent             var(--mat-sys-secondary)          / text on it: var(--mat-sys-on-secondary)
+//   warn / error       var(--mat-sys-error)              / text on it: var(--mat-sys-on-error)
+//   app background     var(--mat-sys-surface-container)  / text on it: var(--mat-sys-on-surface)
+//   lower / higher     var(--mat-sys-surface-container-lowest | -low | -high | -highest)
+//   borders            var(--mat-sys-outline) / var(--mat-sys-outline-variant)
+//
+// A CSS custom property cannot be passed to Sass color functions (darken, lighten, rgba, ...).
+// For transparency use: color-mix(in srgb, var(--mat-sys-primary) 20%, transparent)
+//
+// To change the brand colors edit the palette passed to the themes in src/styles/_themes.scss
+// (palette source: src/styles/_colors/_custom-palette.scss).
 //
 // Styleguide Vars.colors.theme
 
-// EDIT THESE
-$primary-palette: $phire-light-blue;
-$primary-shade: 50;
-$accent-palette: mat.$yellow-palette;
-$accent-shade: 40;
-$primary-shade-dark: 50;
-$accent-shade-dark: 50;
+// Layout Variables
+//
+// Styleguide Vars.layout
 
 $headerHeight: 100px;
 $headerPaddingTopBottom: 16px;
 $headerPaddingSides: 32px;
 $mainNavHeight: 52px;
 $footerHeight: 0px; // 52px if environment footer is enabled
-$footerBg: $grey300;
-$footerBgDark: $grey700;
 
 $appContainerWidth: 1400px;
 
-
-
-// DO NOT EDIT THESE
-$primary: map-get($primary-palette, $primary-shade );
-$accent: map-get($accent-palette, $accent-shade);
-$primaryDark: map-get($primary-palette, $primary-shade-dark);
-$accentDark: map-get($accent-palette, $accent-shade-dark);
-$warn: $red500;
+// Non-theme colors (no Material system token exists for these)
 $success: $green500;
-$light-error: map-get(map-get($phire-light-blue, 'error'), 40);
-$dark-error: map-get(map-get($phire-light-blue, 'error'), 80);
-
-// Background Color Variables
-//
-// Used for app backgrounds in both light and dark themes
-// View source for better definition of settings
-//
-// Styleguide Vars.colors.backgrounds
-
-$appBackgroundColor: $grey200;
-
-$background: $appBackgroundColor;
-
-$background1: darken($appBackgroundColor, 10);
-$background2: darken($appBackgroundColor, 15);
-$background3: darken($appBackgroundColor, 20);
-$backgroundA1: lighten($appBackgroundColor, 10);
-$backgroundA2: lighten($appBackgroundColor, 15);
-$backgroundA3: lighten($appBackgroundColor, 20);
-
-$backgroundDark: $grey800;
-
-$backgroundDark1: darken($backgroundDark, 10);
-$backgroundDark2: darken($backgroundDark, 15);
-$backgroundDark3: darken($backgroundDark, 20);
-$backgroundDarkA1: lighten($backgroundDark, 10);
-$backgroundDarkA2: lighten($backgroundDark, 15);
-$backgroundDarkA3: lighten($backgroundDark, 20);
-
-$linkColor: $blue500;
-$linkColorDark: $light-blue200;
 
 // Media Breakpoint Variables
 //
